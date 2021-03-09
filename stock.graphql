@@ -176,3 +176,11 @@ input UpdatePlasmidInput {
   keywords: [String]
   genbank_accession: String
 }
+
+# this would be passed into list strains query ("stock_type")
+enum StrainType {
+  ALL
+  REGULAR
+  GWDI
+  BACTERIAL
+}
