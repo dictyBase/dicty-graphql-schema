@@ -556,7 +556,7 @@ export type QueryStrainArgs = {
 export type QueryListStrainsArgs = {
   cursor?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['String']>;
+  filter?: Maybe<StrainListFilter>;
 };
 
 
@@ -668,6 +668,14 @@ export type Strain = Stock & {
   genotypes?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type StrainListFilter = {
+  label?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  in_stock?: Maybe<Scalars['Boolean']>;
+  strain_type: StrainTypeEnum;
+};
+
 export type StrainListWithCursor = {
   __typename?: 'StrainListWithCursor';
   strains: Array<Strain>;
@@ -676,6 +684,13 @@ export type StrainListWithCursor = {
   limit?: Maybe<Scalars['Int']>;
   totalCount: Scalars['Int'];
 };
+
+export enum StrainTypeEnum {
+  All = 'ALL',
+  Regular = 'REGULAR',
+  Gwdi = 'GWDI',
+  Bacterial = 'BACTERIAL'
+}
 
 
 export type UpdateContentInput = {
@@ -1067,7 +1082,7 @@ export type StockListQuery = (
 export type StrainListQueryVariables = Exact<{
   cursor: Scalars['Int'];
   limit: Scalars['Int'];
-  filter: Scalars['String'];
+  filter?: Maybe<StrainListFilter>;
 }>;
 
 
@@ -1876,7 +1891,7 @@ export type StockListQueryHookResult = ReturnType<typeof useStockListQuery>;
 export type StockListLazyQueryHookResult = ReturnType<typeof useStockListLazyQuery>;
 export type StockListQueryResult = Apollo.QueryResult<StockListQuery, StockListQueryVariables>;
 export const StrainListDocument = gql`
-    query StrainList($cursor: Int!, $limit: Int!, $filter: String!) {
+    query StrainList($cursor: Int!, $limit: Int!, $filter: StrainListFilter) {
   listStrains(cursor: $cursor, limit: $limit, filter: $filter) {
     nextCursor
     totalCount
