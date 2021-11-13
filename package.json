@@ -29,7 +29,7 @@
   "devDependencies": {
     "@apollo/client": "^3.3.15",
     "@graphql-codegen/cli": "^1.21.4",
-    "@graphql-codegen/typescript": "^1.22.0",
+    "@graphql-codegen/typescript": "^2.3.1",
     "@graphql-codegen/typescript-operations": "^1.17.16",
     "@graphql-codegen/typescript-react-apollo": "^2.2.4",
     "@semantic-release/changelog": "^5.0.1",
