@@ -19,5 +19,11 @@
     }
   ],
   "suffix": ".bs.js",
-  "namespace": true
+  "namespace": true,
+  "bs-dependencies": [
+    "@reasonml-community/graphql-ppx"
+  ],
+  "ppx-flags": [
+    "@reasonml-community/graphql-ppx/ppx"
+  ]
 }
