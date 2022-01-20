@@ -16,8 +16,12 @@
   "scripts": {
     "generate": "graphql-codegen",
     "build": "tsc types/index.ts --outDir ./dist --esModuleInterop",
-    "compile": "yarn run generate && yarn run build",
-    "create-release": "semantic-release"
+    "compile": "yarn run generate && yarn run build && yarn run re:build",
+    "create-release": "semantic-release",
+    "re:build": "rescript",
+    "re:watch": "rescript build -w",
+    "re:start": "rescript build -w",
+    "re:clean": "rescript clean -with-deps"
   },
   "repository": {
     "type": "git",

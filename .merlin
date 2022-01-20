@@ -1,0 +1,16 @@
+####{BSB GENERATED: NO EDIT
+B lib/bs
+FLG -open DictyGraphqlSchema
+FLG -ppx /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/@reasonml-community/graphql-ppx/ppx
+FLG -ppx -schema schema.json
+FLG -ppx '/home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/rescript/linux/bsc.exe -as-ppx -bs-jsx 3'
+S /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/rescript/lib/ocaml
+B /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/rescript/lib/ocaml
+FLG -w +a-4-9-20-40-41-42-50-61-102
+S /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/@reasonml-community/graphql-ppx/lib/ocaml
+B /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/@reasonml-community/graphql-ppx/lib/ocaml
+S /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/@rescript/react/lib/ocaml
+B /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/@rescript/react/lib/ocaml
+S /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/rescript-apollo-client/lib/ocaml
+B /home/ayaanqui/work/dictybase/dicty-graphql-schema/node_modules/rescript-apollo-client/lib/ocaml
+####BSB GENERATED: NO EDIT}
