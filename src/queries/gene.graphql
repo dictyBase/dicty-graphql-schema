@@ -32,7 +32,10 @@ query Gene($gene: String!, $limit: Int, $sort_by: String = "desc") {
       type
       date
       evidence_code
-      go_term
+      go_term {
+        name
+        link
+      }
       qualifier
       publication
       assigned_by
