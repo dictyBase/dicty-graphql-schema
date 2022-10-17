@@ -15,7 +15,7 @@
   },
   "scripts": {
     "generate": "graphql-codegen",
-    "build": "tsc types/index.ts --outDir ./dist --esModuleInterop",
+    "build": "tsup types/index.ts --format esm,cjs --target=chrome87,firefox78,safari13,edge88",
     "compile": "yarn run generate && yarn run build",
     "create-release": "semantic-release"
   },
