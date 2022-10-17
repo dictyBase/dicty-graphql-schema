@@ -15,8 +15,11 @@
   },
   "scripts": {
     "generate": "graphql-codegen",
-    "build": "tsup types/index.ts --format esm,cjs --target=chrome87,firefox78,safari13,edge88",
+    "build-esm": "esbuild --bundle types/index.ts --outfile=dist/index.mjs --format=esm --target=chrome87,firefox78,safari13,edge88 --external:./node_modules/*",
+    "build-cjs": "esbuild --bundle types/index.ts --outfile=dist/index.js --format=cjs --target=chrome87,firefox78,safari13,edge88 --external:./node_modules/*",
+    "build": "tsup types/index.ts --format esm,cjs --target=chrome87,firefox78,safari13,edge88 --dts",
     "compile": "yarn run generate && yarn run build",
+    "clean": "rm -rf dist",
     "create-release": "semantic-release"
   },
   "repository": {
@@ -54,10 +57,10 @@
     "@types/node": "^18.8.3",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "graphql": "^16.6.0",
-    "graphql-tag": "^2.12.6"
+    "graphql-tag": "^2.12.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.13.5",
@@ -78,6 +81,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
     "semantic-release": "^19.0.5",
+    "tsup": "^6.3.0",
     "typescript": "^4.8.4"
   }
 }
