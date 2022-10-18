@@ -54,13 +54,10 @@
   "homepage": "https://github.com/dictyBase/graphql-schema#readme",
   "dependencies": {
     "@apollo/client": "^3.7.0",
-    "@types/node": "^18.8.3",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "17.x",
+    "react-dom": "17.x"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.13.5",
@@ -78,6 +75,9 @@
     "@semantic-release/github": "^8.0.6",
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
+    "@types/node": "17.x",
+    "@types/react": "17.x",
+    "@types/react-dom": "17.x",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
     "semantic-release": "^19.0.5",
