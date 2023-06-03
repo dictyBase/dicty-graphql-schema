@@ -703,12 +703,12 @@
     "@graphql-tools/utils" "^10.0.0"
     tslib "~2.5.0"
 
-"@graphql-codegen/fragment-matcher@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/fragment-matcher/-/fragment-matcher-4.0.1.tgz#56f53759f1c1428e60eca18bdbda071fd8b858f5"
-  integrity sha512-m1jjCBppB+QXupYu8eVM1BZM36APPArHEVB8R0v29Vj2Kz/35+pe682PyQaf7iyxTkemW759h2KIvWFtXdLCJQ==
+"@graphql-codegen/fragment-matcher@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/fragment-matcher/-/fragment-matcher-5.0.0.tgz#2a016715e42e8f21aa08830f34a4d0a930e660fe"
+  integrity sha512-mbash9E8eY6RSMSNrrO+C9JJEn8rdr8ORaxMpgdWL2qe2q/TlLUCE3ZvQvHkSc7GjBnMEk36LncA8ApwHR2BHg==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^4.1.0"
+    "@graphql-codegen/plugin-helpers" "^5.0.0"
     tslib "~2.5.0"
 
 "@graphql-codegen/introspection@4.0.0":
