@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/dictyBase/graphql-schema/compare/v1.10.0...1.11.0) (2024-02-14)
+
+
+### Features
+
+* add the newly generated code after changes in graphql query for content schema ([3a322ba](https://github.com/dictyBase/graphql-schema/commit/3a322bacb5d0745ec6e0dc973cbef0d1b33cedff))
+* **content.graphql:** add created_at and created_by fields to content queries ([e373372](https://github.com/dictyBase/graphql-schema/commit/e37337296b35a66fd55a60d269a436553974aa7e))
+
 # [1.9.0](https://github.com/dictyBase/graphql-schema/compare/1.8.1...1.9.0) (2022-09-06)
 
 
