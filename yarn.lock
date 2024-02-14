@@ -806,13 +806,13 @@
     "@graphql-tools/utils" "^10.0.0"
     tslib "~2.6.0"
 
-"@graphql-codegen/fragment-matcher@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/fragment-matcher/-/fragment-matcher-4.0.1.tgz#56f53759f1c1428e60eca18bdbda071fd8b858f5"
-  integrity sha512-m1jjCBppB+QXupYu8eVM1BZM36APPArHEVB8R0v29Vj2Kz/35+pe682PyQaf7iyxTkemW759h2KIvWFtXdLCJQ==
+"@graphql-codegen/fragment-matcher@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/fragment-matcher/-/fragment-matcher-5.0.2.tgz#3440661070fc5022ea9f4af7a52f6a158b256680"
+  integrity sha512-AeazT6Arv7LvpkvPYTajfUO6g1FeGLqyt6VaxDhMIRCuJN21PAvSWsh3wayc+K5L5VtYFZXYczC7Lw1bMb8C2Q==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^4.1.0"
-    tslib "~2.5.0"
+    "@graphql-codegen/plugin-helpers" "^5.0.3"
+    tslib "~2.6.0"
 
 "@graphql-codegen/gql-tag-operations@4.0.4":
   version "4.0.4"
@@ -857,18 +857,6 @@
     import-from "4.0.0"
     lodash "~4.17.0"
     tslib "~2.4.0"
-
-"@graphql-codegen/plugin-helpers@^4.1.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-4.2.0.tgz#8324914d0f99162a223cfa01796cdd6be972d2ae"
-  integrity sha512-THFTCfg+46PXlXobYJ/OoCX6pzjI+9woQqCjdyKtgoI0tn3Xq2HUUCiidndxUpEYVrXb5pRiRXb7b/ZbMQqD0A==
-  dependencies:
-    "@graphql-tools/utils" "^9.0.0"
-    change-case-all "1.0.15"
-    common-tags "1.8.2"
-    import-from "4.0.0"
-    lodash "~4.17.0"
-    tslib "~2.5.0"
 
 "@graphql-codegen/plugin-helpers@^5.0.3":
   version "5.0.3"
@@ -6439,11 +6427,6 @@ tslib@~2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
-
-tslib@~2.5.0:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.2.tgz#1b6f07185c881557b0ffa84b111a0106989e8338"
-  integrity sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==
 
 tsup@^7.2.0:
   version "7.2.0"
