@@ -1,4 +1,4 @@
-import { graphql, ResponseResolver, GraphQLRequest, GraphQLContext } from 'msw'
+import { graphql } from 'msw'
 
 /**
  * @param resolver a function that accepts a captured request and may return a mocked response.
@@ -11,7 +11,7 @@ import { graphql, ResponseResolver, GraphQLRequest, GraphQLContext } from 'msw'
  *   )
  * })
  */
-export const mockLoginMutation = (resolver: ResponseResolver<GraphQLRequest<LoginMutationVariables>, GraphQLContext<LoginMutation>, any>) =>
+export const mockLoginMutation = (resolver: Parameters<typeof graphql.mutation<LoginMutation, LoginMutationVariables>>[1]) =>
   graphql.mutation<LoginMutation, LoginMutationVariables>(
     'Login',
     resolver
@@ -27,7 +27,7 @@ export const mockLoginMutation = (resolver: ResponseResolver<GraphQLRequest<Logi
  *   )
  * })
  */
-export const mockLogoutMutation = (resolver: ResponseResolver<GraphQLRequest<LogoutMutationVariables>, GraphQLContext<LogoutMutation>, any>) =>
+export const mockLogoutMutation = (resolver: Parameters<typeof graphql.mutation<LogoutMutation, LogoutMutationVariables>>[1]) =>
   graphql.mutation<LogoutMutation, LogoutMutationVariables>(
     'Logout',
     resolver
@@ -44,7 +44,7 @@ export const mockLogoutMutation = (resolver: ResponseResolver<GraphQLRequest<Log
  *   )
  * })
  */
-export const mockCreateContentMutation = (resolver: ResponseResolver<GraphQLRequest<CreateContentMutationVariables>, GraphQLContext<CreateContentMutation>, any>) =>
+export const mockCreateContentMutation = (resolver: Parameters<typeof graphql.mutation<CreateContentMutation, CreateContentMutationVariables>>[1]) =>
   graphql.mutation<CreateContentMutation, CreateContentMutationVariables>(
     'CreateContent',
     resolver
@@ -61,7 +61,7 @@ export const mockCreateContentMutation = (resolver: ResponseResolver<GraphQLRequ
  *   )
  * })
  */
-export const mockUpdateContentMutation = (resolver: ResponseResolver<GraphQLRequest<UpdateContentMutationVariables>, GraphQLContext<UpdateContentMutation>, any>) =>
+export const mockUpdateContentMutation = (resolver: Parameters<typeof graphql.mutation<UpdateContentMutation, UpdateContentMutationVariables>>[1]) =>
   graphql.mutation<UpdateContentMutation, UpdateContentMutationVariables>(
     'UpdateContent',
     resolver
@@ -78,7 +78,7 @@ export const mockUpdateContentMutation = (resolver: ResponseResolver<GraphQLRequ
  *   )
  * })
  */
-export const mockCreateOrderMutation = (resolver: ResponseResolver<GraphQLRequest<CreateOrderMutationVariables>, GraphQLContext<CreateOrderMutation>, any>) =>
+export const mockCreateOrderMutation = (resolver: Parameters<typeof graphql.mutation<CreateOrderMutation, CreateOrderMutationVariables>>[1]) =>
   graphql.mutation<CreateOrderMutation, CreateOrderMutationVariables>(
     'CreateOrder',
     resolver
@@ -95,7 +95,7 @@ export const mockCreateOrderMutation = (resolver: ResponseResolver<GraphQLReques
  *   )
  * })
  */
-export const mockCreateUserMutation = (resolver: ResponseResolver<GraphQLRequest<CreateUserMutationVariables>, GraphQLContext<CreateUserMutation>, any>) =>
+export const mockCreateUserMutation = (resolver: Parameters<typeof graphql.mutation<CreateUserMutation, CreateUserMutationVariables>>[1]) =>
   graphql.mutation<CreateUserMutation, CreateUserMutationVariables>(
     'CreateUser',
     resolver
@@ -112,7 +112,7 @@ export const mockCreateUserMutation = (resolver: ResponseResolver<GraphQLRequest
  *   )
  * })
  */
-export const mockUpdateUserMutation = (resolver: ResponseResolver<GraphQLRequest<UpdateUserMutationVariables>, GraphQLContext<UpdateUserMutation>, any>) =>
+export const mockUpdateUserMutation = (resolver: Parameters<typeof graphql.mutation<UpdateUserMutation, UpdateUserMutationVariables>>[1]) =>
   graphql.mutation<UpdateUserMutation, UpdateUserMutationVariables>(
     'UpdateUser',
     resolver
@@ -129,7 +129,7 @@ export const mockUpdateUserMutation = (resolver: ResponseResolver<GraphQLRequest
  *   )
  * })
  */
-export const mockGetRefreshTokenQuery = (resolver: ResponseResolver<GraphQLRequest<GetRefreshTokenQueryVariables>, GraphQLContext<GetRefreshTokenQuery>, any>) =>
+export const mockGetRefreshTokenQuery = (resolver: Parameters<typeof graphql.query<GetRefreshTokenQuery, GetRefreshTokenQueryVariables>>[1]) =>
   graphql.query<GetRefreshTokenQuery, GetRefreshTokenQueryVariables>(
     'GetRefreshToken',
     resolver
@@ -146,7 +146,7 @@ export const mockGetRefreshTokenQuery = (resolver: ResponseResolver<GraphQLReque
  *   )
  * })
  */
-export const mockContentBySlugQuery = (resolver: ResponseResolver<GraphQLRequest<ContentBySlugQueryVariables>, GraphQLContext<ContentBySlugQuery>, any>) =>
+export const mockContentBySlugQuery = (resolver: Parameters<typeof graphql.query<ContentBySlugQuery, ContentBySlugQueryVariables>>[1]) =>
   graphql.query<ContentBySlugQuery, ContentBySlugQueryVariables>(
     'contentBySlug',
     resolver
@@ -163,7 +163,7 @@ export const mockContentBySlugQuery = (resolver: ResponseResolver<GraphQLRequest
  *   )
  * })
  */
-export const mockContentQuery = (resolver: ResponseResolver<GraphQLRequest<ContentQueryVariables>, GraphQLContext<ContentQuery>, any>) =>
+export const mockContentQuery = (resolver: Parameters<typeof graphql.query<ContentQuery, ContentQueryVariables>>[1]) =>
   graphql.query<ContentQuery, ContentQueryVariables>(
     'content',
     resolver
@@ -179,7 +179,7 @@ export const mockContentQuery = (resolver: ResponseResolver<GraphQLRequest<Conte
  *   )
  * })
  */
-export const mockListOrganismsQuery = (resolver: ResponseResolver<GraphQLRequest<ListOrganismsQueryVariables>, GraphQLContext<ListOrganismsQuery>, any>) =>
+export const mockListOrganismsQuery = (resolver: Parameters<typeof graphql.query<ListOrganismsQuery, ListOrganismsQueryVariables>>[1]) =>
   graphql.query<ListOrganismsQuery, ListOrganismsQueryVariables>(
     'ListOrganisms',
     resolver
@@ -196,7 +196,7 @@ export const mockListOrganismsQuery = (resolver: ResponseResolver<GraphQLRequest
  *   )
  * })
  */
-export const mockGeneQuery = (resolver: ResponseResolver<GraphQLRequest<GeneQueryVariables>, GraphQLContext<GeneQuery>, any>) =>
+export const mockGeneQuery = (resolver: Parameters<typeof graphql.query<GeneQuery, GeneQueryVariables>>[1]) =>
   graphql.query<GeneQuery, GeneQueryVariables>(
     'Gene',
     resolver
@@ -213,7 +213,7 @@ export const mockGeneQuery = (resolver: ResponseResolver<GraphQLRequest<GeneQuer
  *   )
  * })
  */
-export const mockListRecentGenesQuery = (resolver: ResponseResolver<GraphQLRequest<ListRecentGenesQueryVariables>, GraphQLContext<ListRecentGenesQuery>, any>) =>
+export const mockListRecentGenesQuery = (resolver: Parameters<typeof graphql.query<ListRecentGenesQuery, ListRecentGenesQueryVariables>>[1]) =>
   graphql.query<ListRecentGenesQuery, ListRecentGenesQueryVariables>(
     'ListRecentGenes',
     resolver
@@ -230,7 +230,7 @@ export const mockListRecentGenesQuery = (resolver: ResponseResolver<GraphQLReque
  *   )
  * })
  */
-export const mockPublicationQuery = (resolver: ResponseResolver<GraphQLRequest<PublicationQueryVariables>, GraphQLContext<PublicationQuery>, any>) =>
+export const mockPublicationQuery = (resolver: Parameters<typeof graphql.query<PublicationQuery, PublicationQueryVariables>>[1]) =>
   graphql.query<PublicationQuery, PublicationQueryVariables>(
     'Publication',
     resolver
@@ -247,7 +247,7 @@ export const mockPublicationQuery = (resolver: ResponseResolver<GraphQLRequest<P
  *   )
  * })
  */
-export const mockListRecentPublicationsQuery = (resolver: ResponseResolver<GraphQLRequest<ListRecentPublicationsQueryVariables>, GraphQLContext<ListRecentPublicationsQuery>, any>) =>
+export const mockListRecentPublicationsQuery = (resolver: Parameters<typeof graphql.query<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>>[1]) =>
   graphql.query<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>(
     'ListRecentPublications',
     resolver
@@ -264,7 +264,7 @@ export const mockListRecentPublicationsQuery = (resolver: ResponseResolver<Graph
  *   )
  * })
  */
-export const mockStrainListQuery = (resolver: ResponseResolver<GraphQLRequest<StrainListQueryVariables>, GraphQLContext<StrainListQuery>, any>) =>
+export const mockStrainListQuery = (resolver: Parameters<typeof graphql.query<StrainListQuery, StrainListQueryVariables>>[1]) =>
   graphql.query<StrainListQuery, StrainListQueryVariables>(
     'StrainList',
     resolver
@@ -281,7 +281,7 @@ export const mockStrainListQuery = (resolver: ResponseResolver<GraphQLRequest<St
  *   )
  * })
  */
-export const mockListStrainsWithPhenotypeQuery = (resolver: ResponseResolver<GraphQLRequest<ListStrainsWithPhenotypeQueryVariables>, GraphQLContext<ListStrainsWithPhenotypeQuery>, any>) =>
+export const mockListStrainsWithPhenotypeQuery = (resolver: Parameters<typeof graphql.query<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>>[1]) =>
   graphql.query<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(
     'ListStrainsWithPhenotype',
     resolver
@@ -297,7 +297,7 @@ export const mockListStrainsWithPhenotypeQuery = (resolver: ResponseResolver<Gra
  *   )
  * })
  */
-export const mockListBacterialStrainsQuery = (resolver: ResponseResolver<GraphQLRequest<ListBacterialStrainsQueryVariables>, GraphQLContext<ListBacterialStrainsQuery>, any>) =>
+export const mockListBacterialStrainsQuery = (resolver: Parameters<typeof graphql.query<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>>[1]) =>
   graphql.query<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>(
     'ListBacterialStrains',
     resolver
@@ -314,7 +314,7 @@ export const mockListBacterialStrainsQuery = (resolver: ResponseResolver<GraphQL
  *   )
  * })
  */
-export const mockListStrainsInventoryQuery = (resolver: ResponseResolver<GraphQLRequest<ListStrainsInventoryQueryVariables>, GraphQLContext<ListStrainsInventoryQuery>, any>) =>
+export const mockListStrainsInventoryQuery = (resolver: Parameters<typeof graphql.query<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>>[1]) =>
   graphql.query<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(
     'ListStrainsInventory',
     resolver
@@ -331,7 +331,7 @@ export const mockListStrainsInventoryQuery = (resolver: ResponseResolver<GraphQL
  *   )
  * })
  */
-export const mockListPlasmidsInventoryQuery = (resolver: ResponseResolver<GraphQLRequest<ListPlasmidsInventoryQueryVariables>, GraphQLContext<ListPlasmidsInventoryQuery>, any>) =>
+export const mockListPlasmidsInventoryQuery = (resolver: Parameters<typeof graphql.query<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>>[1]) =>
   graphql.query<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(
     'ListPlasmidsInventory',
     resolver
@@ -348,7 +348,7 @@ export const mockListPlasmidsInventoryQuery = (resolver: ResponseResolver<GraphQ
  *   )
  * })
  */
-export const mockPlasmidListFilterQuery = (resolver: ResponseResolver<GraphQLRequest<PlasmidListFilterQueryVariables>, GraphQLContext<PlasmidListFilterQuery>, any>) =>
+export const mockPlasmidListFilterQuery = (resolver: Parameters<typeof graphql.query<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>>[1]) =>
   graphql.query<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(
     'PlasmidListFilter',
     resolver
@@ -365,7 +365,7 @@ export const mockPlasmidListFilterQuery = (resolver: ResponseResolver<GraphQLReq
  *   )
  * })
  */
-export const mockPlasmidQuery = (resolver: ResponseResolver<GraphQLRequest<PlasmidQueryVariables>, GraphQLContext<PlasmidQuery>, any>) =>
+export const mockPlasmidQuery = (resolver: Parameters<typeof graphql.query<PlasmidQuery, PlasmidQueryVariables>>[1]) =>
   graphql.query<PlasmidQuery, PlasmidQueryVariables>(
     'Plasmid',
     resolver
@@ -382,7 +382,7 @@ export const mockPlasmidQuery = (resolver: ResponseResolver<GraphQLRequest<Plasm
  *   )
  * })
  */
-export const mockStrainQuery = (resolver: ResponseResolver<GraphQLRequest<StrainQueryVariables>, GraphQLContext<StrainQuery>, any>) =>
+export const mockStrainQuery = (resolver: Parameters<typeof graphql.query<StrainQuery, StrainQueryVariables>>[1]) =>
   graphql.query<StrainQuery, StrainQueryVariables>(
     'Strain',
     resolver
@@ -399,7 +399,7 @@ export const mockStrainQuery = (resolver: ResponseResolver<GraphQLRequest<Strain
  *   )
  * })
  */
-export const mockListRecentPlasmidsQuery = (resolver: ResponseResolver<GraphQLRequest<ListRecentPlasmidsQueryVariables>, GraphQLContext<ListRecentPlasmidsQuery>, any>) =>
+export const mockListRecentPlasmidsQuery = (resolver: Parameters<typeof graphql.query<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>>[1]) =>
   graphql.query<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>(
     'ListRecentPlasmids',
     resolver
@@ -416,7 +416,7 @@ export const mockListRecentPlasmidsQuery = (resolver: ResponseResolver<GraphQLRe
  *   )
  * })
  */
-export const mockListRecentStrainsQuery = (resolver: ResponseResolver<GraphQLRequest<ListRecentStrainsQueryVariables>, GraphQLContext<ListRecentStrainsQuery>, any>) =>
+export const mockListRecentStrainsQuery = (resolver: Parameters<typeof graphql.query<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>>[1]) =>
   graphql.query<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>(
     'ListRecentStrains',
     resolver
@@ -433,7 +433,7 @@ export const mockListRecentStrainsQuery = (resolver: ResponseResolver<GraphQLReq
  *   )
  * })
  */
-export const mockUserByEmailQuery = (resolver: ResponseResolver<GraphQLRequest<UserByEmailQueryVariables>, GraphQLContext<UserByEmailQuery>, any>) =>
+export const mockUserByEmailQuery = (resolver: Parameters<typeof graphql.query<UserByEmailQuery, UserByEmailQueryVariables>>[1]) =>
   graphql.query<UserByEmailQuery, UserByEmailQueryVariables>(
     'UserByEmail',
     resolver

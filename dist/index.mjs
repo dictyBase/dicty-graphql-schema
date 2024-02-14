@@ -149,6 +149,10 @@ function useGetRefreshTokenLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(GetRefreshTokenDocument, options);
 }
+function useGetRefreshTokenSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(GetRefreshTokenDocument, options);
+}
 var ContentBySlugDocument = gql`
     query contentBySlug($slug: String!) {
   contentBySlug(slug: $slug) {
@@ -156,19 +160,19 @@ var ContentBySlugDocument = gql`
     content
     name
     slug
+    created_at
     updated_at
+    created_by {
+      id
+      email
+      first_name
+      last_name
+    }
     updated_by {
       id
       email
       first_name
       last_name
-      roles {
-        role
-        permissions {
-          permission
-          resource
-        }
-      }
     }
   }
 }
@@ -181,6 +185,10 @@ function useContentBySlugLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ContentBySlugDocument, options);
 }
+function useContentBySlugSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ContentBySlugDocument, options);
+}
 var ContentDocument = gql`
     query content($id: ID!) {
   content(id: $id) {
@@ -189,19 +197,19 @@ var ContentDocument = gql`
     name
     slug
     namespace
+    created_at
     updated_at
+    created_by {
+      id
+      email
+      first_name
+      last_name
+    }
     updated_by {
       id
       email
       first_name
       last_name
-      roles {
-        role
-        permissions {
-          permission
-          resource
-        }
-      }
     }
   }
 }
@@ -213,6 +221,10 @@ function useContentQuery(baseOptions) {
 function useContentLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ContentDocument, options);
+}
+function useContentSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ContentDocument, options);
 }
 var ListOrganismsDocument = gql`
     query ListOrganisms {
@@ -242,6 +254,10 @@ function useListOrganismsQuery(baseOptions) {
 function useListOrganismsLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListOrganismsDocument, options);
+}
+function useListOrganismsSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListOrganismsDocument, options);
 }
 var GeneDocument = gql`
     query Gene($gene: String!, $limit: Int, $sort_by: String = "desc") {
@@ -436,6 +452,10 @@ function useGeneLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(GeneDocument, options);
 }
+function useGeneSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(GeneDocument, options);
+}
 var ListRecentGenesDocument = gql`
     query ListRecentGenes($limit: Int! = 4) {
   listRecentGenes(limit: $limit) {
@@ -451,6 +471,10 @@ function useListRecentGenesQuery(baseOptions) {
 function useListRecentGenesLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListRecentGenesDocument, options);
+}
+function useListRecentGenesSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListRecentGenesDocument, options);
 }
 var PublicationDocument = gql`
     query Publication($id: ID!) {
@@ -479,6 +503,10 @@ function usePublicationLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(PublicationDocument, options);
 }
+function usePublicationSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(PublicationDocument, options);
+}
 var ListRecentPublicationsDocument = gql`
     query ListRecentPublications($limit: Int! = 4) {
   listRecentPublications(limit: $limit) {
@@ -506,6 +534,10 @@ function useListRecentPublicationsLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListRecentPublicationsDocument, options);
 }
+function useListRecentPublicationsSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListRecentPublicationsDocument, options);
+}
 var StrainListDocument = gql`
     query StrainList($cursor: Int!, $limit: Int!, $filter: StrainListFilter) {
   listStrains(cursor: $cursor, limit: $limit, filter: $filter) {
@@ -527,6 +559,10 @@ function useStrainListQuery(baseOptions) {
 function useStrainListLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(StrainListDocument, options);
+}
+function useStrainListSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(StrainListDocument, options);
 }
 var ListStrainsWithPhenotypeDocument = gql`
     query ListStrainsWithPhenotype($cursor: Int!, $limit: Int!, $type: String!, $annotation: String!) {
@@ -566,6 +602,10 @@ function useListStrainsWithPhenotypeQuery(baseOptions) {
 function useListStrainsWithPhenotypeLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListStrainsWithPhenotypeDocument, options);
+}
+function useListStrainsWithPhenotypeSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListStrainsWithPhenotypeDocument, options);
 }
 var ListBacterialStrainsDocument = gql`
     query ListBacterialStrains {
@@ -609,6 +649,10 @@ function useListBacterialStrainsLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListBacterialStrainsDocument, options);
 }
+function useListBacterialStrainsSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListBacterialStrainsDocument, options);
+}
 var ListStrainsInventoryDocument = gql`
     query ListStrainsInventory($cursor: Int!, $limit: Int!) {
   listStrainsWithAnnotation(
@@ -635,6 +679,10 @@ function useListStrainsInventoryQuery(baseOptions) {
 function useListStrainsInventoryLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListStrainsInventoryDocument, options);
+}
+function useListStrainsInventorySuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListStrainsInventoryDocument, options);
 }
 var ListPlasmidsInventoryDocument = gql`
     query ListPlasmidsInventory($cursor: Int!, $limit: Int!) {
@@ -663,6 +711,10 @@ function useListPlasmidsInventoryLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListPlasmidsInventoryDocument, options);
 }
+function useListPlasmidsInventorySuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListPlasmidsInventoryDocument, options);
+}
 var PlasmidListFilterDocument = gql`
     query PlasmidListFilter($cursor: Int!, $limit: Int!, $filter: String!) {
   listPlasmids(cursor: $cursor, limit: $limit, filter: $filter) {
@@ -684,6 +736,10 @@ function usePlasmidListFilterQuery(baseOptions) {
 function usePlasmidListFilterLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(PlasmidListFilterDocument, options);
+}
+function usePlasmidListFilterSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(PlasmidListFilterDocument, options);
 }
 var PlasmidDocument = gql`
     query Plasmid($id: ID!) {
@@ -726,6 +782,10 @@ function usePlasmidQuery(baseOptions) {
 function usePlasmidLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(PlasmidDocument, options);
+}
+function usePlasmidSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(PlasmidDocument, options);
 }
 var StrainDocument = gql`
     query Strain($id: ID!) {
@@ -794,6 +854,10 @@ function useStrainLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(StrainDocument, options);
 }
+function useStrainSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(StrainDocument, options);
+}
 var ListRecentPlasmidsDocument = gql`
     query ListRecentPlasmids($limit: Int! = 4) {
   listRecentPlasmids(limit: $limit) {
@@ -810,6 +874,10 @@ function useListRecentPlasmidsQuery(baseOptions) {
 function useListRecentPlasmidsLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListRecentPlasmidsDocument, options);
+}
+function useListRecentPlasmidsSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListRecentPlasmidsDocument, options);
 }
 var ListRecentStrainsDocument = gql`
     query ListRecentStrains($limit: Int! = 4) {
@@ -828,6 +896,10 @@ function useListRecentStrainsLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(ListRecentStrainsDocument, options);
 }
+function useListRecentStrainsSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(ListRecentStrainsDocument, options);
+}
 var UserByEmailDocument = gql`
     query UserByEmail($email: String!) {
   userByEmail(email: $email) {
@@ -842,6 +914,10 @@ function useUserByEmailQuery(baseOptions) {
 function useUserByEmailLazyQuery(baseOptions) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery(UserByEmailDocument, options);
+}
+function useUserByEmailSuspenseQuery(baseOptions) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery(UserByEmailDocument, options);
 }
 export {
   ContentBySlugDocument,
@@ -874,47 +950,66 @@ export {
   UserByEmailDocument,
   useContentBySlugLazyQuery,
   useContentBySlugQuery,
+  useContentBySlugSuspenseQuery,
   useContentLazyQuery,
   useContentQuery,
+  useContentSuspenseQuery,
   useCreateContentMutation,
   useCreateOrderMutation,
   useCreateUserMutation,
   useGeneLazyQuery,
   useGeneQuery,
+  useGeneSuspenseQuery,
   useGetRefreshTokenLazyQuery,
   useGetRefreshTokenQuery,
+  useGetRefreshTokenSuspenseQuery,
   useListBacterialStrainsLazyQuery,
   useListBacterialStrainsQuery,
+  useListBacterialStrainsSuspenseQuery,
   useListOrganismsLazyQuery,
   useListOrganismsQuery,
+  useListOrganismsSuspenseQuery,
   useListPlasmidsInventoryLazyQuery,
   useListPlasmidsInventoryQuery,
+  useListPlasmidsInventorySuspenseQuery,
   useListRecentGenesLazyQuery,
   useListRecentGenesQuery,
+  useListRecentGenesSuspenseQuery,
   useListRecentPlasmidsLazyQuery,
   useListRecentPlasmidsQuery,
+  useListRecentPlasmidsSuspenseQuery,
   useListRecentPublicationsLazyQuery,
   useListRecentPublicationsQuery,
+  useListRecentPublicationsSuspenseQuery,
   useListRecentStrainsLazyQuery,
   useListRecentStrainsQuery,
+  useListRecentStrainsSuspenseQuery,
   useListStrainsInventoryLazyQuery,
   useListStrainsInventoryQuery,
+  useListStrainsInventorySuspenseQuery,
   useListStrainsWithPhenotypeLazyQuery,
   useListStrainsWithPhenotypeQuery,
+  useListStrainsWithPhenotypeSuspenseQuery,
   useLoginMutation,
   useLogoutMutation,
   usePlasmidLazyQuery,
   usePlasmidListFilterLazyQuery,
   usePlasmidListFilterQuery,
+  usePlasmidListFilterSuspenseQuery,
   usePlasmidQuery,
+  usePlasmidSuspenseQuery,
   usePublicationLazyQuery,
   usePublicationQuery,
+  usePublicationSuspenseQuery,
   useStrainLazyQuery,
   useStrainListLazyQuery,
   useStrainListQuery,
+  useStrainListSuspenseQuery,
   useStrainQuery,
+  useStrainSuspenseQuery,
   useUpdateContentMutation,
   useUpdateUserMutation,
   useUserByEmailLazyQuery,
-  useUserByEmailQuery
+  useUserByEmailQuery,
+  useUserByEmailSuspenseQuery
 };
