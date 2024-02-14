@@ -10,13 +10,6 @@ query contentBySlug($slug: String!) {
       email
       first_name
       last_name
-      roles {
-        role
-        permissions {
-          permission
-          resource
-        }
-      }
     }
   }
 }
@@ -34,13 +27,6 @@ query content($id: ID!) {
       email
       first_name
       last_name
-      roles {
-        role
-        permissions {
-          permission
-          resource
-        }
-      }
     }
   }
 }
