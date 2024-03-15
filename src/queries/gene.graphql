@@ -182,6 +182,24 @@ query Gene($gene: String!, $limit: Int, $sort_by: String = "desc") {
   }
 }
 
+query GeneOntologyAnnotation ($gene: String!) {
+  gene(gene: $gene) {
+    id
+    name
+    goas {
+      id
+      type
+      date
+      evidence_code
+      qualifier
+      publication
+      with
+      extensions
+      assigned_by
+    }
+  }
+}
+
 query ListRecentGenes($limit: Int! = 4) {
   listRecentGenes(limit: $limit) {
     id
