@@ -182,7 +182,7 @@ query Gene($gene: String!, $limit: Int, $sort_by: String = "desc") {
   }
 }
 
-query GeneOntologyAnnotation ($gene: String!) {
+query GeneOntologyAnnotation($gene: String!) {
   gene(gene: $gene) {
     id
     name
@@ -193,8 +193,17 @@ query GeneOntologyAnnotation ($gene: String!) {
       evidence_code
       qualifier
       publication
-      with
-      extensions
+      with {
+        id
+        db
+        name
+      }
+      extensions {
+        id
+        db
+        relation
+        name
+      }
       assigned_by
     }
   }
