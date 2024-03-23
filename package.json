@@ -54,7 +54,7 @@
   },
   "homepage": "https://github.com/dictyBase/graphql-schema#readme",
   "dependencies": {
-    "@apollo/client": "^3.9.7",
+    "@apollo/client": "^3.9.9",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "react": "18.x",
