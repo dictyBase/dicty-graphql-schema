@@ -1,19 +1,22 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+import { graphql, type GraphQLResponseResolver, type RequestHandlerOptions } from 'msw'
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  Timestamp: any;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  Timestamp: { input: any; output: any; }
 };
 
 export type AssociatedSequences = {
@@ -21,205 +24,205 @@ export type AssociatedSequences = {
   ests: Array<NameWithLink>;
   genbank_genomic_fragment?: Maybe<NameWithLink>;
   genbank_mrna?: Maybe<NameWithLink>;
-  more_link: Scalars['String'];
+  more_link: Scalars['String']['output'];
 };
 
 export type Auth = {
   __typename?: 'Auth';
   identity: Identity;
-  token: Scalars['String'];
+  token: Scalars['String']['output'];
   user: User;
 };
 
 export type Author = {
   __typename?: 'Author';
-  first_name?: Maybe<Scalars['String']>;
-  initials?: Maybe<Scalars['String']>;
-  last_name: Scalars['String'];
-  rank?: Maybe<Scalars['String']>;
+  first_name?: Maybe<Scalars['String']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  last_name: Scalars['String']['output'];
+  rank?: Maybe<Scalars['String']['output']>;
 };
 
 export type BasePublication = {
-  abstract: Scalars['String'];
+  abstract: Scalars['String']['output'];
   authors: Array<Author>;
-  doi?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  issn?: Maybe<Scalars['String']>;
-  issue?: Maybe<Scalars['String']>;
-  journal: Scalars['String'];
-  pages?: Maybe<Scalars['String']>;
-  pub_date?: Maybe<Scalars['Timestamp']>;
-  pub_type: Scalars['String'];
-  source: Scalars['String'];
-  status?: Maybe<Scalars['String']>;
-  title: Scalars['String'];
-  volume?: Maybe<Scalars['String']>;
+  doi?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  issn?: Maybe<Scalars['String']['output']>;
+  issue?: Maybe<Scalars['String']['output']>;
+  journal: Scalars['String']['output'];
+  pages?: Maybe<Scalars['String']['output']>;
+  pub_date?: Maybe<Scalars['Timestamp']['output']>;
+  pub_type: Scalars['String']['output'];
+  source: Scalars['String']['output'];
+  status?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  volume?: Maybe<Scalars['String']['output']>;
 };
 
 export type Citation = {
   __typename?: 'Citation';
-  authors: Scalars['String'];
-  journal: Scalars['String'];
-  pubmed_id: Scalars['String'];
-  title: Scalars['String'];
+  authors: Scalars['String']['output'];
+  journal: Scalars['String']['output'];
+  pubmed_id: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type Content = {
   __typename?: 'Content';
-  content: Scalars['String'];
-  created_at: Scalars['Timestamp'];
+  content: Scalars['String']['output'];
+  created_at: Scalars['Timestamp']['output'];
   created_by: User;
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  namespace: Scalars['String'];
-  slug: Scalars['String'];
-  updated_at: Scalars['Timestamp'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  namespace: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  updated_at: Scalars['Timestamp']['output'];
   updated_by: User;
 };
 
 export type CreateContentInput = {
-  content: Scalars['String'];
-  created_by: Scalars['String'];
-  name: Scalars['String'];
-  namespace: Scalars['String'];
+  content: Scalars['String']['input'];
+  created_by: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  namespace: Scalars['String']['input'];
 };
 
 export type CreateOrderInput = {
-  comments?: InputMaybe<Scalars['String']>;
-  consumer: Scalars['String'];
-  courier: Scalars['String'];
-  courier_account: Scalars['String'];
-  items: Array<Scalars['String']>;
-  payer: Scalars['String'];
-  payment: Scalars['String'];
-  purchase_order_num?: InputMaybe<Scalars['String']>;
-  purchaser: Scalars['String'];
+  comments?: InputMaybe<Scalars['String']['input']>;
+  consumer: Scalars['String']['input'];
+  courier: Scalars['String']['input'];
+  courier_account: Scalars['String']['input'];
+  items: Array<Scalars['String']['input']>;
+  payer: Scalars['String']['input'];
+  payment: Scalars['String']['input'];
+  purchase_order_num?: InputMaybe<Scalars['String']['input']>;
+  purchaser: Scalars['String']['input'];
   status: StatusEnum;
 };
 
 export type CreatePermissionInput = {
-  description: Scalars['String'];
-  permission: Scalars['String'];
-  resource: Scalars['String'];
+  description: Scalars['String']['input'];
+  permission: Scalars['String']['input'];
+  resource: Scalars['String']['input'];
 };
 
 export type CreatePlasmidInput = {
-  created_by: Scalars['String'];
-  dbxrefs?: InputMaybe<Array<Scalars['String']>>;
-  depositor?: InputMaybe<Scalars['String']>;
-  editable_summary?: InputMaybe<Scalars['String']>;
-  genbank_accession?: InputMaybe<Scalars['String']>;
-  genes?: InputMaybe<Array<Scalars['String']>>;
-  image_map?: InputMaybe<Scalars['String']>;
-  in_stock: Scalars['Boolean'];
-  keywords?: InputMaybe<Array<Scalars['String']>>;
-  name: Scalars['String'];
-  publications?: InputMaybe<Array<Scalars['String']>>;
-  sequence?: InputMaybe<Scalars['String']>;
-  summary?: InputMaybe<Scalars['String']>;
-  updated_by: Scalars['String'];
+  created_by: Scalars['String']['input'];
+  dbxrefs?: InputMaybe<Array<Scalars['String']['input']>>;
+  depositor?: InputMaybe<Scalars['String']['input']>;
+  editable_summary?: InputMaybe<Scalars['String']['input']>;
+  genbank_accession?: InputMaybe<Scalars['String']['input']>;
+  genes?: InputMaybe<Array<Scalars['String']['input']>>;
+  image_map?: InputMaybe<Scalars['String']['input']>;
+  in_stock: Scalars['Boolean']['input'];
+  keywords?: InputMaybe<Array<Scalars['String']['input']>>;
+  name: Scalars['String']['input'];
+  publications?: InputMaybe<Array<Scalars['String']['input']>>;
+  sequence?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  updated_by: Scalars['String']['input'];
 };
 
 export type CreateRoleInput = {
-  description: Scalars['String'];
-  role: Scalars['String'];
+  description: Scalars['String']['input'];
+  role: Scalars['String']['input'];
 };
 
 export type CreateStrainInput = {
-  characteristics?: InputMaybe<Array<Scalars['String']>>;
-  created_by: Scalars['String'];
-  dbxrefs?: InputMaybe<Array<Scalars['String']>>;
-  depositor?: InputMaybe<Scalars['String']>;
-  editable_summary?: InputMaybe<Scalars['String']>;
-  genes?: InputMaybe<Array<Scalars['String']>>;
-  genetic_modification?: InputMaybe<Scalars['String']>;
-  genotypes?: InputMaybe<Array<Scalars['String']>>;
-  in_stock: Scalars['Boolean'];
-  label: Scalars['String'];
-  mutagenesis_method?: InputMaybe<Scalars['String']>;
-  names?: InputMaybe<Array<Scalars['String']>>;
-  parent?: InputMaybe<Scalars['String']>;
-  phenotypes?: InputMaybe<Array<Scalars['String']>>;
-  plasmid?: InputMaybe<Scalars['String']>;
-  publications?: InputMaybe<Array<Scalars['String']>>;
-  species: Scalars['String'];
-  summary?: InputMaybe<Scalars['String']>;
-  systematic_name: Scalars['String'];
-  updated_by: Scalars['String'];
+  characteristics?: InputMaybe<Array<Scalars['String']['input']>>;
+  created_by: Scalars['String']['input'];
+  dbxrefs?: InputMaybe<Array<Scalars['String']['input']>>;
+  depositor?: InputMaybe<Scalars['String']['input']>;
+  editable_summary?: InputMaybe<Scalars['String']['input']>;
+  genes?: InputMaybe<Array<Scalars['String']['input']>>;
+  genetic_modification?: InputMaybe<Scalars['String']['input']>;
+  genotypes?: InputMaybe<Array<Scalars['String']['input']>>;
+  in_stock: Scalars['Boolean']['input'];
+  label: Scalars['String']['input'];
+  mutagenesis_method?: InputMaybe<Scalars['String']['input']>;
+  names?: InputMaybe<Array<Scalars['String']['input']>>;
+  parent?: InputMaybe<Scalars['String']['input']>;
+  phenotypes?: InputMaybe<Array<Scalars['String']['input']>>;
+  plasmid?: InputMaybe<Scalars['String']['input']>;
+  publications?: InputMaybe<Array<Scalars['String']['input']>>;
+  species: Scalars['String']['input'];
+  summary?: InputMaybe<Scalars['String']['input']>;
+  systematic_name: Scalars['String']['input'];
+  updated_by: Scalars['String']['input'];
 };
 
 export type CreateUserInput = {
-  city?: InputMaybe<Scalars['String']>;
-  country?: InputMaybe<Scalars['String']>;
-  email: Scalars['String'];
-  first_address?: InputMaybe<Scalars['String']>;
-  first_name: Scalars['String'];
-  group_name?: InputMaybe<Scalars['String']>;
-  is_active: Scalars['Boolean'];
-  last_name: Scalars['String'];
-  organization?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['String']>;
-  second_address?: InputMaybe<Scalars['String']>;
-  state?: InputMaybe<Scalars['String']>;
-  zipcode?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
+  email: Scalars['String']['input'];
+  first_address?: InputMaybe<Scalars['String']['input']>;
+  first_name: Scalars['String']['input'];
+  group_name?: InputMaybe<Scalars['String']['input']>;
+  is_active: Scalars['Boolean']['input'];
+  last_name: Scalars['String']['input'];
+  organization?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  second_address?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  zipcode?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DeleteContent = {
   __typename?: 'DeleteContent';
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type DeletePermission = {
   __typename?: 'DeletePermission';
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type DeleteRole = {
   __typename?: 'DeleteRole';
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type DeleteStock = {
   __typename?: 'DeleteStock';
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type DeleteUser = {
   __typename?: 'DeleteUser';
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type Download = {
   __typename?: 'Download';
   items: Array<DownloadItem>;
-  title: Scalars['String'];
+  title: Scalars['String']['output'];
 };
 
 export type DownloadItem = {
   __typename?: 'DownloadItem';
-  title: Scalars['String'];
-  url: Scalars['String'];
+  title: Scalars['String']['output'];
+  url: Scalars['String']['output'];
 };
 
 export type Extension = {
   __typename?: 'Extension';
-  db: Scalars['String'];
-  id: Scalars['String'];
-  name: Scalars['String'];
-  relation: Scalars['String'];
+  db: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  relation: Scalars['String']['output'];
 };
 
 export type GoAnnotation = {
   __typename?: 'GOAnnotation';
-  assigned_by: Scalars['String'];
-  date: Scalars['String'];
-  evidence_code: Scalars['String'];
+  assigned_by: Scalars['String']['output'];
+  date: Scalars['String']['output'];
+  evidence_code: Scalars['String']['output'];
   extensions?: Maybe<Array<Extension>>;
-  go_term: Scalars['String'];
-  id: Scalars['String'];
-  publication: Scalars['String'];
-  qualifier: Scalars['String'];
-  type: Scalars['String'];
+  go_term: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  publication: Scalars['String']['output'];
+  qualifier: Scalars['String']['output'];
+  type: Scalars['String']['output'];
   with?: Maybe<Array<With>>;
 };
 
@@ -228,9 +231,9 @@ export type Gene = {
   associated_sequences: AssociatedSequences;
   general_info: GeneralInfo;
   goas?: Maybe<Array<GoAnnotation>>;
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   links: Links;
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   orthologs?: Maybe<Array<Orthologs>>;
   product_info?: Maybe<Array<ProductInformation>>;
   protein_information?: Maybe<ProteinInformation>;
@@ -239,28 +242,28 @@ export type Gene = {
 
 export type GeneralInfo = {
   __typename?: 'GeneralInfo';
-  alt_gene_name?: Maybe<Array<Scalars['String']>>;
-  alt_protein_names?: Maybe<Array<Scalars['String']>>;
-  description: Scalars['String'];
-  gene_product: Scalars['String'];
-  name_description: Array<Scalars['String']>;
+  alt_gene_name?: Maybe<Array<Scalars['String']['output']>>;
+  alt_protein_names?: Maybe<Array<Scalars['String']['output']>>;
+  description: Scalars['String']['output'];
+  gene_product: Scalars['String']['output'];
+  name_description: Array<Scalars['String']['output']>;
 };
 
 export type GenomicCoordinates = {
   __typename?: 'GenomicCoordinates';
-  chrom_coords: Scalars['String'];
-  exon: Scalars['String'];
-  local_coords: Scalars['String'];
+  chrom_coords: Scalars['String']['output'];
+  exon: Scalars['String']['output'];
+  local_coords: Scalars['String']['output'];
 };
 
 export type Identity = {
   __typename?: 'Identity';
-  created_at: Scalars['Timestamp'];
-  id: Scalars['ID'];
-  identifier: Scalars['String'];
-  provider: Scalars['String'];
-  updated_at: Scalars['Timestamp'];
-  user_id: Scalars['ID'];
+  created_at: Scalars['Timestamp']['output'];
+  id: Scalars['ID']['output'];
+  identifier: Scalars['String']['output'];
+  provider: Scalars['String']['output'];
+  updated_at: Scalars['Timestamp']['output'];
+  user_id: Scalars['ID']['output'];
 };
 
 export type Links = {
@@ -271,17 +274,17 @@ export type Links = {
 };
 
 export type LoginInput = {
-  client_id: Scalars['String'];
-  code: Scalars['String'];
-  provider: Scalars['String'];
-  redirect_url: Scalars['String'];
-  scopes: Scalars['String'];
-  state: Scalars['String'];
+  client_id: Scalars['String']['input'];
+  code: Scalars['String']['input'];
+  provider: Scalars['String']['input'];
+  redirect_url: Scalars['String']['input'];
+  scopes: Scalars['String']['input'];
+  state: Scalars['String']['input'];
 };
 
 export type Logout = {
   __typename?: 'Logout';
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type Mutation = {
@@ -338,8 +341,8 @@ export type MutationCreateRoleArgs = {
 
 
 export type MutationCreateRolePermissionRelationshipArgs = {
-  permissionId: Scalars['ID'];
-  roleId: Scalars['ID'];
+  permissionId: Scalars['ID']['input'];
+  roleId: Scalars['ID']['input'];
 };
 
 
@@ -354,33 +357,33 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationCreateUserRoleRelationshipArgs = {
-  roleId: Scalars['ID'];
-  userId: Scalars['ID'];
+  roleId: Scalars['ID']['input'];
+  userId: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteContentArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationDeletePermissionArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteRoleArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteStockArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteUserArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
@@ -395,230 +398,219 @@ export type MutationUpdateContentArgs = {
 
 
 export type MutationUpdateOrderArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
   input?: InputMaybe<UpdateOrderInput>;
 };
 
 
 export type MutationUpdatePermissionArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
   input?: InputMaybe<UpdatePermissionInput>;
 };
 
 
 export type MutationUpdatePlasmidArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
   input?: InputMaybe<UpdatePlasmidInput>;
 };
 
 
 export type MutationUpdateRoleArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
   input?: InputMaybe<UpdateRoleInput>;
 };
 
 
 export type MutationUpdateStrainArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
   input?: InputMaybe<UpdateStrainInput>;
 };
 
 
 export type MutationUpdateUserArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
   input?: InputMaybe<UpdateUserInput>;
 };
 
 export type NameWithLink = {
   __typename?: 'NameWithLink';
-  link: Scalars['String'];
-  name: Scalars['String'];
+  link: Scalars['String']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type NumberOfPublicationsWithGene = {
   __typename?: 'NumberOfPublicationsWithGene';
-  num_pubs: Scalars['Int'];
+  num_pubs: Scalars['Int']['output'];
   publications: Array<PublicationWithGene>;
 };
 
 export type Order = {
   __typename?: 'Order';
-  comments?: Maybe<Scalars['String']>;
+  comments?: Maybe<Scalars['String']['output']>;
   consumer?: Maybe<User>;
-  courier?: Maybe<Scalars['String']>;
-  courier_account?: Maybe<Scalars['String']>;
-  created_at: Scalars['Timestamp'];
-  id: Scalars['ID'];
+  courier?: Maybe<Scalars['String']['output']>;
+  courier_account?: Maybe<Scalars['String']['output']>;
+  created_at: Scalars['Timestamp']['output'];
+  id: Scalars['ID']['output'];
   items?: Maybe<Array<Stock>>;
   payer?: Maybe<User>;
-  payment?: Maybe<Scalars['String']>;
-  purchase_order_num?: Maybe<Scalars['String']>;
+  payment?: Maybe<Scalars['String']['output']>;
+  purchase_order_num?: Maybe<Scalars['String']['output']>;
   purchaser?: Maybe<User>;
   status?: Maybe<StatusEnum>;
-  updated_at: Scalars['Timestamp'];
+  updated_at: Scalars['Timestamp']['output'];
 };
 
 export type OrderListWithCursor = {
   __typename?: 'OrderListWithCursor';
-  limit?: Maybe<Scalars['Int']>;
-  nextCursor: Scalars['Int'];
+  limit?: Maybe<Scalars['Int']['output']>;
+  nextCursor: Scalars['Int']['output'];
   orders: Array<Order>;
-  previousCursor: Scalars['Int'];
-  totalCount: Scalars['Int'];
+  previousCursor: Scalars['Int']['output'];
+  totalCount: Scalars['Int']['output'];
 };
 
 export type Organism = {
   __typename?: 'Organism';
   citations: Array<Citation>;
   downloads: Array<Download>;
-  scientific_name: Scalars['String'];
-  taxon_id: Scalars['String'];
+  scientific_name: Scalars['String']['output'];
+  taxon_id: Scalars['String']['output'];
 };
 
 export type Orthologs = {
   __typename?: 'Orthologs';
-  gene_product: Scalars['String'];
+  gene_product: Scalars['String']['output'];
   id: NameWithLink;
-  source: Array<Scalars['String']>;
-  species: Scalars['String'];
+  source: Array<Scalars['String']['output']>;
+  species: Scalars['String']['output'];
   uniprotkb: NameWithLink;
 };
 
 export type Permission = {
   __typename?: 'Permission';
-  created_at: Scalars['Timestamp'];
-  description: Scalars['String'];
-  id: Scalars['ID'];
-  permission: Scalars['String'];
-  resource?: Maybe<Scalars['String']>;
-  updated_at: Scalars['Timestamp'];
+  created_at: Scalars['Timestamp']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  permission: Scalars['String']['output'];
+  resource?: Maybe<Scalars['String']['output']>;
+  updated_at: Scalars['Timestamp']['output'];
 };
 
 export type Phenotype = {
   __typename?: 'Phenotype';
-  assay?: Maybe<Scalars['String']>;
-  environment?: Maybe<Scalars['String']>;
-  note?: Maybe<Scalars['String']>;
-  phenotype: Scalars['String'];
+  assay?: Maybe<Scalars['String']['output']>;
+  environment?: Maybe<Scalars['String']['output']>;
+  note?: Maybe<Scalars['String']['output']>;
+  phenotype: Scalars['String']['output'];
   publication?: Maybe<Publication>;
 };
 
 export type Plasmid = Stock & {
   __typename?: 'Plasmid';
-  created_at: Scalars['Timestamp'];
+  created_at: Scalars['Timestamp']['output'];
   created_by: User;
-  dbxrefs?: Maybe<Array<Scalars['String']>>;
+  dbxrefs?: Maybe<Array<Scalars['String']['output']>>;
   depositor: User;
-  editable_summary?: Maybe<Scalars['String']>;
-  genbank_accession?: Maybe<Scalars['String']>;
+  editable_summary?: Maybe<Scalars['String']['output']>;
+  genbank_accession?: Maybe<Scalars['String']['output']>;
   genes?: Maybe<Array<Gene>>;
-  id: Scalars['ID'];
-  image_map?: Maybe<Scalars['String']>;
-  in_stock: Scalars['Boolean'];
-  keywords?: Maybe<Array<Scalars['String']>>;
-  name: Scalars['String'];
+  id: Scalars['ID']['output'];
+  image_map?: Maybe<Scalars['String']['output']>;
+  in_stock: Scalars['Boolean']['output'];
+  keywords?: Maybe<Array<Scalars['String']['output']>>;
+  name: Scalars['String']['output'];
   publications?: Maybe<Array<Publication>>;
-  sequence?: Maybe<Scalars['String']>;
-  summary?: Maybe<Scalars['String']>;
-  updated_at: Scalars['Timestamp'];
+  sequence?: Maybe<Scalars['String']['output']>;
+  summary?: Maybe<Scalars['String']['output']>;
+  updated_at: Scalars['Timestamp']['output'];
   updated_by: User;
 };
 
 export type PlasmidListWithCursor = {
   __typename?: 'PlasmidListWithCursor';
-  limit?: Maybe<Scalars['Int']>;
-  nextCursor: Scalars['Int'];
+  limit?: Maybe<Scalars['Int']['output']>;
+  nextCursor: Scalars['Int']['output'];
   plasmids: Array<Plasmid>;
-  previousCursor: Scalars['Int'];
-  totalCount: Scalars['Int'];
+  previousCursor: Scalars['Int']['output'];
+  totalCount: Scalars['Int']['output'];
 };
 
 export type ProductInformation = {
   __typename?: 'ProductInformation';
   genomic_coords: Array<GenomicCoordinates>;
-  more_protein_data: Scalars['String'];
+  more_protein_data: Scalars['String']['output'];
   protein_coding_gene: NameWithLink;
-  protein_length: Scalars['String'];
-  protein_molecular_weight: Scalars['String'];
+  protein_length: Scalars['String']['output'];
+  protein_molecular_weight: Scalars['String']['output'];
 };
 
 export type ProteinGeneralInfo = {
   __typename?: 'ProteinGeneralInfo';
   aa_composition: NameWithLink;
-  description: Scalars['String'];
-  dictybase_id: Scalars['String'];
-  gene_product: Scalars['String'];
-  molecular_weight: Scalars['String'];
-  note: Scalars['String'];
-  protein_existence: Scalars['String'];
-  protein_length: Scalars['String'];
-  subcellular_location: Scalars['String'];
+  description: Scalars['String']['output'];
+  dictybase_id: Scalars['String']['output'];
+  gene_product: Scalars['String']['output'];
+  molecular_weight: Scalars['String']['output'];
+  note: Scalars['String']['output'];
+  protein_existence: Scalars['String']['output'];
+  protein_length: Scalars['String']['output'];
+  subcellular_location: Scalars['String']['output'];
 };
 
 export type ProteinInformation = {
   __typename?: 'ProteinInformation';
   external_links: Array<NameWithLink>;
   general_info: ProteinGeneralInfo;
-  protein_sequence: Scalars['String'];
+  protein_sequence: Scalars['String']['output'];
 };
 
 export type Publication = BasePublication & {
   __typename?: 'Publication';
-  abstract: Scalars['String'];
+  abstract: Scalars['String']['output'];
   authors: Array<Author>;
-  doi?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  issn?: Maybe<Scalars['String']>;
-  issue?: Maybe<Scalars['String']>;
-  journal: Scalars['String'];
-  pages?: Maybe<Scalars['String']>;
-  pub_date?: Maybe<Scalars['Timestamp']>;
-  pub_type: Scalars['String'];
-  source: Scalars['String'];
-  status?: Maybe<Scalars['String']>;
-  title: Scalars['String'];
-  volume?: Maybe<Scalars['String']>;
+  doi?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  issn?: Maybe<Scalars['String']['output']>;
+  issue?: Maybe<Scalars['String']['output']>;
+  journal: Scalars['String']['output'];
+  pages?: Maybe<Scalars['String']['output']>;
+  pub_date?: Maybe<Scalars['Timestamp']['output']>;
+  pub_type: Scalars['String']['output'];
+  source: Scalars['String']['output'];
+  status?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  volume?: Maybe<Scalars['String']['output']>;
 };
 
 export type PublicationWithGene = BasePublication & {
   __typename?: 'PublicationWithGene';
-  abstract: Scalars['String'];
+  abstract: Scalars['String']['output'];
   authors: Array<Author>;
-  doi?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  issn?: Maybe<Scalars['String']>;
-  issue?: Maybe<Scalars['String']>;
-  journal: Scalars['String'];
-  pages?: Maybe<Scalars['String']>;
-  pub_date?: Maybe<Scalars['Timestamp']>;
-  pub_type: Scalars['String'];
+  doi?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  issn?: Maybe<Scalars['String']['output']>;
+  issue?: Maybe<Scalars['String']['output']>;
+  journal: Scalars['String']['output'];
+  pages?: Maybe<Scalars['String']['output']>;
+  pub_date?: Maybe<Scalars['Timestamp']['output']>;
+  pub_type: Scalars['String']['output'];
   related_genes: Array<Gene>;
-  source: Scalars['String'];
-  status?: Maybe<Scalars['String']>;
-  title: Scalars['String'];
-  volume?: Maybe<Scalars['String']>;
+  source: Scalars['String']['output'];
+  status?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  volume?: Maybe<Scalars['String']['output']>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  allOrthologs?: Maybe<Gene>;
-  allPublications: NumberOfPublicationsWithGene;
-  allStrains?: Maybe<Gene>;
   content?: Maybe<Content>;
   contentBySlug?: Maybe<Content>;
-  gene?: Maybe<Gene>;
-  generalInformation?: Maybe<Gene>;
-  getAssociatedSequnces?: Maybe<Gene>;
-  getLinks?: Maybe<Gene>;
-  getProteinInformation?: Maybe<Gene>;
-  getRefreshToken?: Maybe<Auth>;
-  listGeneProductInfo?: Maybe<Gene>;
+  geneOntologyAnnotation?: Maybe<Array<GoAnnotation>>;
   listOrders?: Maybe<OrderListWithCursor>;
-  listOrganisms?: Maybe<Array<Organism>>;
   listPermissions?: Maybe<Array<Permission>>;
   listPlasmids?: Maybe<PlasmidListWithCursor>;
   listPlasmidsWithAnnotation?: Maybe<PlasmidListWithCursor>;
-  listRecentGenes?: Maybe<Array<Gene>>;
   listRecentPlasmids?: Maybe<Array<Plasmid>>;
   listRecentPublications?: Maybe<Array<Publication>>;
   listRecentStrains?: Maybe<Array<Strain>>;
@@ -627,7 +619,6 @@ export type Query = {
   listStrainsWithAnnotation?: Maybe<StrainListWithCursor>;
   listUsers?: Maybe<UserList>;
   order?: Maybe<Order>;
-  organism?: Maybe<Organism>;
   permission?: Maybe<Permission>;
   plasmid?: Maybe<Plasmid>;
   publication?: Maybe<Publication>;
@@ -638,184 +629,127 @@ export type Query = {
 };
 
 
-export type QueryAllOrthologsArgs = {
-  gene: Scalars['String'];
-};
-
-
-export type QueryAllPublicationsArgs = {
-  gene: Scalars['String'];
-  limit?: InputMaybe<Scalars['Int']>;
-  sort_by?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QueryAllStrainsArgs = {
-  gene: Scalars['String'];
-};
-
-
 export type QueryContentArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryContentBySlugArgs = {
-  slug: Scalars['String'];
+  slug: Scalars['String']['input'];
 };
 
 
-export type QueryGeneArgs = {
-  gene: Scalars['String'];
-};
-
-
-export type QueryGeneralInformationArgs = {
-  gene: Scalars['String'];
-};
-
-
-export type QueryGetAssociatedSequncesArgs = {
-  gene: Scalars['String'];
-};
-
-
-export type QueryGetLinksArgs = {
-  gene: Scalars['String'];
-};
-
-
-export type QueryGetProteinInformationArgs = {
-  gene: Scalars['String'];
-};
-
-
-export type QueryGetRefreshTokenArgs = {
-  token: Scalars['String'];
-};
-
-
-export type QueryListGeneProductInfoArgs = {
-  gene: Scalars['String'];
+export type QueryGeneOntologyAnnotationArgs = {
+  gene: Scalars['String']['input'];
 };
 
 
 export type QueryListOrdersArgs = {
-  cursor?: InputMaybe<Scalars['Int']>;
-  filter?: InputMaybe<Scalars['String']>;
-  limit?: InputMaybe<Scalars['Int']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryListPlasmidsArgs = {
-  cursor?: InputMaybe<Scalars['Int']>;
-  filter?: InputMaybe<Scalars['String']>;
-  limit?: InputMaybe<Scalars['Int']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryListPlasmidsWithAnnotationArgs = {
-  annotation: Scalars['String'];
-  cursor?: InputMaybe<Scalars['Int']>;
-  limit?: InputMaybe<Scalars['Int']>;
-  type: Scalars['String'];
-};
-
-
-export type QueryListRecentGenesArgs = {
-  limit: Scalars['Int'];
+  annotation: Scalars['String']['input'];
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  type: Scalars['String']['input'];
 };
 
 
 export type QueryListRecentPlasmidsArgs = {
-  limit: Scalars['Int'];
+  limit: Scalars['Int']['input'];
 };
 
 
 export type QueryListRecentPublicationsArgs = {
-  limit: Scalars['Int'];
+  limit: Scalars['Int']['input'];
 };
 
 
 export type QueryListRecentStrainsArgs = {
-  limit: Scalars['Int'];
+  limit: Scalars['Int']['input'];
 };
 
 
 export type QueryListStrainsArgs = {
-  cursor?: InputMaybe<Scalars['Int']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   filter?: InputMaybe<StrainListFilter>;
-  limit?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryListStrainsWithAnnotationArgs = {
-  annotation: Scalars['String'];
-  cursor?: InputMaybe<Scalars['Int']>;
-  limit?: InputMaybe<Scalars['Int']>;
-  type: Scalars['String'];
+  annotation: Scalars['String']['input'];
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  type: Scalars['String']['input'];
 };
 
 
 export type QueryListUsersArgs = {
-  filter: Scalars['String'];
-  pagenum: Scalars['String'];
-  pagesize: Scalars['String'];
+  filter: Scalars['String']['input'];
+  pagenum: Scalars['String']['input'];
+  pagesize: Scalars['String']['input'];
 };
 
 
 export type QueryOrderArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryOrganismArgs = {
-  taxon_id: Scalars['String'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryPermissionArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryPlasmidArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryPublicationArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryRoleArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryStrainArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryUserArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryUserByEmailArgs = {
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
 };
 
 export type Role = {
   __typename?: 'Role';
-  created_at: Scalars['Timestamp'];
-  description: Scalars['String'];
-  id: Scalars['ID'];
+  created_at: Scalars['Timestamp']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   permissions?: Maybe<Array<Permission>>;
-  role: Scalars['String'];
-  updated_at: Scalars['Timestamp'];
+  role: Scalars['String']['output'];
+  updated_at: Scalars['Timestamp']['output'];
 };
 
 export enum StatusEnum {
@@ -826,62 +760,62 @@ export enum StatusEnum {
 }
 
 export type Stock = {
-  created_at: Scalars['Timestamp'];
+  created_at: Scalars['Timestamp']['output'];
   created_by: User;
-  dbxrefs?: Maybe<Array<Scalars['String']>>;
+  dbxrefs?: Maybe<Array<Scalars['String']['output']>>;
   depositor: User;
-  editable_summary?: Maybe<Scalars['String']>;
+  editable_summary?: Maybe<Scalars['String']['output']>;
   genes?: Maybe<Array<Gene>>;
-  id: Scalars['ID'];
-  in_stock: Scalars['Boolean'];
+  id: Scalars['ID']['output'];
+  in_stock: Scalars['Boolean']['output'];
   publications?: Maybe<Array<Publication>>;
-  summary?: Maybe<Scalars['String']>;
-  updated_at: Scalars['Timestamp'];
+  summary?: Maybe<Scalars['String']['output']>;
+  updated_at: Scalars['Timestamp']['output'];
   updated_by: User;
 };
 
 export type Strain = Stock & {
   __typename?: 'Strain';
-  characteristics?: Maybe<Array<Scalars['String']>>;
-  created_at: Scalars['Timestamp'];
+  characteristics?: Maybe<Array<Scalars['String']['output']>>;
+  created_at: Scalars['Timestamp']['output'];
   created_by: User;
-  dbxrefs?: Maybe<Array<Scalars['String']>>;
+  dbxrefs?: Maybe<Array<Scalars['String']['output']>>;
   depositor: User;
-  editable_summary?: Maybe<Scalars['String']>;
+  editable_summary?: Maybe<Scalars['String']['output']>;
   genes?: Maybe<Array<Gene>>;
-  genetic_modification?: Maybe<Scalars['String']>;
-  genotypes?: Maybe<Array<Scalars['String']>>;
-  id: Scalars['ID'];
-  in_stock: Scalars['Boolean'];
-  label: Scalars['String'];
-  mutagenesis_method?: Maybe<Scalars['String']>;
-  names?: Maybe<Array<Scalars['String']>>;
+  genetic_modification?: Maybe<Scalars['String']['output']>;
+  genotypes?: Maybe<Array<Scalars['String']['output']>>;
+  id: Scalars['ID']['output'];
+  in_stock: Scalars['Boolean']['output'];
+  label: Scalars['String']['output'];
+  mutagenesis_method?: Maybe<Scalars['String']['output']>;
+  names?: Maybe<Array<Scalars['String']['output']>>;
   parent?: Maybe<Strain>;
   phenotypes?: Maybe<Array<Phenotype>>;
-  plasmid?: Maybe<Scalars['String']>;
+  plasmid?: Maybe<Scalars['String']['output']>;
   publications?: Maybe<Array<Publication>>;
-  species: Scalars['String'];
-  summary?: Maybe<Scalars['String']>;
-  systematic_name: Scalars['String'];
-  updated_at: Scalars['Timestamp'];
+  species: Scalars['String']['output'];
+  summary?: Maybe<Scalars['String']['output']>;
+  systematic_name: Scalars['String']['output'];
+  updated_at: Scalars['Timestamp']['output'];
   updated_by: User;
 };
 
 export type StrainListFilter = {
-  id?: InputMaybe<Scalars['ID']>;
-  in_stock?: InputMaybe<Scalars['Boolean']>;
-  label?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  in_stock?: InputMaybe<Scalars['Boolean']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
   strain_type: StrainType;
-  summary?: InputMaybe<Scalars['String']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StrainListWithCursor = {
   __typename?: 'StrainListWithCursor';
-  limit?: Maybe<Scalars['Int']>;
-  nextCursor: Scalars['Int'];
-  previousCursor: Scalars['Int'];
+  limit?: Maybe<Scalars['Int']['output']>;
+  nextCursor: Scalars['Int']['output'];
+  previousCursor: Scalars['Int']['output'];
   strains: Array<Strain>;
-  totalCount: Scalars['Int'];
+  totalCount: Scalars['Int']['output'];
 };
 
 export enum StrainType {
@@ -892,228 +826,159 @@ export enum StrainType {
 }
 
 export type UpdateContentInput = {
-  content: Scalars['String'];
-  id: Scalars['ID'];
-  updated_by: Scalars['String'];
+  content: Scalars['String']['input'];
+  id: Scalars['ID']['input'];
+  updated_by: Scalars['String']['input'];
 };
 
 export type UpdateOrderInput = {
-  comments?: InputMaybe<Scalars['String']>;
-  courier?: InputMaybe<Scalars['String']>;
-  courier_account?: InputMaybe<Scalars['String']>;
-  items?: InputMaybe<Array<Scalars['String']>>;
-  payment?: InputMaybe<Scalars['String']>;
-  purchase_order_num?: InputMaybe<Scalars['String']>;
+  comments?: InputMaybe<Scalars['String']['input']>;
+  courier?: InputMaybe<Scalars['String']['input']>;
+  courier_account?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<Scalars['String']['input']>>;
+  payment?: InputMaybe<Scalars['String']['input']>;
+  purchase_order_num?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<StatusEnum>;
 };
 
 export type UpdatePermissionInput = {
-  description: Scalars['String'];
-  permission: Scalars['String'];
-  resource: Scalars['String'];
+  description: Scalars['String']['input'];
+  permission: Scalars['String']['input'];
+  resource: Scalars['String']['input'];
 };
 
 export type UpdatePlasmidInput = {
-  dbxrefs?: InputMaybe<Array<Scalars['String']>>;
-  depositor?: InputMaybe<Scalars['String']>;
-  editable_summary?: InputMaybe<Scalars['String']>;
-  genbank_accession?: InputMaybe<Scalars['String']>;
-  genes?: InputMaybe<Array<Scalars['String']>>;
-  image_map?: InputMaybe<Scalars['String']>;
-  in_stock?: InputMaybe<Scalars['Boolean']>;
-  keywords?: InputMaybe<Array<Scalars['String']>>;
-  name?: InputMaybe<Scalars['String']>;
-  publications?: InputMaybe<Array<Scalars['String']>>;
-  sequence?: InputMaybe<Scalars['String']>;
-  summary?: InputMaybe<Scalars['String']>;
-  updated_by: Scalars['String'];
+  dbxrefs?: InputMaybe<Array<Scalars['String']['input']>>;
+  depositor?: InputMaybe<Scalars['String']['input']>;
+  editable_summary?: InputMaybe<Scalars['String']['input']>;
+  genbank_accession?: InputMaybe<Scalars['String']['input']>;
+  genes?: InputMaybe<Array<Scalars['String']['input']>>;
+  image_map?: InputMaybe<Scalars['String']['input']>;
+  in_stock?: InputMaybe<Scalars['Boolean']['input']>;
+  keywords?: InputMaybe<Array<Scalars['String']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  publications?: InputMaybe<Array<Scalars['String']['input']>>;
+  sequence?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  updated_by: Scalars['String']['input'];
 };
 
 export type UpdateRoleInput = {
-  description: Scalars['String'];
-  role: Scalars['String'];
+  description: Scalars['String']['input'];
+  role: Scalars['String']['input'];
 };
 
 export type UpdateStrainInput = {
-  characteristics?: InputMaybe<Array<Scalars['String']>>;
-  dbxrefs?: InputMaybe<Array<Scalars['String']>>;
-  depositor?: InputMaybe<Scalars['String']>;
-  editable_summary?: InputMaybe<Scalars['String']>;
-  genes?: InputMaybe<Array<Scalars['String']>>;
-  genetic_modification?: InputMaybe<Scalars['String']>;
-  genotypes?: InputMaybe<Array<Scalars['String']>>;
-  in_stock?: InputMaybe<Scalars['Boolean']>;
-  label?: InputMaybe<Scalars['String']>;
-  mutagenesis_method?: InputMaybe<Scalars['String']>;
-  names?: InputMaybe<Array<Scalars['String']>>;
-  parent?: InputMaybe<Scalars['String']>;
-  phenotypes?: InputMaybe<Array<Scalars['String']>>;
-  plasmid?: InputMaybe<Scalars['String']>;
-  publications?: InputMaybe<Array<Scalars['String']>>;
-  species?: InputMaybe<Scalars['String']>;
-  summary?: InputMaybe<Scalars['String']>;
-  systematic_name?: InputMaybe<Scalars['String']>;
-  updated_by: Scalars['String'];
+  characteristics?: InputMaybe<Array<Scalars['String']['input']>>;
+  dbxrefs?: InputMaybe<Array<Scalars['String']['input']>>;
+  depositor?: InputMaybe<Scalars['String']['input']>;
+  editable_summary?: InputMaybe<Scalars['String']['input']>;
+  genes?: InputMaybe<Array<Scalars['String']['input']>>;
+  genetic_modification?: InputMaybe<Scalars['String']['input']>;
+  genotypes?: InputMaybe<Array<Scalars['String']['input']>>;
+  in_stock?: InputMaybe<Scalars['Boolean']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  mutagenesis_method?: InputMaybe<Scalars['String']['input']>;
+  names?: InputMaybe<Array<Scalars['String']['input']>>;
+  parent?: InputMaybe<Scalars['String']['input']>;
+  phenotypes?: InputMaybe<Array<Scalars['String']['input']>>;
+  plasmid?: InputMaybe<Scalars['String']['input']>;
+  publications?: InputMaybe<Array<Scalars['String']['input']>>;
+  species?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  systematic_name?: InputMaybe<Scalars['String']['input']>;
+  updated_by: Scalars['String']['input'];
 };
 
 export type UpdateUserInput = {
-  city?: InputMaybe<Scalars['String']>;
-  country?: InputMaybe<Scalars['String']>;
-  first_address?: InputMaybe<Scalars['String']>;
-  first_name?: InputMaybe<Scalars['String']>;
-  group_name?: InputMaybe<Scalars['String']>;
-  is_active?: InputMaybe<Scalars['Boolean']>;
-  last_name?: InputMaybe<Scalars['String']>;
-  organization?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['String']>;
-  second_address?: InputMaybe<Scalars['String']>;
-  state?: InputMaybe<Scalars['String']>;
-  zipcode?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
+  first_address?: InputMaybe<Scalars['String']['input']>;
+  first_name?: InputMaybe<Scalars['String']['input']>;
+  group_name?: InputMaybe<Scalars['String']['input']>;
+  is_active?: InputMaybe<Scalars['Boolean']['input']>;
+  last_name?: InputMaybe<Scalars['String']['input']>;
+  organization?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  second_address?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  zipcode?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type User = {
   __typename?: 'User';
-  city?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  created_at: Scalars['Timestamp'];
-  email: Scalars['String'];
-  first_address?: Maybe<Scalars['String']>;
-  first_name: Scalars['String'];
-  group_name?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  is_active: Scalars['Boolean'];
-  last_name: Scalars['String'];
-  organization?: Maybe<Scalars['String']>;
-  phone?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
+  created_at: Scalars['Timestamp']['output'];
+  email: Scalars['String']['output'];
+  first_address?: Maybe<Scalars['String']['output']>;
+  first_name: Scalars['String']['output'];
+  group_name?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  is_active: Scalars['Boolean']['output'];
+  last_name: Scalars['String']['output'];
+  organization?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
   roles?: Maybe<Array<Role>>;
-  second_address?: Maybe<Scalars['String']>;
-  state?: Maybe<Scalars['String']>;
-  updated_at: Scalars['Timestamp'];
-  zipcode?: Maybe<Scalars['String']>;
+  second_address?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  updated_at: Scalars['Timestamp']['output'];
+  zipcode?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserList = {
   __typename?: 'UserList';
-  pageNum?: Maybe<Scalars['String']>;
-  pageSize?: Maybe<Scalars['String']>;
-  totalCount: Scalars['Int'];
+  pageNum?: Maybe<Scalars['String']['output']>;
+  pageSize?: Maybe<Scalars['String']['output']>;
+  totalCount: Scalars['Int']['output'];
   users: Array<User>;
 };
 
 export type With = {
   __typename?: 'With';
-  db: Scalars['String'];
-  id: Scalars['String'];
-  name: Scalars['String'];
+  db: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
 };
 
-export type LoginMutationVariables = Exact<{
-  input: LoginInput;
-}>;
-
-
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'Auth', token: string, user: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string, roles?: Array<{ __typename?: 'Role', role: string, permissions?: Array<{ __typename?: 'Permission', permission: string, resource?: string | null }> | null }> | null }, identity: { __typename?: 'Identity', provider: string } } | null };
-
-export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type LogoutMutation = { __typename?: 'Mutation', logout?: { __typename?: 'Logout', success: boolean } | null };
-
-export type CreateContentMutationVariables = Exact<{
-  input: CreateContentInput;
-}>;
-
-
-export type CreateContentMutation = { __typename?: 'Mutation', createContent?: { __typename?: 'Content', name: string, content: string, namespace: string, created_by: { __typename?: 'User', id: string } } | null };
-
-export type UpdateContentMutationVariables = Exact<{
-  input: UpdateContentInput;
-}>;
-
-
-export type UpdateContentMutation = { __typename?: 'Mutation', updateContent?: { __typename?: 'Content', id: string, content: string, updated_by: { __typename?: 'User', id: string } } | null };
-
-export type CreateOrderMutationVariables = Exact<{
-  input: CreateOrderInput;
-}>;
-
-
-export type CreateOrderMutation = { __typename?: 'Mutation', createOrder?: { __typename?: 'Order', id: string } | null };
-
-export type CreateUserMutationVariables = Exact<{
-  input: CreateUserInput;
-}>;
-
-
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'User', id: string } | null };
-
-export type UpdateUserMutationVariables = Exact<{
-  id: Scalars['ID'];
-  input: UpdateUserInput;
-}>;
-
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'User', id: string } | null };
-
-export type GetRefreshTokenQueryVariables = Exact<{
-  token: Scalars['String'];
-}>;
-
-
-export type GetRefreshTokenQuery = { __typename?: 'Query', getRefreshToken?: { __typename?: 'Auth', token: string, user: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string, roles?: Array<{ __typename?: 'Role', role: string, permissions?: Array<{ __typename?: 'Permission', permission: string, resource?: string | null }> | null }> | null }, identity: { __typename?: 'Identity', provider: string } } | null };
-
 export type ContentBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
+  slug: Scalars['String']['input'];
 }>;
 
 
 export type ContentBySlugQuery = { __typename?: 'Query', contentBySlug?: { __typename?: 'Content', id: string, content: string, name: string, slug: string, created_at: any, updated_at: any, created_by: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string }, updated_by: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string } } | null };
 
 export type ContentQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 }>;
 
 
 export type ContentQuery = { __typename?: 'Query', content?: { __typename?: 'Content', id: string, content: string, name: string, slug: string, namespace: string, created_at: any, updated_at: any, created_by: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string }, updated_by: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string } } | null };
 
-export type ListOrganismsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ListOrganismsQuery = { __typename?: 'Query', listOrganisms?: Array<{ __typename?: 'Organism', taxon_id: string, scientific_name: string, citations: Array<{ __typename?: 'Citation', title: string, authors: string, pubmed_id: string, journal: string }>, downloads: Array<{ __typename?: 'Download', title: string, items: Array<{ __typename?: 'DownloadItem', title: string, url: string }> }> }> | null };
-
-export type GeneQueryVariables = Exact<{
-  gene: Scalars['String'];
-  limit?: InputMaybe<Scalars['Int']>;
-  sort_by?: InputMaybe<Scalars['String']>;
+export type GeneOntologyAnnotationQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
 }>;
 
 
-export type GeneQuery = { __typename?: 'Query', allStrains?: { __typename?: 'Gene', id: string, name: string, strains?: Array<{ __typename?: 'Strain', id: string, label: string, characteristics?: Array<string> | null, in_stock: boolean, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, publication?: { __typename?: 'Publication', id: string, title: string, journal: string, pages?: string | null, volume?: string | null, pub_date?: any | null, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> } | null }> | null }> | null } | null, gene?: { __typename?: 'Gene', id: string, name: string, goas?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, evidence_code: string, go_term: string, qualifier: string, publication: string, assigned_by: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null } | null, allPublications: { __typename?: 'NumberOfPublicationsWithGene', num_pubs: number, publications: Array<{ __typename?: 'PublicationWithGene', id: string, doi?: string | null, title: string, journal: string, pub_date?: any | null, volume?: string | null, pages?: string | null, pub_type: string, source: string, issue?: string | null, related_genes: Array<{ __typename?: 'Gene', id: string, name: string }>, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> }> }, allOrthologs?: { __typename?: 'Gene', id: string, name: string, orthologs?: Array<{ __typename?: 'Orthologs', species: string, gene_product: string, source: Array<string>, id: { __typename?: 'NameWithLink', name: string, link: string }, uniprotkb: { __typename?: 'NameWithLink', name: string, link: string } }> | null } | null, listGeneProductInfo?: { __typename?: 'Gene', id: string, name: string, product_info?: Array<{ __typename?: 'ProductInformation', protein_length: string, protein_molecular_weight: string, more_protein_data: string, protein_coding_gene: { __typename?: 'NameWithLink', name: string, link: string }, genomic_coords: Array<{ __typename?: 'GenomicCoordinates', exon: string, local_coords: string, chrom_coords: string }> }> | null } | null, generalInformation?: { __typename?: 'Gene', id: string, name: string, general_info: { __typename?: 'GeneralInfo', name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } } | null, getAssociatedSequnces?: { __typename?: 'Gene', id: string, name: string, associated_sequences: { __typename?: 'AssociatedSequences', more_link: string, genbank_genomic_fragment?: { __typename?: 'NameWithLink', name: string, link: string } | null, genbank_mrna?: { __typename?: 'NameWithLink', name: string, link: string } | null, ests: Array<{ __typename?: 'NameWithLink', name: string, link: string }> } } | null, getLinks?: { __typename?: 'Gene', id: string, name: string, links: { __typename?: 'Links', expression: Array<{ __typename?: 'NameWithLink', name: string, link: string }>, colleagues: { __typename?: 'NameWithLink', name: string, link: string }, ext_resources: Array<{ __typename?: 'NameWithLink', name: string, link: string }> } } | null, getProteinInformation?: { __typename?: 'Gene', id: string, name: string, protein_information?: { __typename?: 'ProteinInformation', protein_sequence: string, general_info: { __typename?: 'ProteinGeneralInfo', gene_product: string, dictybase_id: string, description: string, protein_length: string, molecular_weight: string, subcellular_location: string, protein_existence: string, note: string, aa_composition: { __typename?: 'NameWithLink', name: string, link: string } }, external_links: Array<{ __typename?: 'NameWithLink', name: string, link: string }> } | null } | null };
-
-export type ListRecentGenesQueryVariables = Exact<{
-  limit?: Scalars['Int'];
-}>;
-
-
-export type ListRecentGenesQuery = { __typename?: 'Query', listRecentGenes?: Array<{ __typename?: 'Gene', id: string, name: string }> | null };
+export type GeneOntologyAnnotationQuery = { __typename?: 'Query', geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, evidence_code: string, qualifier: string, publication: string, assigned_by: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null };
 
 export type PublicationQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 }>;
 
 
 export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, doi?: string | null, title: string, abstract: string, journal: string, pub_date?: any | null, pages?: string | null, issue?: string | null, volume?: string | null, authors: Array<{ __typename?: 'Author', initials?: string | null, last_name: string }> } | null };
 
 export type ListRecentPublicationsQueryVariables = Exact<{
-  limit?: Scalars['Int'];
+  limit?: Scalars['Int']['input'];
 }>;
 
 
 export type ListRecentPublicationsQuery = { __typename?: 'Query', listRecentPublications?: Array<{ __typename?: 'Publication', id: string, doi?: string | null, title: string, abstract: string, journal: string, pub_date?: any | null, pages?: string | null, issue?: string | null, volume?: string | null, authors: Array<{ __typename?: 'Author', initials?: string | null, last_name: string }> }> | null };
 
 export type StrainListQueryVariables = Exact<{
-  cursor: Scalars['Int'];
-  limit: Scalars['Int'];
+  cursor: Scalars['Int']['input'];
+  limit: Scalars['Int']['input'];
   filter?: InputMaybe<StrainListFilter>;
 }>;
 
@@ -1121,10 +986,10 @@ export type StrainListQueryVariables = Exact<{
 export type StrainListQuery = { __typename?: 'Query', listStrains?: { __typename?: 'StrainListWithCursor', nextCursor: number, totalCount: number, strains: Array<{ __typename?: 'Strain', id: string, label: string, summary?: string | null, in_stock: boolean }> } | null };
 
 export type ListStrainsWithPhenotypeQueryVariables = Exact<{
-  cursor: Scalars['Int'];
-  limit: Scalars['Int'];
-  type: Scalars['String'];
-  annotation: Scalars['String'];
+  cursor: Scalars['Int']['input'];
+  limit: Scalars['Int']['input'];
+  type: Scalars['String']['input'];
+  annotation: Scalars['String']['input'];
 }>;
 
 
@@ -1136,380 +1001,68 @@ export type ListBacterialStrainsQueryVariables = Exact<{ [key: string]: never; }
 export type ListBacterialStrainsQuery = { __typename?: 'Query', bacterialFoodSource?: { __typename?: 'StrainListWithCursor', totalCount: number, nextCursor: number, strains: Array<{ __typename?: 'Strain', id: string, label: string, summary?: string | null, in_stock: boolean }> } | null, symbioticFarmerBacterium?: { __typename?: 'StrainListWithCursor', totalCount: number, nextCursor: number, strains: Array<{ __typename?: 'Strain', id: string, label: string, summary?: string | null, in_stock: boolean }> } | null };
 
 export type ListStrainsInventoryQueryVariables = Exact<{
-  cursor: Scalars['Int'];
-  limit: Scalars['Int'];
+  cursor: Scalars['Int']['input'];
+  limit: Scalars['Int']['input'];
 }>;
 
 
 export type ListStrainsInventoryQuery = { __typename?: 'Query', listStrainsWithAnnotation?: { __typename?: 'StrainListWithCursor', totalCount: number, nextCursor: number, strains: Array<{ __typename?: 'Strain', id: string, label: string, summary?: string | null, in_stock: boolean }> } | null };
 
 export type ListPlasmidsInventoryQueryVariables = Exact<{
-  cursor: Scalars['Int'];
-  limit: Scalars['Int'];
+  cursor: Scalars['Int']['input'];
+  limit: Scalars['Int']['input'];
 }>;
 
 
 export type ListPlasmidsInventoryQuery = { __typename?: 'Query', listPlasmidsWithAnnotation?: { __typename?: 'PlasmidListWithCursor', totalCount: number, nextCursor: number, plasmids: Array<{ __typename?: 'Plasmid', id: string, name: string, summary?: string | null, in_stock: boolean }> } | null };
 
 export type PlasmidListFilterQueryVariables = Exact<{
-  cursor: Scalars['Int'];
-  limit: Scalars['Int'];
-  filter: Scalars['String'];
+  cursor: Scalars['Int']['input'];
+  limit: Scalars['Int']['input'];
+  filter: Scalars['String']['input'];
 }>;
 
 
 export type PlasmidListFilterQuery = { __typename?: 'Query', listPlasmids?: { __typename?: 'PlasmidListWithCursor', nextCursor: number, totalCount: number, plasmids: Array<{ __typename?: 'Plasmid', id: string, name: string, summary?: string | null, in_stock: boolean }> } | null };
 
 export type PlasmidQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 }>;
 
 
 export type PlasmidQuery = { __typename?: 'Query', plasmid?: { __typename?: 'Plasmid', id: string, name: string, summary?: string | null, dbxrefs?: Array<string> | null, image_map?: string | null, sequence?: string | null, keywords?: Array<string> | null, genbank_accession?: string | null, in_stock: boolean, depositor: { __typename?: 'User', first_name: string, last_name: string }, publications?: Array<{ __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, doi?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> }> | null, genes?: Array<{ __typename?: 'Gene', name: string }> | null } | null };
 
 export type StrainQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 }>;
 
 
 export type StrainQuery = { __typename?: 'Query', strain?: { __typename?: 'Strain', id: string, label: string, summary?: string | null, species: string, plasmid?: string | null, dbxrefs?: Array<string> | null, in_stock: boolean, systematic_name: string, genotypes?: Array<string> | null, mutagenesis_method?: string | null, genetic_modification?: string | null, names?: Array<string> | null, characteristics?: Array<string> | null, parent?: { __typename?: 'Strain', id: string, label: string } | null, depositor: { __typename?: 'User', first_name: string, last_name: string }, publications?: Array<{ __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, doi?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> }> | null, genes?: Array<{ __typename?: 'Gene', name: string }> | null, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, note?: string | null, assay?: string | null, environment?: string | null, publication?: { __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> } | null }> | null } | null };
 
 export type ListRecentPlasmidsQueryVariables = Exact<{
-  limit?: Scalars['Int'];
+  limit?: Scalars['Int']['input'];
 }>;
 
 
 export type ListRecentPlasmidsQuery = { __typename?: 'Query', listRecentPlasmids?: Array<{ __typename?: 'Plasmid', id: string, created_at: any, name: string }> | null };
 
 export type ListRecentStrainsQueryVariables = Exact<{
-  limit?: Scalars['Int'];
+  limit?: Scalars['Int']['input'];
 }>;
 
 
 export type ListRecentStrainsQuery = { __typename?: 'Query', listRecentStrains?: Array<{ __typename?: 'Strain', id: string, created_at: any, systematic_name: string }> | null };
 
 export type UserByEmailQueryVariables = Exact<{
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
 }>;
 
 
 export type UserByEmailQuery = { __typename?: 'Query', userByEmail?: { __typename?: 'User', id: string } | null };
 
 
-export const LoginDocument = gql`
-    mutation Login($input: LoginInput!) {
-  login(input: $input) {
-    token
-    user {
-      id
-      email
-      first_name
-      last_name
-      roles {
-        role
-        permissions {
-          permission
-          resource
-        }
-      }
-    }
-    identity {
-      provider
-    }
-  }
-}
-    `;
-export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
-
-/**
- * __useLoginMutation__
- *
- * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useLoginMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [loginMutation, { data, loading, error }] = useLoginMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
-      }
-export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
-export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
-export const LogoutDocument = gql`
-    mutation Logout {
-  logout {
-    success
-  }
-}
-    `;
-export type LogoutMutationFn = Apollo.MutationFunction<LogoutMutation, LogoutMutationVariables>;
-
-/**
- * __useLogoutMutation__
- *
- * To run a mutation, you first call `useLogoutMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useLogoutMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [logoutMutation, { data, loading, error }] = useLogoutMutation({
- *   variables: {
- *   },
- * });
- */
-export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<LogoutMutation, LogoutMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument, options);
-      }
-export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
-export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
-export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
-export const CreateContentDocument = gql`
-    mutation CreateContent($input: CreateContentInput!) {
-  createContent(input: $input) {
-    name
-    created_by {
-      id
-    }
-    content
-    namespace
-  }
-}
-    `;
-export type CreateContentMutationFn = Apollo.MutationFunction<CreateContentMutation, CreateContentMutationVariables>;
-
-/**
- * __useCreateContentMutation__
- *
- * To run a mutation, you first call `useCreateContentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateContentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createContentMutation, { data, loading, error }] = useCreateContentMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useCreateContentMutation(baseOptions?: Apollo.MutationHookOptions<CreateContentMutation, CreateContentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateContentMutation, CreateContentMutationVariables>(CreateContentDocument, options);
-      }
-export type CreateContentMutationHookResult = ReturnType<typeof useCreateContentMutation>;
-export type CreateContentMutationResult = Apollo.MutationResult<CreateContentMutation>;
-export type CreateContentMutationOptions = Apollo.BaseMutationOptions<CreateContentMutation, CreateContentMutationVariables>;
-export const UpdateContentDocument = gql`
-    mutation UpdateContent($input: UpdateContentInput!) {
-  updateContent(input: $input) {
-    id
-    updated_by {
-      id
-    }
-    content
-  }
-}
-    `;
-export type UpdateContentMutationFn = Apollo.MutationFunction<UpdateContentMutation, UpdateContentMutationVariables>;
-
-/**
- * __useUpdateContentMutation__
- *
- * To run a mutation, you first call `useUpdateContentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateContentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateContentMutation, { data, loading, error }] = useUpdateContentMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateContentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateContentMutation, UpdateContentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateContentMutation, UpdateContentMutationVariables>(UpdateContentDocument, options);
-      }
-export type UpdateContentMutationHookResult = ReturnType<typeof useUpdateContentMutation>;
-export type UpdateContentMutationResult = Apollo.MutationResult<UpdateContentMutation>;
-export type UpdateContentMutationOptions = Apollo.BaseMutationOptions<UpdateContentMutation, UpdateContentMutationVariables>;
-export const CreateOrderDocument = gql`
-    mutation CreateOrder($input: CreateOrderInput!) {
-  createOrder(input: $input) {
-    id
-  }
-}
-    `;
-export type CreateOrderMutationFn = Apollo.MutationFunction<CreateOrderMutation, CreateOrderMutationVariables>;
-
-/**
- * __useCreateOrderMutation__
- *
- * To run a mutation, you first call `useCreateOrderMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateOrderMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createOrderMutation, { data, loading, error }] = useCreateOrderMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useCreateOrderMutation(baseOptions?: Apollo.MutationHookOptions<CreateOrderMutation, CreateOrderMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateOrderMutation, CreateOrderMutationVariables>(CreateOrderDocument, options);
-      }
-export type CreateOrderMutationHookResult = ReturnType<typeof useCreateOrderMutation>;
-export type CreateOrderMutationResult = Apollo.MutationResult<CreateOrderMutation>;
-export type CreateOrderMutationOptions = Apollo.BaseMutationOptions<CreateOrderMutation, CreateOrderMutationVariables>;
-export const CreateUserDocument = gql`
-    mutation CreateUser($input: CreateUserInput!) {
-  createUser(input: $input) {
-    id
-  }
-}
-    `;
-export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
-
-/**
- * __useCreateUserMutation__
- *
- * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
-      }
-export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
-export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
-export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
-export const UpdateUserDocument = gql`
-    mutation UpdateUser($id: ID!, $input: UpdateUserInput!) {
-  updateUser(id: $id, input: $input) {
-    id
-  }
-}
-    `;
-export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
-
-/**
- * __useUpdateUserMutation__
- *
- * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
- *   variables: {
- *      id: // value for 'id'
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
-      }
-export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
-export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
-export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
-export const GetRefreshTokenDocument = gql`
-    query GetRefreshToken($token: String!) {
-  getRefreshToken(token: $token) {
-    token
-    user {
-      id
-      email
-      first_name
-      last_name
-      roles {
-        role
-        permissions {
-          permission
-          resource
-        }
-      }
-    }
-    identity {
-      provider
-    }
-  }
-}
-    `;
-
-/**
- * __useGetRefreshTokenQuery__
- *
- * To run a query within a React component, call `useGetRefreshTokenQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetRefreshTokenQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetRefreshTokenQuery({
- *   variables: {
- *      token: // value for 'token'
- *   },
- * });
- */
-export function useGetRefreshTokenQuery(baseOptions: Apollo.QueryHookOptions<GetRefreshTokenQuery, GetRefreshTokenQueryVariables> & ({ variables: GetRefreshTokenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetRefreshTokenQuery, GetRefreshTokenQueryVariables>(GetRefreshTokenDocument, options);
-      }
-export function useGetRefreshTokenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRefreshTokenQuery, GetRefreshTokenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetRefreshTokenQuery, GetRefreshTokenQueryVariables>(GetRefreshTokenDocument, options);
-        }
-export function useGetRefreshTokenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetRefreshTokenQuery, GetRefreshTokenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetRefreshTokenQuery, GetRefreshTokenQueryVariables>(GetRefreshTokenDocument, options);
-        }
-export type GetRefreshTokenQueryHookResult = ReturnType<typeof useGetRefreshTokenQuery>;
-export type GetRefreshTokenLazyQueryHookResult = ReturnType<typeof useGetRefreshTokenLazyQuery>;
-export type GetRefreshTokenSuspenseQueryHookResult = ReturnType<typeof useGetRefreshTokenSuspenseQuery>;
-export type GetRefreshTokenQueryResult = Apollo.QueryResult<GetRefreshTokenQuery, GetRefreshTokenQueryVariables>;
 export const ContentBySlugDocument = gql`
-    query contentBySlug($slug: String!) {
+    query ContentBySlug($slug: String!) {
   contentBySlug(slug: $slug) {
     id
     content
@@ -1566,7 +1119,7 @@ export type ContentBySlugLazyQueryHookResult = ReturnType<typeof useContentBySlu
 export type ContentBySlugSuspenseQueryHookResult = ReturnType<typeof useContentBySlugSuspenseQuery>;
 export type ContentBySlugQueryResult = Apollo.QueryResult<ContentBySlugQuery, ContentBySlugQueryVariables>;
 export const ContentDocument = gql`
-    query content($id: ID!) {
+    query Content($id: ID!) {
   content(id: $id) {
     id
     content
@@ -1623,320 +1176,63 @@ export type ContentQueryHookResult = ReturnType<typeof useContentQuery>;
 export type ContentLazyQueryHookResult = ReturnType<typeof useContentLazyQuery>;
 export type ContentSuspenseQueryHookResult = ReturnType<typeof useContentSuspenseQuery>;
 export type ContentQueryResult = Apollo.QueryResult<ContentQuery, ContentQueryVariables>;
-export const ListOrganismsDocument = gql`
-    query ListOrganisms {
-  listOrganisms {
-    taxon_id
-    scientific_name
-    citations {
-      title
-      authors
-      pubmed_id
-      journal
+export const GeneOntologyAnnotationDocument = gql`
+    query GeneOntologyAnnotation($gene: String!) {
+  geneOntologyAnnotation(gene: $gene) {
+    id
+    type
+    date
+    evidence_code
+    qualifier
+    publication
+    assigned_by
+    with {
+      id
+      db
+      name
     }
-    downloads {
-      title
-      items {
-        title
-        url
-      }
+    extensions {
+      id
+      db
+      relation
+      name
     }
   }
 }
     `;
 
 /**
- * __useListOrganismsQuery__
+ * __useGeneOntologyAnnotationQuery__
  *
- * To run a query within a React component, call `useListOrganismsQuery` and pass it any options that fit your needs.
- * When your component renders, `useListOrganismsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGeneOntologyAnnotationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGeneOntologyAnnotationQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useListOrganismsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useListOrganismsQuery(baseOptions?: Apollo.QueryHookOptions<ListOrganismsQuery, ListOrganismsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
-      }
-export function useListOrganismsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListOrganismsQuery, ListOrganismsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
-        }
-export function useListOrganismsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListOrganismsQuery, ListOrganismsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
-        }
-export type ListOrganismsQueryHookResult = ReturnType<typeof useListOrganismsQuery>;
-export type ListOrganismsLazyQueryHookResult = ReturnType<typeof useListOrganismsLazyQuery>;
-export type ListOrganismsSuspenseQueryHookResult = ReturnType<typeof useListOrganismsSuspenseQuery>;
-export type ListOrganismsQueryResult = Apollo.QueryResult<ListOrganismsQuery, ListOrganismsQueryVariables>;
-export const GeneDocument = gql`
-    query Gene($gene: String!, $limit: Int, $sort_by: String = "desc") {
-  allStrains(gene: $gene) {
-    id
-    name
-    strains {
-      id
-      label
-      characteristics
-      in_stock
-      phenotypes {
-        phenotype
-        publication {
-          id
-          title
-          journal
-          pages
-          volume
-          pub_date
-          authors {
-            last_name
-            rank
-          }
-        }
-      }
-    }
-  }
-  gene(gene: $gene) {
-    id
-    name
-    goas {
-      id
-      type
-      date
-      evidence_code
-      go_term
-      qualifier
-      publication
-      assigned_by
-      with {
-        id
-        db
-        name
-      }
-      extensions {
-        id
-        db
-        relation
-        name
-      }
-    }
-  }
-  allPublications(gene: $gene, limit: $limit, sort_by: $sort_by) {
-    num_pubs
-    publications {
-      related_genes {
-        id
-        name
-      }
-      id
-      doi
-      title
-      journal
-      pub_date
-      volume
-      pages
-      pub_type
-      source
-      issue
-      authors {
-        last_name
-        rank
-      }
-    }
-  }
-  allOrthologs(gene: $gene) {
-    id
-    name
-    orthologs {
-      id {
-        name
-        link
-      }
-      species
-      uniprotkb {
-        name
-        link
-      }
-      gene_product
-      source
-    }
-  }
-  listGeneProductInfo(gene: $gene) {
-    id
-    name
-    product_info {
-      protein_coding_gene {
-        name
-        link
-      }
-      protein_length
-      protein_molecular_weight
-      more_protein_data
-      genomic_coords {
-        exon
-        local_coords
-        chrom_coords
-      }
-    }
-  }
-  generalInformation(gene: $gene) {
-    id
-    name
-    general_info {
-      name_description
-      alt_gene_name
-      gene_product
-      alt_protein_names
-      description
-    }
-  }
-  getAssociatedSequnces(gene: $gene) {
-    id
-    name
-    associated_sequences {
-      genbank_genomic_fragment {
-        name
-        link
-      }
-      genbank_mrna {
-        name
-        link
-      }
-      ests {
-        name
-        link
-      }
-      more_link
-    }
-  }
-  getLinks(gene: $gene) {
-    id
-    name
-    links {
-      expression {
-        name
-        link
-      }
-      colleagues {
-        name
-        link
-      }
-      ext_resources {
-        name
-        link
-      }
-    }
-  }
-  getProteinInformation(gene: $gene) {
-    id
-    name
-    protein_information {
-      general_info {
-        gene_product
-        dictybase_id
-        description
-        protein_length
-        molecular_weight
-        aa_composition {
-          name
-          link
-        }
-        subcellular_location
-        protein_existence
-        note
-      }
-      external_links {
-        name
-        link
-      }
-      protein_sequence
-    }
-  }
-}
-    `;
-
-/**
- * __useGeneQuery__
- *
- * To run a query within a React component, call `useGeneQuery` and pass it any options that fit your needs.
- * When your component renders, `useGeneQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGeneQuery({
+ * const { data, loading, error } = useGeneOntologyAnnotationQuery({
  *   variables: {
  *      gene: // value for 'gene'
- *      limit: // value for 'limit'
- *      sort_by: // value for 'sort_by'
  *   },
  * });
  */
-export function useGeneQuery(baseOptions: Apollo.QueryHookOptions<GeneQuery, GeneQueryVariables> & ({ variables: GeneQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+export function useGeneOntologyAnnotationQuery(baseOptions: Apollo.QueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables> & ({ variables: GeneOntologyAnnotationQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GeneQuery, GeneQueryVariables>(GeneDocument, options);
+        return Apollo.useQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
       }
-export function useGeneLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GeneQuery, GeneQueryVariables>) {
+export function useGeneOntologyAnnotationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GeneQuery, GeneQueryVariables>(GeneDocument, options);
+          return Apollo.useLazyQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
         }
-export function useGeneSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GeneQuery, GeneQueryVariables>) {
+export function useGeneOntologyAnnotationSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GeneQuery, GeneQueryVariables>(GeneDocument, options);
+          return Apollo.useSuspenseQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
         }
-export type GeneQueryHookResult = ReturnType<typeof useGeneQuery>;
-export type GeneLazyQueryHookResult = ReturnType<typeof useGeneLazyQuery>;
-export type GeneSuspenseQueryHookResult = ReturnType<typeof useGeneSuspenseQuery>;
-export type GeneQueryResult = Apollo.QueryResult<GeneQuery, GeneQueryVariables>;
-export const ListRecentGenesDocument = gql`
-    query ListRecentGenes($limit: Int! = 4) {
-  listRecentGenes(limit: $limit) {
-    id
-    name
-  }
-}
-    `;
-
-/**
- * __useListRecentGenesQuery__
- *
- * To run a query within a React component, call `useListRecentGenesQuery` and pass it any options that fit your needs.
- * When your component renders, `useListRecentGenesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useListRecentGenesQuery({
- *   variables: {
- *      limit: // value for 'limit'
- *   },
- * });
- */
-export function useListRecentGenesQuery(baseOptions?: Apollo.QueryHookOptions<ListRecentGenesQuery, ListRecentGenesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ListRecentGenesQuery, ListRecentGenesQueryVariables>(ListRecentGenesDocument, options);
-      }
-export function useListRecentGenesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListRecentGenesQuery, ListRecentGenesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ListRecentGenesQuery, ListRecentGenesQueryVariables>(ListRecentGenesDocument, options);
-        }
-export function useListRecentGenesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentGenesQuery, ListRecentGenesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<ListRecentGenesQuery, ListRecentGenesQueryVariables>(ListRecentGenesDocument, options);
-        }
-export type ListRecentGenesQueryHookResult = ReturnType<typeof useListRecentGenesQuery>;
-export type ListRecentGenesLazyQueryHookResult = ReturnType<typeof useListRecentGenesLazyQuery>;
-export type ListRecentGenesSuspenseQueryHookResult = ReturnType<typeof useListRecentGenesSuspenseQuery>;
-export type ListRecentGenesQueryResult = Apollo.QueryResult<ListRecentGenesQuery, ListRecentGenesQueryVariables>;
+export type GeneOntologyAnnotationQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationQuery>;
+export type GeneOntologyAnnotationLazyQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationLazyQuery>;
+export type GeneOntologyAnnotationSuspenseQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationSuspenseQuery>;
+export type GeneOntologyAnnotationQueryResult = Apollo.QueryResult<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>;
 export const PublicationDocument = gql`
     query Publication($id: ID!) {
   publication(id: $id) {
@@ -2661,3 +1957,354 @@ export type UserByEmailQueryHookResult = ReturnType<typeof useUserByEmailQuery>;
 export type UserByEmailLazyQueryHookResult = ReturnType<typeof useUserByEmailLazyQuery>;
 export type UserByEmailSuspenseQueryHookResult = ReturnType<typeof useUserByEmailSuspenseQuery>;
 export type UserByEmailQueryResult = Apollo.QueryResult<UserByEmailQuery, UserByEmailQueryVariables>;
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockContentBySlugQuery(
+ *   ({ query, variables }) => {
+ *     const { slug } = variables;
+ *     return HttpResponse.json({
+ *       data: { contentBySlug }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockContentBySlugQuery = (resolver: GraphQLResponseResolver<ContentBySlugQuery, ContentBySlugQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ContentBySlugQuery, ContentBySlugQueryVariables>(
+    'ContentBySlug',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockContentQuery(
+ *   ({ query, variables }) => {
+ *     const { id } = variables;
+ *     return HttpResponse.json({
+ *       data: { content }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockContentQuery = (resolver: GraphQLResponseResolver<ContentQuery, ContentQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ContentQuery, ContentQueryVariables>(
+    'Content',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockGeneOntologyAnnotationQuery(
+ *   ({ query, variables }) => {
+ *     const { gene } = variables;
+ *     return HttpResponse.json({
+ *       data: { geneOntologyAnnotation }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockGeneOntologyAnnotationQuery = (resolver: GraphQLResponseResolver<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(
+    'GeneOntologyAnnotation',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockPublicationQuery(
+ *   ({ query, variables }) => {
+ *     const { id } = variables;
+ *     return HttpResponse.json({
+ *       data: { publication }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockPublicationQuery = (resolver: GraphQLResponseResolver<PublicationQuery, PublicationQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<PublicationQuery, PublicationQueryVariables>(
+    'Publication',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListRecentPublicationsQuery(
+ *   ({ query, variables }) => {
+ *     const { limit } = variables;
+ *     return HttpResponse.json({
+ *       data: { listRecentPublications }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListRecentPublicationsQuery = (resolver: GraphQLResponseResolver<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>(
+    'ListRecentPublications',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockStrainListQuery(
+ *   ({ query, variables }) => {
+ *     const { cursor, limit, filter } = variables;
+ *     return HttpResponse.json({
+ *       data: { listStrains }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockStrainListQuery = (resolver: GraphQLResponseResolver<StrainListQuery, StrainListQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<StrainListQuery, StrainListQueryVariables>(
+    'StrainList',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListStrainsWithPhenotypeQuery(
+ *   ({ query, variables }) => {
+ *     const { cursor, limit, type, annotation } = variables;
+ *     return HttpResponse.json({
+ *       data: { listStrainsWithAnnotation }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListStrainsWithPhenotypeQuery = (resolver: GraphQLResponseResolver<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(
+    'ListStrainsWithPhenotype',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListBacterialStrainsQuery(
+ *   ({ query, variables }) => {
+ *     return HttpResponse.json({
+ *       data: { listStrainsWithAnnotation, listStrainsWithAnnotation }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListBacterialStrainsQuery = (resolver: GraphQLResponseResolver<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>(
+    'ListBacterialStrains',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListStrainsInventoryQuery(
+ *   ({ query, variables }) => {
+ *     const { cursor, limit } = variables;
+ *     return HttpResponse.json({
+ *       data: { listStrainsWithAnnotation }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListStrainsInventoryQuery = (resolver: GraphQLResponseResolver<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(
+    'ListStrainsInventory',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListPlasmidsInventoryQuery(
+ *   ({ query, variables }) => {
+ *     const { cursor, limit } = variables;
+ *     return HttpResponse.json({
+ *       data: { listPlasmidsWithAnnotation }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListPlasmidsInventoryQuery = (resolver: GraphQLResponseResolver<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(
+    'ListPlasmidsInventory',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockPlasmidListFilterQuery(
+ *   ({ query, variables }) => {
+ *     const { cursor, limit, filter } = variables;
+ *     return HttpResponse.json({
+ *       data: { listPlasmids }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockPlasmidListFilterQuery = (resolver: GraphQLResponseResolver<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(
+    'PlasmidListFilter',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockPlasmidQuery(
+ *   ({ query, variables }) => {
+ *     const { id } = variables;
+ *     return HttpResponse.json({
+ *       data: { plasmid }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockPlasmidQuery = (resolver: GraphQLResponseResolver<PlasmidQuery, PlasmidQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<PlasmidQuery, PlasmidQueryVariables>(
+    'Plasmid',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockStrainQuery(
+ *   ({ query, variables }) => {
+ *     const { id } = variables;
+ *     return HttpResponse.json({
+ *       data: { strain }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockStrainQuery = (resolver: GraphQLResponseResolver<StrainQuery, StrainQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<StrainQuery, StrainQueryVariables>(
+    'Strain',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListRecentPlasmidsQuery(
+ *   ({ query, variables }) => {
+ *     const { limit } = variables;
+ *     return HttpResponse.json({
+ *       data: { listRecentPlasmids }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListRecentPlasmidsQuery = (resolver: GraphQLResponseResolver<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>(
+    'ListRecentPlasmids',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListRecentStrainsQuery(
+ *   ({ query, variables }) => {
+ *     const { limit } = variables;
+ *     return HttpResponse.json({
+ *       data: { listRecentStrains }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListRecentStrainsQuery = (resolver: GraphQLResponseResolver<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>(
+    'ListRecentStrains',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockUserByEmailQuery(
+ *   ({ query, variables }) => {
+ *     const { email } = variables;
+ *     return HttpResponse.json({
+ *       data: { userByEmail }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockUserByEmailQuery = (resolver: GraphQLResponseResolver<UserByEmailQuery, UserByEmailQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<UserByEmailQuery, UserByEmailQueryVariables>(
+    'UserByEmail',
+    resolver,
+    options
+  )
