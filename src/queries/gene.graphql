@@ -1,14 +1,12 @@
 query GeneOntologyAnnotation($gene: String!) {
   geneOntologyAnnotation(gene: $gene) {
-    id
-    name
-    goas {
       id
       type
       date
       evidence_code
       qualifier
       publication
+      assigned_by
       with {
         id
         db
@@ -19,15 +17,6 @@ query GeneOntologyAnnotation($gene: String!) {
         db
         relation
         name
-      }
-      assigned_by
-    }
-  }
-}
-
-query ListRecentGenes($limit: Int! = 4) {
-  listRecentGenes(limit: $limit) {
-    id
-    name
+     }
   }
 }
