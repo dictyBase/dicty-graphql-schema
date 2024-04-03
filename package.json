@@ -2,9 +2,7 @@
   "name": "dicty-graphql-schema",
   "version": "1.9.0",
   "description": "GraphQL schema and typings for the dictyBase API.",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
-  "module": "./dist/index.mjs",
+  "main": "./src/index.ts",
   "files": [
     "dist",
     "types",
@@ -15,11 +13,7 @@
     "node": ">= 20.11.1"
   },
   "scripts": {
-    "generate": "graphql-codegen",
-    "build-esm": "esbuild --bundle types/index.ts --outfile=dist/index.mjs --format=esm --target=chrome87,firefox78,safari13,edge88 --external:./node_modules/*",
-    "build-cjs": "esbuild --bundle types/index.ts --outfile=dist/index.js --format=cjs --target=chrome87,firefox78,safari13,edge88 --external:./node_modules/*",
-    "build": "tsup types/index.ts --format esm,cjs --target=chrome87,firefox78,safari13,edge88 --dts",
-    "compile": "yarn run generate && yarn run build",
+    "generate": "graphql-codegen -c src/codegen.ts",
     "clean": "rm -rf dist",
     "create-release": "semantic-release"
   },
