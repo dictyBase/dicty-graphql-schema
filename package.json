@@ -14,7 +14,6 @@
   },
   "scripts": {
     "generate": "graphql-codegen -c src/codegen.ts",
-    "clean": "rm -rf dist",
     "create-release": "semantic-release"
   },
   "repository": {
