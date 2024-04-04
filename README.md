@@ -46,6 +46,9 @@ export const MyStrainComponent = () => {
 ```
 Details [here](https://www.the-guild.dev/graphql/codegen/plugins/typescript/typescript-react-apollo)
 
+### typed-document-node
+Details [here](https://the-guild.dev/graphql/codegen/plugins/typescript/typed-document-node)
+
 ### fragment-matcher
 The generated code should be used with apollo-clientv3, particularly in case of
 configuring cache. For example,
@@ -79,6 +82,9 @@ Details
 Generates a json formatted graphql introspection file saves as `schema.json`.
 Details
 [here](https://www.the-guild.dev/graphql/codegen/plugins/other/introspection)
+
+### document-nodes
+Details [here](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-document-nodes)
 
 ## Development using github pull request
 - Clone the repository.
