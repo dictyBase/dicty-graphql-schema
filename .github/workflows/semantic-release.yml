@@ -7,24 +7,22 @@ jobs:
   semantic-release:
     runs-on: ubuntu-latest
     steps:
-      - name: set up node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
       - name: check out code
         uses: actions/checkout@v4
+      - name: setup bun
+        uses: oven-sh/setup-bun@v1
       - name: install deps
-        run: yarn install
+        run: bun install
       - name: release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: yarn semantic-release
+        run: bun run --bun semantic-release
   merge:
     needs: semantic-release
     runs-on: ubuntu-latest
     steps:
       - name: merge to develop
-        uses: devmasx/merge-branch@1.4.0
+        uses: devmasx/merge-branch@master
         with:
           type: now
           from_branch: master

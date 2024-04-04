@@ -4,8 +4,8 @@ schema](https://graphql.github.io/learn/schema/) and TypeScript types for the
 dictyBase API.
 
 All schema, queries and mutations are inside the `src` folder. The `schema`
-folder contains the graphql schema definitions and the `mutations` and
-`queries` has graphql documents that exports mutations and queries.
+folder contains the graphql schema definitions. The `mutations` and
+`queries` folders has the graphql documents. 
 
 ## Install
 `yarn add dictybase/dicty-graphql-schema`   
@@ -76,17 +76,17 @@ Details
 [here](https://www.the-guild.dev/graphql/codegen/plugins/typescript/typescript-msw)
 
 ### introspection
-Generates a json formatted graphql introspection file saves as `scheme.json`.
+Generates a json formatted graphql introspection file saves as `schema.json`.
 Details
 [here](https://www.the-guild.dev/graphql/codegen/plugins/other/introspection)
 
 ## Development using github pull request
 - Clone the repository.
 - Create a new branch (i.e. `feature/new-schema`).
-- Run `yarn install`
+- Install [bun](https://bun.sh/docs/installation)
+- Run `bun install`
 - Complete any necessary work.
-- Run `yarn compile` to generate code from the schema. The generated code will
-  be split among `dist`,`introspection` and `types` folders.
+- Run `bun run --bun generat` to generate code from the schema. The generated code will go in the `types` folder.
 - Commit all changes and create a github pull request.
 - Repeat the cycle until the work is done. When finished, merge to `develop`.
 

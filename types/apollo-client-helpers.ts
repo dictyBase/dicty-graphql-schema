@@ -332,26 +332,15 @@ export type PublicationWithGeneFieldPolicy = {
 	title?: FieldPolicy<any> | FieldReadFunction<any>,
 	volume?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('allOrthologs' | 'allPublications' | 'allStrains' | 'content' | 'contentBySlug' | 'gene' | 'generalInformation' | 'getAssociatedSequnces' | 'getLinks' | 'getProteinInformation' | 'getRefreshToken' | 'listGeneProductInfo' | 'listOrders' | 'listOrganisms' | 'listPermissions' | 'listPlasmids' | 'listPlasmidsWithAnnotation' | 'listRecentGenes' | 'listRecentPlasmids' | 'listRecentPublications' | 'listRecentStrains' | 'listRoles' | 'listStrains' | 'listStrainsWithAnnotation' | 'listUsers' | 'order' | 'organism' | 'permission' | 'plasmid' | 'publication' | 'role' | 'strain' | 'user' | 'userByEmail' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('content' | 'contentBySlug' | 'geneOntologyAnnotation' | 'listOrders' | 'listPermissions' | 'listPlasmids' | 'listPlasmidsWithAnnotation' | 'listRecentPlasmids' | 'listRecentPublications' | 'listRecentStrains' | 'listRoles' | 'listStrains' | 'listStrainsWithAnnotation' | 'listUsers' | 'order' | 'permission' | 'plasmid' | 'publication' | 'role' | 'strain' | 'user' | 'userByEmail' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
-	allOrthologs?: FieldPolicy<any> | FieldReadFunction<any>,
-	allPublications?: FieldPolicy<any> | FieldReadFunction<any>,
-	allStrains?: FieldPolicy<any> | FieldReadFunction<any>,
 	content?: FieldPolicy<any> | FieldReadFunction<any>,
 	contentBySlug?: FieldPolicy<any> | FieldReadFunction<any>,
-	gene?: FieldPolicy<any> | FieldReadFunction<any>,
-	generalInformation?: FieldPolicy<any> | FieldReadFunction<any>,
-	getAssociatedSequnces?: FieldPolicy<any> | FieldReadFunction<any>,
-	getLinks?: FieldPolicy<any> | FieldReadFunction<any>,
-	getProteinInformation?: FieldPolicy<any> | FieldReadFunction<any>,
-	getRefreshToken?: FieldPolicy<any> | FieldReadFunction<any>,
-	listGeneProductInfo?: FieldPolicy<any> | FieldReadFunction<any>,
+	geneOntologyAnnotation?: FieldPolicy<any> | FieldReadFunction<any>,
 	listOrders?: FieldPolicy<any> | FieldReadFunction<any>,
-	listOrganisms?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPermissions?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPlasmids?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPlasmidsWithAnnotation?: FieldPolicy<any> | FieldReadFunction<any>,
-	listRecentGenes?: FieldPolicy<any> | FieldReadFunction<any>,
 	listRecentPlasmids?: FieldPolicy<any> | FieldReadFunction<any>,
 	listRecentPublications?: FieldPolicy<any> | FieldReadFunction<any>,
 	listRecentStrains?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -360,7 +349,6 @@ export type QueryFieldPolicy = {
 	listStrainsWithAnnotation?: FieldPolicy<any> | FieldReadFunction<any>,
 	listUsers?: FieldPolicy<any> | FieldReadFunction<any>,
 	order?: FieldPolicy<any> | FieldReadFunction<any>,
-	organism?: FieldPolicy<any> | FieldReadFunction<any>,
 	permission?: FieldPolicy<any> | FieldReadFunction<any>,
 	plasmid?: FieldPolicy<any> | FieldReadFunction<any>,
 	publication?: FieldPolicy<any> | FieldReadFunction<any>,
