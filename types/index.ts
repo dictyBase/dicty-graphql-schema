@@ -18,6 +18,8 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   Timestamp: { input: any; output: any; }
+  /** The `Upload` scalar type represents a multipart file upload. */
+  Upload: { input: any; output: any; }
 };
 
 export type AssociatedSequences = {
@@ -213,6 +215,12 @@ export type Extension = {
   relation: Scalars['String']['output'];
 };
 
+/** The `UploadFile` type, represents the request for uploading a image file with a certain payload. */
+export type FileToUpload = {
+  file: Scalars['Upload']['input'];
+  id: Scalars['Int']['input'];
+};
+
 export type GoAnnotation = {
   __typename?: 'GOAnnotation';
   assigned_by: Scalars['String']['output'];
@@ -267,6 +275,12 @@ export type Identity = {
   user_id: Scalars['ID']['output'];
 };
 
+/** The `ImageFile` type, represents the response of uploading an image file. */
+export type ImageFile = {
+  __typename?: 'ImageFile';
+  url: Scalars['String']['output'];
+};
+
 export type Links = {
   __typename?: 'Links';
   colleagues: NameWithLink;
@@ -313,6 +327,7 @@ export type Mutation = {
   updateRole?: Maybe<Role>;
   updateStrain?: Maybe<Strain>;
   updateUser?: Maybe<User>;
+  uploadFile: ImageFile;
 };
 
 
@@ -431,6 +446,11 @@ export type MutationUpdateStrainArgs = {
 export type MutationUpdateUserArgs = {
   id: Scalars['ID']['input'];
   input?: InputMaybe<UpdateUserInput>;
+};
+
+
+export type MutationUploadFileArgs = {
+  file: Scalars['Upload']['input'];
 };
 
 export type NameWithLink = {
