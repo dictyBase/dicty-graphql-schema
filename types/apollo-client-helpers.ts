@@ -141,6 +141,10 @@ export type IdentityFieldPolicy = {
 	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	user_id?: FieldPolicy<any> | FieldReadFunction<any>
 };
+export type ImageFileKeySpecifier = ('url' | ImageFileKeySpecifier)[];
+export type ImageFileFieldPolicy = {
+	url?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type LinksKeySpecifier = ('colleagues' | 'expression' | 'ext_resources' | LinksKeySpecifier)[];
 export type LinksFieldPolicy = {
 	colleagues?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -151,7 +155,7 @@ export type LogoutKeySpecifier = ('success' | LogoutKeySpecifier)[];
 export type LogoutFieldPolicy = {
 	success?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('createContent' | 'createOrder' | 'createPermission' | 'createPlasmid' | 'createRole' | 'createRolePermissionRelationship' | 'createStrain' | 'createUser' | 'createUserRoleRelationship' | 'deleteContent' | 'deletePermission' | 'deleteRole' | 'deleteStock' | 'deleteUser' | 'login' | 'logout' | 'updateContent' | 'updateOrder' | 'updatePermission' | 'updatePlasmid' | 'updateRole' | 'updateStrain' | 'updateUser' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('createContent' | 'createOrder' | 'createPermission' | 'createPlasmid' | 'createRole' | 'createRolePermissionRelationship' | 'createStrain' | 'createUser' | 'createUserRoleRelationship' | 'deleteContent' | 'deletePermission' | 'deleteRole' | 'deleteStock' | 'deleteUser' | 'login' | 'logout' | 'updateContent' | 'updateOrder' | 'updatePermission' | 'updatePlasmid' | 'updateRole' | 'updateStrain' | 'updateUser' | 'uploadFile' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
 	createContent?: FieldPolicy<any> | FieldReadFunction<any>,
 	createOrder?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -175,7 +179,8 @@ export type MutationFieldPolicy = {
 	updatePlasmid?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateRole?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateStrain?: FieldPolicy<any> | FieldReadFunction<any>,
-	updateUser?: FieldPolicy<any> | FieldReadFunction<any>
+	updateUser?: FieldPolicy<any> | FieldReadFunction<any>,
+	uploadFile?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type NameWithLinkKeySpecifier = ('link' | 'name' | NameWithLinkKeySpecifier)[];
 export type NameWithLinkFieldPolicy = {
@@ -524,6 +529,10 @@ export type StrictTypedTypePolicies = {
 	Identity?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | IdentityKeySpecifier | (() => undefined | IdentityKeySpecifier),
 		fields?: IdentityFieldPolicy,
+	},
+	ImageFile?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | ImageFileKeySpecifier | (() => undefined | ImageFileKeySpecifier),
+		fields?: ImageFileFieldPolicy,
 	},
 	Links?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | LinksKeySpecifier | (() => undefined | LinksKeySpecifier),
