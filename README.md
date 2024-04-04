@@ -83,10 +83,10 @@ Details
 ## Development using github pull request
 - Clone the repository.
 - Create a new branch (i.e. `feature/new-schema`).
-- Run `yarn install`
+- Install [bun](https://bun.sh/docs/installation)
+- Run `bun install`
 - Complete any necessary work.
-- Run `yarn compile` to generate code from the schema. The generated code will
-  be split among `dist`,`introspection` and `types` folders.
+- Run `bun run --bun generat` to generate code from the schema. The generated code will go in the `types` folder.
 - Commit all changes and create a github pull request.
 - Repeat the cycle until the work is done. When finished, merge to `develop`.
 
