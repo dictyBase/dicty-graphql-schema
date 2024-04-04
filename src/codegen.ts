@@ -10,6 +10,7 @@ const config: CodegenConfig = {
         "typescript",
         "typescript-operations",
         "typescript-react-apollo",
+        "typed-document-node",
         "typescript-msw",
       ],
       config: { withHooks: true },
@@ -22,6 +23,9 @@ const config: CodegenConfig = {
     },
     "./schema.json": {
       plugins: ["introspection"],
+    },
+    "./types/query.ts": {
+      plugins: ["typescript-document-nodes"],
     },
   },
 };
