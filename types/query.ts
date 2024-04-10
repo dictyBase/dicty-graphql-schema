@@ -1,5 +1,86 @@
 import gql from 'graphql-tag';
 
+export const Login = gql`
+    mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    token
+    user {
+      id
+      email
+      first_name
+      last_name
+      roles {
+        role
+        permissions {
+          permission
+          resource
+        }
+      }
+    }
+    identity {
+      provider
+    }
+  }
+}
+    `;
+export const Logout = gql`
+    mutation Logout {
+  logout {
+    success
+  }
+}
+    `;
+export const CreateContent = gql`
+    mutation CreateContent($input: CreateContentInput!) {
+  createContent(input: $input) {
+    name
+    created_by {
+      id
+    }
+    content
+    namespace
+  }
+}
+    `;
+export const UpdateContent = gql`
+    mutation UpdateContent($input: UpdateContentInput!) {
+  updateContent(input: $input) {
+    id
+    updated_by {
+      id
+    }
+    content
+  }
+}
+    `;
+export const CreateOrder = gql`
+    mutation CreateOrder($input: CreateOrderInput!) {
+  createOrder(input: $input) {
+    id
+  }
+}
+    `;
+export const UploadFile = gql`
+    mutation UploadFile($file: Upload!) {
+  uploadFile(file: $file) {
+    url
+  }
+}
+    `;
+export const CreateUser = gql`
+    mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    id
+  }
+}
+    `;
+export const UpdateUser = gql`
+    mutation UpdateUser($id: ID!, $input: UpdateUserInput!) {
+  updateUser(id: $id, input: $input) {
+    id
+  }
+}
+    `;
 export const ContentBySlug = gql`
     query ContentBySlug($slug: String!) {
   contentBySlug(slug: $slug) {
