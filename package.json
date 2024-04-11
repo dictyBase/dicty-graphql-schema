@@ -47,7 +47,8 @@
   },
   "homepage": "https://github.com/dictyBase/graphql-schema#readme",
   "dependencies": {
-    "graphql": "^16.8.1"
+    "graphql": "^16.8.1",
+    "msw": "^2.2.13"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
