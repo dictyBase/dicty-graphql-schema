@@ -628,6 +628,7 @@ export type Query = {
   contentBySlug?: Maybe<Content>;
   geneOntologyAnnotation?: Maybe<Array<GoAnnotation>>;
   listOrders?: Maybe<OrderListWithCursor>;
+  listOrganisms?: Maybe<Array<Organism>>;
   listPermissions?: Maybe<Array<Permission>>;
   listPlasmids?: Maybe<PlasmidListWithCursor>;
   listPlasmidsWithAnnotation?: Maybe<PlasmidListWithCursor>;
@@ -639,6 +640,7 @@ export type Query = {
   listStrainsWithAnnotation?: Maybe<StrainListWithCursor>;
   listUsers?: Maybe<UserList>;
   order?: Maybe<Order>;
+  organism?: Maybe<Organism>;
   permission?: Maybe<Permission>;
   plasmid?: Maybe<Plasmid>;
   publication?: Maybe<Publication>;
@@ -725,6 +727,11 @@ export type QueryListUsersArgs = {
 
 export type QueryOrderArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type QueryOrganismArgs = {
+  taxon_id: Scalars['String']['input'];
 };
 
 
@@ -1029,6 +1036,11 @@ export type ContentQueryVariables = Exact<{
 
 
 export type ContentQuery = { __typename?: 'Query', content?: { __typename?: 'Content', id: string, content: string, name: string, slug: string, namespace: string, created_at: any, updated_at: any, created_by: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string }, updated_by: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string } } | null };
+
+export type ListOrganismsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListOrganismsQuery = { __typename?: 'Query', listOrganisms?: Array<{ __typename?: 'Organism', taxon_id: string, scientific_name: string, citations: Array<{ __typename?: 'Citation', title: string, authors: string, pubmed_id: string, journal: string }>, downloads: Array<{ __typename?: 'Download', title: string, items: Array<{ __typename?: 'DownloadItem', title: string, url: string }> }> }> | null };
 
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
@@ -1540,6 +1552,59 @@ export type ContentQueryHookResult = ReturnType<typeof useContentQuery>;
 export type ContentLazyQueryHookResult = ReturnType<typeof useContentLazyQuery>;
 export type ContentSuspenseQueryHookResult = ReturnType<typeof useContentSuspenseQuery>;
 export type ContentQueryResult = Apollo.QueryResult<ContentQuery, ContentQueryVariables>;
+export const ListOrganismsDocument = gql`
+    query ListOrganisms {
+  listOrganisms {
+    taxon_id
+    scientific_name
+    citations {
+      title
+      authors
+      pubmed_id
+      journal
+    }
+    downloads {
+      title
+      items {
+        title
+        url
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useListOrganismsQuery__
+ *
+ * To run a query within a React component, call `useListOrganismsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListOrganismsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListOrganismsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListOrganismsQuery(baseOptions?: Apollo.QueryHookOptions<ListOrganismsQuery, ListOrganismsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
+      }
+export function useListOrganismsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListOrganismsQuery, ListOrganismsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
+        }
+export function useListOrganismsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListOrganismsQuery, ListOrganismsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
+        }
+export type ListOrganismsQueryHookResult = ReturnType<typeof useListOrganismsQuery>;
+export type ListOrganismsLazyQueryHookResult = ReturnType<typeof useListOrganismsLazyQuery>;
+export type ListOrganismsSuspenseQueryHookResult = ReturnType<typeof useListOrganismsSuspenseQuery>;
+export type ListOrganismsQueryResult = Apollo.QueryResult<ListOrganismsQuery, ListOrganismsQueryVariables>;
 export const GeneOntologyAnnotationDocument = gql`
     query GeneOntologyAnnotation($gene: String!) {
   geneOntologyAnnotation(gene: $gene) {
@@ -2537,6 +2602,27 @@ export const mockContentBySlugQuery = (resolver: GraphQLResponseResolver<Content
 export const mockContentQuery = (resolver: GraphQLResponseResolver<ContentQuery, ContentQueryVariables>, options?: RequestHandlerOptions) =>
   graphql.query<ContentQuery, ContentQueryVariables>(
     'Content',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListOrganismsQuery(
+ *   ({ query, variables }) => {
+ *     return HttpResponse.json({
+ *       data: { listOrganisms }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListOrganismsQuery = (resolver: GraphQLResponseResolver<ListOrganismsQuery, ListOrganismsQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListOrganismsQuery, ListOrganismsQueryVariables>(
+    'ListOrganisms',
     resolver,
     options
   )
