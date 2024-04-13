@@ -20,3 +20,10 @@ query GeneOntologyAnnotation($gene: String!) {
      }
   }
 }
+
+query ListRecentGenes($limit: Int! = 4) {
+  listRecentGenes(limit: $limit) {
+    id
+    name
+  }
+}

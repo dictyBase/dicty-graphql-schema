@@ -1,6 +1,7 @@
 type Query {
   # Gene queries
   geneOntologyAnnotation(gene: String!): [GOAnnotation!]
+  listRecentGenes(limit: Int!): [Gene!]
   # Content queries
   content(id: ID!): Content
   contentBySlug(slug: String!): Content
