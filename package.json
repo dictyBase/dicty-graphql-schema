@@ -1,6 +1,6 @@
 {
   "name": "dicty-graphql-schema",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "description": "GraphQL schema and typings for the dictyBase API.",
   "main": "./types/index.ts",
   "type": "module",
