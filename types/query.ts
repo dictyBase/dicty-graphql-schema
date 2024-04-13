@@ -130,6 +130,27 @@ export const Content = gql`
   }
 }
     `;
+export const ListOrganisms = gql`
+    query ListOrganisms {
+  listOrganisms {
+    taxon_id
+    scientific_name
+    citations {
+      title
+      authors
+      pubmed_id
+      journal
+    }
+    downloads {
+      title
+      items {
+        title
+        url
+      }
+    }
+  }
+}
+    `;
 export const GeneOntologyAnnotation = gql`
     query GeneOntologyAnnotation($gene: String!) {
   geneOntologyAnnotation(gene: $gene) {
