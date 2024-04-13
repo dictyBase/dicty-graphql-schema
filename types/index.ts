@@ -632,6 +632,7 @@ export type Query = {
   listPermissions?: Maybe<Array<Permission>>;
   listPlasmids?: Maybe<PlasmidListWithCursor>;
   listPlasmidsWithAnnotation?: Maybe<PlasmidListWithCursor>;
+  listRecentGenes?: Maybe<Array<Gene>>;
   listRecentPlasmids?: Maybe<Array<Plasmid>>;
   listRecentPublications?: Maybe<Array<Publication>>;
   listRecentStrains?: Maybe<Array<Strain>>;
@@ -685,6 +686,11 @@ export type QueryListPlasmidsWithAnnotationArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   type: Scalars['String']['input'];
+};
+
+
+export type QueryListRecentGenesArgs = {
+  limit: Scalars['Int']['input'];
 };
 
 
@@ -1048,6 +1054,13 @@ export type GeneOntologyAnnotationQueryVariables = Exact<{
 
 
 export type GeneOntologyAnnotationQuery = { __typename?: 'Query', geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, evidence_code: string, qualifier: string, publication: string, assigned_by: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null };
+
+export type ListRecentGenesQueryVariables = Exact<{
+  limit?: Scalars['Int']['input'];
+}>;
+
+
+export type ListRecentGenesQuery = { __typename?: 'Query', listRecentGenes?: Array<{ __typename?: 'Gene', id: string, name: string }> | null };
 
 export type PublicationQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1662,6 +1675,47 @@ export type GeneOntologyAnnotationQueryHookResult = ReturnType<typeof useGeneOnt
 export type GeneOntologyAnnotationLazyQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationLazyQuery>;
 export type GeneOntologyAnnotationSuspenseQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationSuspenseQuery>;
 export type GeneOntologyAnnotationQueryResult = Apollo.QueryResult<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>;
+export const ListRecentGenesDocument = gql`
+    query ListRecentGenes($limit: Int! = 4) {
+  listRecentGenes(limit: $limit) {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useListRecentGenesQuery__
+ *
+ * To run a query within a React component, call `useListRecentGenesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListRecentGenesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListRecentGenesQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListRecentGenesQuery(baseOptions?: Apollo.QueryHookOptions<ListRecentGenesQuery, ListRecentGenesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListRecentGenesQuery, ListRecentGenesQueryVariables>(ListRecentGenesDocument, options);
+      }
+export function useListRecentGenesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListRecentGenesQuery, ListRecentGenesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListRecentGenesQuery, ListRecentGenesQueryVariables>(ListRecentGenesDocument, options);
+        }
+export function useListRecentGenesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentGenesQuery, ListRecentGenesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListRecentGenesQuery, ListRecentGenesQueryVariables>(ListRecentGenesDocument, options);
+        }
+export type ListRecentGenesQueryHookResult = ReturnType<typeof useListRecentGenesQuery>;
+export type ListRecentGenesLazyQueryHookResult = ReturnType<typeof useListRecentGenesLazyQuery>;
+export type ListRecentGenesSuspenseQueryHookResult = ReturnType<typeof useListRecentGenesSuspenseQuery>;
+export type ListRecentGenesQueryResult = Apollo.QueryResult<ListRecentGenesQuery, ListRecentGenesQueryVariables>;
 export const PublicationDocument = gql`
     query Publication($id: ID!) {
   publication(id: $id) {
@@ -2645,6 +2699,28 @@ export const mockListOrganismsQuery = (resolver: GraphQLResponseResolver<ListOrg
 export const mockGeneOntologyAnnotationQuery = (resolver: GraphQLResponseResolver<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>, options?: RequestHandlerOptions) =>
   graphql.query<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(
     'GeneOntologyAnnotation',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListRecentGenesQuery(
+ *   ({ query, variables }) => {
+ *     const { limit } = variables;
+ *     return HttpResponse.json({
+ *       data: { listRecentGenes }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListRecentGenesQuery = (resolver: GraphQLResponseResolver<ListRecentGenesQuery, ListRecentGenesQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListRecentGenesQuery, ListRecentGenesQueryVariables>(
+    'ListRecentGenes',
     resolver,
     options
   )
