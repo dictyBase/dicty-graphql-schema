@@ -175,6 +175,14 @@ export const GeneOntologyAnnotation = gql`
   }
 }
     `;
+export const ListRecentGenes = gql`
+    query ListRecentGenes($limit: Int! = 4) {
+  listRecentGenes(limit: $limit) {
+    id
+    name
+  }
+}
+    `;
 export const Publication = gql`
     query Publication($id: ID!) {
   publication(id: $id) {
