@@ -4,6 +4,9 @@ type Query {
   # Content queries
   content(id: ID!): Content
   contentBySlug(slug: String!): Content
+  # Download page queries
+  organism(taxon_id: String!): Organism
+  listOrganisms: [Organism!]
   # Order queries
   order(id: ID!): Order
   listOrders(cursor: Int, limit: Int, filter: String): OrderListWithCursor
@@ -15,7 +18,11 @@ type Query {
   # Stock queries
   plasmid(id: ID!): Plasmid
   strain(id: ID!): Strain
-  listStrains(cursor: Int, limit: Int, filter: StrainListFilter): StrainListWithCursor
+  listStrains(
+    cursor: Int
+    limit: Int
+    filter: StrainListFilter
+  ): StrainListWithCursor
   listPlasmids(cursor: Int, limit: Int, filter: String): PlasmidListWithCursor
   listStrainsWithAnnotation(
     cursor: Int
