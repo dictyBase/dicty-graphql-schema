@@ -1,6 +1,6 @@
 {
   "name": "dicty-graphql-schema",
-  "version": "1.14.0",
+  "version": "1.14.2",
   "description": "GraphQL schema and typings for the dictyBase API.",
   "main": "./types/index.ts",
   "type": "module",
@@ -47,8 +47,7 @@
   },
   "homepage": "https://github.com/dictyBase/graphql-schema#readme",
   "dependencies": {
-    "graphql": "^16.8.1",
-    "msw": "^2.2.13"
+    "graphql": "^16.8.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
