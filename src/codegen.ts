@@ -8,6 +8,7 @@ const config: CodegenConfig = {
     "./types/index.ts": {
       plugins: [
         "typescript",
+        "typescript-operations",
         "typescript-react-apollo",
       ],
       config: { withHooks: true },
