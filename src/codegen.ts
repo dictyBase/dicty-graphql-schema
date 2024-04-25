@@ -8,8 +8,13 @@ const config: CodegenConfig = {
     "./types/index.ts": {
       plugins: [
         "typescript",
-        "typescript-operations",
         "typescript-react-apollo",
+      ],
+      config: { withHooks: true },
+    },
+    "./types/mock.ts": {
+      plugins: [
+        "typescript-operations",
         "typescript-msw",
       ],
       config: { withHooks: true },
