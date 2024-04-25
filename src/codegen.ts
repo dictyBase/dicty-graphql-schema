@@ -18,7 +18,6 @@ const config: CodegenConfig = {
         "typescript-operations",
         "typescript-msw",
       ],
-      config: { withHooks: true },
     },
     "./types/fragment.ts": {
       plugins: ["fragment-matcher"],
