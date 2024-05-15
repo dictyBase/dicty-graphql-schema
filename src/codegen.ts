@@ -14,6 +14,12 @@ const config: CodegenConfig = {
       ],
       config: { withHooks: true },
     },
+    "./types/mocks.ts" : {
+      plugins: [
+        "typescript-operations",
+        "typescript-msw",
+      ],
+    },
     "./types/fragment.ts": {
       plugins: ["fragment-matcher"],
     },
