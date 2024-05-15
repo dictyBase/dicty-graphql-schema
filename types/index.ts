@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-import { graphql, type GraphQLResponseResolver, type RequestHandlerOptions } from 'msw'
+import { graphql } from 'msw'
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -1491,7 +1491,7 @@ export const ContentBySlugDocument = gql`
  *   },
  * });
  */
-export function useContentBySlugQuery(baseOptions: Apollo.QueryHookOptions<ContentBySlugQuery, ContentBySlugQueryVariables>) {
+export function useContentBySlugQuery(baseOptions: Apollo.QueryHookOptions<ContentBySlugQuery, ContentBySlugQueryVariables> & ({ variables: ContentBySlugQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ContentBySlugQuery, ContentBySlugQueryVariables>(ContentBySlugDocument, options);
       }
@@ -1499,8 +1499,13 @@ export function useContentBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ContentBySlugQuery, ContentBySlugQueryVariables>(ContentBySlugDocument, options);
         }
+export function useContentBySlugSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ContentBySlugQuery, ContentBySlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ContentBySlugQuery, ContentBySlugQueryVariables>(ContentBySlugDocument, options);
+        }
 export type ContentBySlugQueryHookResult = ReturnType<typeof useContentBySlugQuery>;
 export type ContentBySlugLazyQueryHookResult = ReturnType<typeof useContentBySlugLazyQuery>;
+export type ContentBySlugSuspenseQueryHookResult = ReturnType<typeof useContentBySlugSuspenseQuery>;
 export type ContentBySlugQueryResult = Apollo.QueryResult<ContentBySlugQuery, ContentBySlugQueryVariables>;
 export const ContentDocument = gql`
     query Content($id: ID!) {
@@ -1544,7 +1549,7 @@ export const ContentDocument = gql`
  *   },
  * });
  */
-export function useContentQuery(baseOptions: Apollo.QueryHookOptions<ContentQuery, ContentQueryVariables>) {
+export function useContentQuery(baseOptions: Apollo.QueryHookOptions<ContentQuery, ContentQueryVariables> & ({ variables: ContentQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ContentQuery, ContentQueryVariables>(ContentDocument, options);
       }
@@ -1552,8 +1557,13 @@ export function useContentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Co
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ContentQuery, ContentQueryVariables>(ContentDocument, options);
         }
+export function useContentSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ContentQuery, ContentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ContentQuery, ContentQueryVariables>(ContentDocument, options);
+        }
 export type ContentQueryHookResult = ReturnType<typeof useContentQuery>;
 export type ContentLazyQueryHookResult = ReturnType<typeof useContentLazyQuery>;
+export type ContentSuspenseQueryHookResult = ReturnType<typeof useContentSuspenseQuery>;
 export type ContentQueryResult = Apollo.QueryResult<ContentQuery, ContentQueryVariables>;
 export const ListOrganismsDocument = gql`
     query ListOrganisms {
@@ -1600,8 +1610,13 @@ export function useListOrganismsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
         }
+export function useListOrganismsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListOrganismsQuery, ListOrganismsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
+        }
 export type ListOrganismsQueryHookResult = ReturnType<typeof useListOrganismsQuery>;
 export type ListOrganismsLazyQueryHookResult = ReturnType<typeof useListOrganismsLazyQuery>;
+export type ListOrganismsSuspenseQueryHookResult = ReturnType<typeof useListOrganismsSuspenseQuery>;
 export type ListOrganismsQueryResult = Apollo.QueryResult<ListOrganismsQuery, ListOrganismsQueryVariables>;
 export const GeneOntologyAnnotationDocument = gql`
     query GeneOntologyAnnotation($gene: String!) {
@@ -1644,7 +1659,7 @@ export const GeneOntologyAnnotationDocument = gql`
  *   },
  * });
  */
-export function useGeneOntologyAnnotationQuery(baseOptions: Apollo.QueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>) {
+export function useGeneOntologyAnnotationQuery(baseOptions: Apollo.QueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables> & ({ variables: GeneOntologyAnnotationQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
       }
@@ -1652,8 +1667,13 @@ export function useGeneOntologyAnnotationLazyQuery(baseOptions?: Apollo.LazyQuer
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
         }
+export function useGeneOntologyAnnotationSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
+        }
 export type GeneOntologyAnnotationQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationQuery>;
 export type GeneOntologyAnnotationLazyQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationLazyQuery>;
+export type GeneOntologyAnnotationSuspenseQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationSuspenseQuery>;
 export type GeneOntologyAnnotationQueryResult = Apollo.QueryResult<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>;
 export const ListRecentGenesDocument = gql`
     query ListRecentGenes($limit: Int! = 4) {
@@ -1688,8 +1708,13 @@ export function useListRecentGenesLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListRecentGenesQuery, ListRecentGenesQueryVariables>(ListRecentGenesDocument, options);
         }
+export function useListRecentGenesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentGenesQuery, ListRecentGenesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListRecentGenesQuery, ListRecentGenesQueryVariables>(ListRecentGenesDocument, options);
+        }
 export type ListRecentGenesQueryHookResult = ReturnType<typeof useListRecentGenesQuery>;
 export type ListRecentGenesLazyQueryHookResult = ReturnType<typeof useListRecentGenesLazyQuery>;
+export type ListRecentGenesSuspenseQueryHookResult = ReturnType<typeof useListRecentGenesSuspenseQuery>;
 export type ListRecentGenesQueryResult = Apollo.QueryResult<ListRecentGenesQuery, ListRecentGenesQueryVariables>;
 export const PublicationDocument = gql`
     query Publication($id: ID!) {
@@ -1727,7 +1752,7 @@ export const PublicationDocument = gql`
  *   },
  * });
  */
-export function usePublicationQuery(baseOptions: Apollo.QueryHookOptions<PublicationQuery, PublicationQueryVariables>) {
+export function usePublicationQuery(baseOptions: Apollo.QueryHookOptions<PublicationQuery, PublicationQueryVariables> & ({ variables: PublicationQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<PublicationQuery, PublicationQueryVariables>(PublicationDocument, options);
       }
@@ -1735,8 +1760,13 @@ export function usePublicationLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<PublicationQuery, PublicationQueryVariables>(PublicationDocument, options);
         }
+export function usePublicationSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<PublicationQuery, PublicationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PublicationQuery, PublicationQueryVariables>(PublicationDocument, options);
+        }
 export type PublicationQueryHookResult = ReturnType<typeof usePublicationQuery>;
 export type PublicationLazyQueryHookResult = ReturnType<typeof usePublicationLazyQuery>;
+export type PublicationSuspenseQueryHookResult = ReturnType<typeof usePublicationSuspenseQuery>;
 export type PublicationQueryResult = Apollo.QueryResult<PublicationQuery, PublicationQueryVariables>;
 export const ListRecentPublicationsDocument = gql`
     query ListRecentPublications($limit: Int! = 4) {
@@ -1782,8 +1812,13 @@ export function useListRecentPublicationsLazyQuery(baseOptions?: Apollo.LazyQuer
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>(ListRecentPublicationsDocument, options);
         }
+export function useListRecentPublicationsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>(ListRecentPublicationsDocument, options);
+        }
 export type ListRecentPublicationsQueryHookResult = ReturnType<typeof useListRecentPublicationsQuery>;
 export type ListRecentPublicationsLazyQueryHookResult = ReturnType<typeof useListRecentPublicationsLazyQuery>;
+export type ListRecentPublicationsSuspenseQueryHookResult = ReturnType<typeof useListRecentPublicationsSuspenseQuery>;
 export type ListRecentPublicationsQueryResult = Apollo.QueryResult<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>;
 export const StrainListDocument = gql`
     query StrainList($cursor: Int!, $limit: Int!, $filter: StrainListFilter) {
@@ -1818,7 +1853,7 @@ export const StrainListDocument = gql`
  *   },
  * });
  */
-export function useStrainListQuery(baseOptions: Apollo.QueryHookOptions<StrainListQuery, StrainListQueryVariables>) {
+export function useStrainListQuery(baseOptions: Apollo.QueryHookOptions<StrainListQuery, StrainListQueryVariables> & ({ variables: StrainListQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<StrainListQuery, StrainListQueryVariables>(StrainListDocument, options);
       }
@@ -1826,8 +1861,13 @@ export function useStrainListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<StrainListQuery, StrainListQueryVariables>(StrainListDocument, options);
         }
+export function useStrainListSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<StrainListQuery, StrainListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<StrainListQuery, StrainListQueryVariables>(StrainListDocument, options);
+        }
 export type StrainListQueryHookResult = ReturnType<typeof useStrainListQuery>;
 export type StrainListLazyQueryHookResult = ReturnType<typeof useStrainListLazyQuery>;
+export type StrainListSuspenseQueryHookResult = ReturnType<typeof useStrainListSuspenseQuery>;
 export type StrainListQueryResult = Apollo.QueryResult<StrainListQuery, StrainListQueryVariables>;
 export const ListStrainsWithPhenotypeDocument = gql`
     query ListStrainsWithPhenotype($cursor: Int!, $limit: Int!, $type: String!, $annotation: String!) {
@@ -1880,7 +1920,7 @@ export const ListStrainsWithPhenotypeDocument = gql`
  *   },
  * });
  */
-export function useListStrainsWithPhenotypeQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>) {
+export function useListStrainsWithPhenotypeQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables> & ({ variables: ListStrainsWithPhenotypeQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(ListStrainsWithPhenotypeDocument, options);
       }
@@ -1888,8 +1928,13 @@ export function useListStrainsWithPhenotypeLazyQuery(baseOptions?: Apollo.LazyQu
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(ListStrainsWithPhenotypeDocument, options);
         }
+export function useListStrainsWithPhenotypeSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(ListStrainsWithPhenotypeDocument, options);
+        }
 export type ListStrainsWithPhenotypeQueryHookResult = ReturnType<typeof useListStrainsWithPhenotypeQuery>;
 export type ListStrainsWithPhenotypeLazyQueryHookResult = ReturnType<typeof useListStrainsWithPhenotypeLazyQuery>;
+export type ListStrainsWithPhenotypeSuspenseQueryHookResult = ReturnType<typeof useListStrainsWithPhenotypeSuspenseQuery>;
 export type ListStrainsWithPhenotypeQueryResult = Apollo.QueryResult<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>;
 export const ListBacterialStrainsDocument = gql`
     query ListBacterialStrains {
@@ -1949,8 +1994,13 @@ export function useListBacterialStrainsLazyQuery(baseOptions?: Apollo.LazyQueryH
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>(ListBacterialStrainsDocument, options);
         }
+export function useListBacterialStrainsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>(ListBacterialStrainsDocument, options);
+        }
 export type ListBacterialStrainsQueryHookResult = ReturnType<typeof useListBacterialStrainsQuery>;
 export type ListBacterialStrainsLazyQueryHookResult = ReturnType<typeof useListBacterialStrainsLazyQuery>;
+export type ListBacterialStrainsSuspenseQueryHookResult = ReturnType<typeof useListBacterialStrainsSuspenseQuery>;
 export type ListBacterialStrainsQueryResult = Apollo.QueryResult<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>;
 export const ListStrainsInventoryDocument = gql`
     query ListStrainsInventory($cursor: Int!, $limit: Int!) {
@@ -1989,7 +2039,7 @@ export const ListStrainsInventoryDocument = gql`
  *   },
  * });
  */
-export function useListStrainsInventoryQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>) {
+export function useListStrainsInventoryQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables> & ({ variables: ListStrainsInventoryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(ListStrainsInventoryDocument, options);
       }
@@ -1997,8 +2047,13 @@ export function useListStrainsInventoryLazyQuery(baseOptions?: Apollo.LazyQueryH
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(ListStrainsInventoryDocument, options);
         }
+export function useListStrainsInventorySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(ListStrainsInventoryDocument, options);
+        }
 export type ListStrainsInventoryQueryHookResult = ReturnType<typeof useListStrainsInventoryQuery>;
 export type ListStrainsInventoryLazyQueryHookResult = ReturnType<typeof useListStrainsInventoryLazyQuery>;
+export type ListStrainsInventorySuspenseQueryHookResult = ReturnType<typeof useListStrainsInventorySuspenseQuery>;
 export type ListStrainsInventoryQueryResult = Apollo.QueryResult<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>;
 export const ListPlasmidsInventoryDocument = gql`
     query ListPlasmidsInventory($cursor: Int!, $limit: Int!) {
@@ -2037,7 +2092,7 @@ export const ListPlasmidsInventoryDocument = gql`
  *   },
  * });
  */
-export function useListPlasmidsInventoryQuery(baseOptions: Apollo.QueryHookOptions<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>) {
+export function useListPlasmidsInventoryQuery(baseOptions: Apollo.QueryHookOptions<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables> & ({ variables: ListPlasmidsInventoryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(ListPlasmidsInventoryDocument, options);
       }
@@ -2045,8 +2100,13 @@ export function useListPlasmidsInventoryLazyQuery(baseOptions?: Apollo.LazyQuery
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(ListPlasmidsInventoryDocument, options);
         }
+export function useListPlasmidsInventorySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(ListPlasmidsInventoryDocument, options);
+        }
 export type ListPlasmidsInventoryQueryHookResult = ReturnType<typeof useListPlasmidsInventoryQuery>;
 export type ListPlasmidsInventoryLazyQueryHookResult = ReturnType<typeof useListPlasmidsInventoryLazyQuery>;
+export type ListPlasmidsInventorySuspenseQueryHookResult = ReturnType<typeof useListPlasmidsInventorySuspenseQuery>;
 export type ListPlasmidsInventoryQueryResult = Apollo.QueryResult<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>;
 export const PlasmidListFilterDocument = gql`
     query PlasmidListFilter($cursor: Int!, $limit: Int!, $filter: String!) {
@@ -2081,7 +2141,7 @@ export const PlasmidListFilterDocument = gql`
  *   },
  * });
  */
-export function usePlasmidListFilterQuery(baseOptions: Apollo.QueryHookOptions<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>) {
+export function usePlasmidListFilterQuery(baseOptions: Apollo.QueryHookOptions<PlasmidListFilterQuery, PlasmidListFilterQueryVariables> & ({ variables: PlasmidListFilterQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(PlasmidListFilterDocument, options);
       }
@@ -2089,8 +2149,13 @@ export function usePlasmidListFilterLazyQuery(baseOptions?: Apollo.LazyQueryHook
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(PlasmidListFilterDocument, options);
         }
+export function usePlasmidListFilterSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(PlasmidListFilterDocument, options);
+        }
 export type PlasmidListFilterQueryHookResult = ReturnType<typeof usePlasmidListFilterQuery>;
 export type PlasmidListFilterLazyQueryHookResult = ReturnType<typeof usePlasmidListFilterLazyQuery>;
+export type PlasmidListFilterSuspenseQueryHookResult = ReturnType<typeof usePlasmidListFilterSuspenseQuery>;
 export type PlasmidListFilterQueryResult = Apollo.QueryResult<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>;
 export const PlasmidDocument = gql`
     query Plasmid($id: ID!) {
@@ -2143,7 +2208,7 @@ export const PlasmidDocument = gql`
  *   },
  * });
  */
-export function usePlasmidQuery(baseOptions: Apollo.QueryHookOptions<PlasmidQuery, PlasmidQueryVariables>) {
+export function usePlasmidQuery(baseOptions: Apollo.QueryHookOptions<PlasmidQuery, PlasmidQueryVariables> & ({ variables: PlasmidQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<PlasmidQuery, PlasmidQueryVariables>(PlasmidDocument, options);
       }
@@ -2151,8 +2216,13 @@ export function usePlasmidLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pl
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<PlasmidQuery, PlasmidQueryVariables>(PlasmidDocument, options);
         }
+export function usePlasmidSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<PlasmidQuery, PlasmidQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PlasmidQuery, PlasmidQueryVariables>(PlasmidDocument, options);
+        }
 export type PlasmidQueryHookResult = ReturnType<typeof usePlasmidQuery>;
 export type PlasmidLazyQueryHookResult = ReturnType<typeof usePlasmidLazyQuery>;
+export type PlasmidSuspenseQueryHookResult = ReturnType<typeof usePlasmidSuspenseQuery>;
 export type PlasmidQueryResult = Apollo.QueryResult<PlasmidQuery, PlasmidQueryVariables>;
 export const StrainDocument = gql`
     query Strain($id: ID!) {
@@ -2230,7 +2300,7 @@ export const StrainDocument = gql`
  *   },
  * });
  */
-export function useStrainQuery(baseOptions: Apollo.QueryHookOptions<StrainQuery, StrainQueryVariables>) {
+export function useStrainQuery(baseOptions: Apollo.QueryHookOptions<StrainQuery, StrainQueryVariables> & ({ variables: StrainQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<StrainQuery, StrainQueryVariables>(StrainDocument, options);
       }
@@ -2238,8 +2308,13 @@ export function useStrainLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Str
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<StrainQuery, StrainQueryVariables>(StrainDocument, options);
         }
+export function useStrainSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<StrainQuery, StrainQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<StrainQuery, StrainQueryVariables>(StrainDocument, options);
+        }
 export type StrainQueryHookResult = ReturnType<typeof useStrainQuery>;
 export type StrainLazyQueryHookResult = ReturnType<typeof useStrainLazyQuery>;
+export type StrainSuspenseQueryHookResult = ReturnType<typeof useStrainSuspenseQuery>;
 export type StrainQueryResult = Apollo.QueryResult<StrainQuery, StrainQueryVariables>;
 export const ListRecentPlasmidsDocument = gql`
     query ListRecentPlasmids($limit: Int! = 4) {
@@ -2275,8 +2350,13 @@ export function useListRecentPlasmidsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>(ListRecentPlasmidsDocument, options);
         }
+export function useListRecentPlasmidsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>(ListRecentPlasmidsDocument, options);
+        }
 export type ListRecentPlasmidsQueryHookResult = ReturnType<typeof useListRecentPlasmidsQuery>;
 export type ListRecentPlasmidsLazyQueryHookResult = ReturnType<typeof useListRecentPlasmidsLazyQuery>;
+export type ListRecentPlasmidsSuspenseQueryHookResult = ReturnType<typeof useListRecentPlasmidsSuspenseQuery>;
 export type ListRecentPlasmidsQueryResult = Apollo.QueryResult<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>;
 export const ListRecentStrainsDocument = gql`
     query ListRecentStrains($limit: Int! = 4) {
@@ -2312,8 +2392,13 @@ export function useListRecentStrainsLazyQuery(baseOptions?: Apollo.LazyQueryHook
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>(ListRecentStrainsDocument, options);
         }
+export function useListRecentStrainsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>(ListRecentStrainsDocument, options);
+        }
 export type ListRecentStrainsQueryHookResult = ReturnType<typeof useListRecentStrainsQuery>;
 export type ListRecentStrainsLazyQueryHookResult = ReturnType<typeof useListRecentStrainsLazyQuery>;
+export type ListRecentStrainsSuspenseQueryHookResult = ReturnType<typeof useListRecentStrainsSuspenseQuery>;
 export type ListRecentStrainsQueryResult = Apollo.QueryResult<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>;
 export const UserByEmailDocument = gql`
     query UserByEmail($email: String!) {
@@ -2339,7 +2424,7 @@ export const UserByEmailDocument = gql`
  *   },
  * });
  */
-export function useUserByEmailQuery(baseOptions: Apollo.QueryHookOptions<UserByEmailQuery, UserByEmailQueryVariables>) {
+export function useUserByEmailQuery(baseOptions: Apollo.QueryHookOptions<UserByEmailQuery, UserByEmailQueryVariables> & ({ variables: UserByEmailQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<UserByEmailQuery, UserByEmailQueryVariables>(UserByEmailDocument, options);
       }
@@ -2347,575 +2432,450 @@ export function useUserByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<UserByEmailQuery, UserByEmailQueryVariables>(UserByEmailDocument, options);
         }
+export function useUserByEmailSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<UserByEmailQuery, UserByEmailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<UserByEmailQuery, UserByEmailQueryVariables>(UserByEmailDocument, options);
+        }
 export type UserByEmailQueryHookResult = ReturnType<typeof useUserByEmailQuery>;
 export type UserByEmailLazyQueryHookResult = ReturnType<typeof useUserByEmailLazyQuery>;
+export type UserByEmailSuspenseQueryHookResult = ReturnType<typeof useUserByEmailSuspenseQuery>;
 export type UserByEmailQueryResult = Apollo.QueryResult<UserByEmailQuery, UserByEmailQueryVariables>;
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockLoginMutation(
- *   ({ query, variables }) => {
- *     const { input } = variables;
- *     return HttpResponse.json({
- *       data: { login }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockLoginMutation((req, res, ctx) => {
+ *   const { input } = req.variables;
+ *   return res(
+ *     ctx.data({ login })
+ *   )
+ * })
  */
-export const mockLoginMutation = (resolver: GraphQLResponseResolver<LoginMutation, LoginMutationVariables>, options?: RequestHandlerOptions) =>
+export const mockLoginMutation = (resolver: Parameters<typeof graphql.mutation<LoginMutation, LoginMutationVariables>>[1]) =>
   graphql.mutation<LoginMutation, LoginMutationVariables>(
     'Login',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockLogoutMutation(
- *   ({ query, variables }) => {
- *     return HttpResponse.json({
- *       data: { logout }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockLogoutMutation((req, res, ctx) => {
+ *   return res(
+ *     ctx.data({ logout })
+ *   )
+ * })
  */
-export const mockLogoutMutation = (resolver: GraphQLResponseResolver<LogoutMutation, LogoutMutationVariables>, options?: RequestHandlerOptions) =>
+export const mockLogoutMutation = (resolver: Parameters<typeof graphql.mutation<LogoutMutation, LogoutMutationVariables>>[1]) =>
   graphql.mutation<LogoutMutation, LogoutMutationVariables>(
     'Logout',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockCreateContentMutation(
- *   ({ query, variables }) => {
- *     const { input } = variables;
- *     return HttpResponse.json({
- *       data: { createContent }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockCreateContentMutation((req, res, ctx) => {
+ *   const { input } = req.variables;
+ *   return res(
+ *     ctx.data({ createContent })
+ *   )
+ * })
  */
-export const mockCreateContentMutation = (resolver: GraphQLResponseResolver<CreateContentMutation, CreateContentMutationVariables>, options?: RequestHandlerOptions) =>
+export const mockCreateContentMutation = (resolver: Parameters<typeof graphql.mutation<CreateContentMutation, CreateContentMutationVariables>>[1]) =>
   graphql.mutation<CreateContentMutation, CreateContentMutationVariables>(
     'CreateContent',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockUpdateContentMutation(
- *   ({ query, variables }) => {
- *     const { input } = variables;
- *     return HttpResponse.json({
- *       data: { updateContent }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockUpdateContentMutation((req, res, ctx) => {
+ *   const { input } = req.variables;
+ *   return res(
+ *     ctx.data({ updateContent })
+ *   )
+ * })
  */
-export const mockUpdateContentMutation = (resolver: GraphQLResponseResolver<UpdateContentMutation, UpdateContentMutationVariables>, options?: RequestHandlerOptions) =>
+export const mockUpdateContentMutation = (resolver: Parameters<typeof graphql.mutation<UpdateContentMutation, UpdateContentMutationVariables>>[1]) =>
   graphql.mutation<UpdateContentMutation, UpdateContentMutationVariables>(
     'UpdateContent',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockCreateOrderMutation(
- *   ({ query, variables }) => {
- *     const { input } = variables;
- *     return HttpResponse.json({
- *       data: { createOrder }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockCreateOrderMutation((req, res, ctx) => {
+ *   const { input } = req.variables;
+ *   return res(
+ *     ctx.data({ createOrder })
+ *   )
+ * })
  */
-export const mockCreateOrderMutation = (resolver: GraphQLResponseResolver<CreateOrderMutation, CreateOrderMutationVariables>, options?: RequestHandlerOptions) =>
+export const mockCreateOrderMutation = (resolver: Parameters<typeof graphql.mutation<CreateOrderMutation, CreateOrderMutationVariables>>[1]) =>
   graphql.mutation<CreateOrderMutation, CreateOrderMutationVariables>(
     'CreateOrder',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockUploadFileMutation(
- *   ({ query, variables }) => {
- *     const { file } = variables;
- *     return HttpResponse.json({
- *       data: { uploadFile }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockUploadFileMutation((req, res, ctx) => {
+ *   const { file } = req.variables;
+ *   return res(
+ *     ctx.data({ uploadFile })
+ *   )
+ * })
  */
-export const mockUploadFileMutation = (resolver: GraphQLResponseResolver<UploadFileMutation, UploadFileMutationVariables>, options?: RequestHandlerOptions) =>
+export const mockUploadFileMutation = (resolver: Parameters<typeof graphql.mutation<UploadFileMutation, UploadFileMutationVariables>>[1]) =>
   graphql.mutation<UploadFileMutation, UploadFileMutationVariables>(
     'UploadFile',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockCreateUserMutation(
- *   ({ query, variables }) => {
- *     const { input } = variables;
- *     return HttpResponse.json({
- *       data: { createUser }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockCreateUserMutation((req, res, ctx) => {
+ *   const { input } = req.variables;
+ *   return res(
+ *     ctx.data({ createUser })
+ *   )
+ * })
  */
-export const mockCreateUserMutation = (resolver: GraphQLResponseResolver<CreateUserMutation, CreateUserMutationVariables>, options?: RequestHandlerOptions) =>
+export const mockCreateUserMutation = (resolver: Parameters<typeof graphql.mutation<CreateUserMutation, CreateUserMutationVariables>>[1]) =>
   graphql.mutation<CreateUserMutation, CreateUserMutationVariables>(
     'CreateUser',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockUpdateUserMutation(
- *   ({ query, variables }) => {
- *     const { id, input } = variables;
- *     return HttpResponse.json({
- *       data: { updateUser }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockUpdateUserMutation((req, res, ctx) => {
+ *   const { id, input } = req.variables;
+ *   return res(
+ *     ctx.data({ updateUser })
+ *   )
+ * })
  */
-export const mockUpdateUserMutation = (resolver: GraphQLResponseResolver<UpdateUserMutation, UpdateUserMutationVariables>, options?: RequestHandlerOptions) =>
+export const mockUpdateUserMutation = (resolver: Parameters<typeof graphql.mutation<UpdateUserMutation, UpdateUserMutationVariables>>[1]) =>
   graphql.mutation<UpdateUserMutation, UpdateUserMutationVariables>(
     'UpdateUser',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockContentBySlugQuery(
- *   ({ query, variables }) => {
- *     const { slug } = variables;
- *     return HttpResponse.json({
- *       data: { contentBySlug }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockContentBySlugQuery((req, res, ctx) => {
+ *   const { slug } = req.variables;
+ *   return res(
+ *     ctx.data({ contentBySlug })
+ *   )
+ * })
  */
-export const mockContentBySlugQuery = (resolver: GraphQLResponseResolver<ContentBySlugQuery, ContentBySlugQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockContentBySlugQuery = (resolver: Parameters<typeof graphql.query<ContentBySlugQuery, ContentBySlugQueryVariables>>[1]) =>
   graphql.query<ContentBySlugQuery, ContentBySlugQueryVariables>(
     'ContentBySlug',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockContentQuery(
- *   ({ query, variables }) => {
- *     const { id } = variables;
- *     return HttpResponse.json({
- *       data: { content }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockContentQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ content })
+ *   )
+ * })
  */
-export const mockContentQuery = (resolver: GraphQLResponseResolver<ContentQuery, ContentQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockContentQuery = (resolver: Parameters<typeof graphql.query<ContentQuery, ContentQueryVariables>>[1]) =>
   graphql.query<ContentQuery, ContentQueryVariables>(
     'Content',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListOrganismsQuery(
- *   ({ query, variables }) => {
- *     return HttpResponse.json({
- *       data: { listOrganisms }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListOrganismsQuery((req, res, ctx) => {
+ *   return res(
+ *     ctx.data({ listOrganisms })
+ *   )
+ * })
  */
-export const mockListOrganismsQuery = (resolver: GraphQLResponseResolver<ListOrganismsQuery, ListOrganismsQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListOrganismsQuery = (resolver: Parameters<typeof graphql.query<ListOrganismsQuery, ListOrganismsQueryVariables>>[1]) =>
   graphql.query<ListOrganismsQuery, ListOrganismsQueryVariables>(
     'ListOrganisms',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockGeneOntologyAnnotationQuery(
- *   ({ query, variables }) => {
- *     const { gene } = variables;
- *     return HttpResponse.json({
- *       data: { geneOntologyAnnotation }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockGeneOntologyAnnotationQuery((req, res, ctx) => {
+ *   const { gene } = req.variables;
+ *   return res(
+ *     ctx.data({ geneOntologyAnnotation })
+ *   )
+ * })
  */
-export const mockGeneOntologyAnnotationQuery = (resolver: GraphQLResponseResolver<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockGeneOntologyAnnotationQuery = (resolver: Parameters<typeof graphql.query<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>>[1]) =>
   graphql.query<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(
     'GeneOntologyAnnotation',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListRecentGenesQuery(
- *   ({ query, variables }) => {
- *     const { limit } = variables;
- *     return HttpResponse.json({
- *       data: { listRecentGenes }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListRecentGenesQuery((req, res, ctx) => {
+ *   const { limit } = req.variables;
+ *   return res(
+ *     ctx.data({ listRecentGenes })
+ *   )
+ * })
  */
-export const mockListRecentGenesQuery = (resolver: GraphQLResponseResolver<ListRecentGenesQuery, ListRecentGenesQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListRecentGenesQuery = (resolver: Parameters<typeof graphql.query<ListRecentGenesQuery, ListRecentGenesQueryVariables>>[1]) =>
   graphql.query<ListRecentGenesQuery, ListRecentGenesQueryVariables>(
     'ListRecentGenes',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockPublicationQuery(
- *   ({ query, variables }) => {
- *     const { id } = variables;
- *     return HttpResponse.json({
- *       data: { publication }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockPublicationQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ publication })
+ *   )
+ * })
  */
-export const mockPublicationQuery = (resolver: GraphQLResponseResolver<PublicationQuery, PublicationQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockPublicationQuery = (resolver: Parameters<typeof graphql.query<PublicationQuery, PublicationQueryVariables>>[1]) =>
   graphql.query<PublicationQuery, PublicationQueryVariables>(
     'Publication',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListRecentPublicationsQuery(
- *   ({ query, variables }) => {
- *     const { limit } = variables;
- *     return HttpResponse.json({
- *       data: { listRecentPublications }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListRecentPublicationsQuery((req, res, ctx) => {
+ *   const { limit } = req.variables;
+ *   return res(
+ *     ctx.data({ listRecentPublications })
+ *   )
+ * })
  */
-export const mockListRecentPublicationsQuery = (resolver: GraphQLResponseResolver<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListRecentPublicationsQuery = (resolver: Parameters<typeof graphql.query<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>>[1]) =>
   graphql.query<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>(
     'ListRecentPublications',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockStrainListQuery(
- *   ({ query, variables }) => {
- *     const { cursor, limit, filter } = variables;
- *     return HttpResponse.json({
- *       data: { listStrains }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockStrainListQuery((req, res, ctx) => {
+ *   const { cursor, limit, filter } = req.variables;
+ *   return res(
+ *     ctx.data({ listStrains })
+ *   )
+ * })
  */
-export const mockStrainListQuery = (resolver: GraphQLResponseResolver<StrainListQuery, StrainListQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockStrainListQuery = (resolver: Parameters<typeof graphql.query<StrainListQuery, StrainListQueryVariables>>[1]) =>
   graphql.query<StrainListQuery, StrainListQueryVariables>(
     'StrainList',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListStrainsWithPhenotypeQuery(
- *   ({ query, variables }) => {
- *     const { cursor, limit, type, annotation } = variables;
- *     return HttpResponse.json({
- *       data: { listStrainsWithAnnotation }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListStrainsWithPhenotypeQuery((req, res, ctx) => {
+ *   const { cursor, limit, type, annotation } = req.variables;
+ *   return res(
+ *     ctx.data({ listStrainsWithAnnotation })
+ *   )
+ * })
  */
-export const mockListStrainsWithPhenotypeQuery = (resolver: GraphQLResponseResolver<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListStrainsWithPhenotypeQuery = (resolver: Parameters<typeof graphql.query<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>>[1]) =>
   graphql.query<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(
     'ListStrainsWithPhenotype',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListBacterialStrainsQuery(
- *   ({ query, variables }) => {
- *     return HttpResponse.json({
- *       data: { listStrainsWithAnnotation, listStrainsWithAnnotation }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListBacterialStrainsQuery((req, res, ctx) => {
+ *   return res(
+ *     ctx.data({ listStrainsWithAnnotation, listStrainsWithAnnotation })
+ *   )
+ * })
  */
-export const mockListBacterialStrainsQuery = (resolver: GraphQLResponseResolver<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListBacterialStrainsQuery = (resolver: Parameters<typeof graphql.query<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>>[1]) =>
   graphql.query<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>(
     'ListBacterialStrains',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListStrainsInventoryQuery(
- *   ({ query, variables }) => {
- *     const { cursor, limit } = variables;
- *     return HttpResponse.json({
- *       data: { listStrainsWithAnnotation }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListStrainsInventoryQuery((req, res, ctx) => {
+ *   const { cursor, limit } = req.variables;
+ *   return res(
+ *     ctx.data({ listStrainsWithAnnotation })
+ *   )
+ * })
  */
-export const mockListStrainsInventoryQuery = (resolver: GraphQLResponseResolver<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListStrainsInventoryQuery = (resolver: Parameters<typeof graphql.query<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>>[1]) =>
   graphql.query<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(
     'ListStrainsInventory',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListPlasmidsInventoryQuery(
- *   ({ query, variables }) => {
- *     const { cursor, limit } = variables;
- *     return HttpResponse.json({
- *       data: { listPlasmidsWithAnnotation }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListPlasmidsInventoryQuery((req, res, ctx) => {
+ *   const { cursor, limit } = req.variables;
+ *   return res(
+ *     ctx.data({ listPlasmidsWithAnnotation })
+ *   )
+ * })
  */
-export const mockListPlasmidsInventoryQuery = (resolver: GraphQLResponseResolver<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListPlasmidsInventoryQuery = (resolver: Parameters<typeof graphql.query<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>>[1]) =>
   graphql.query<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(
     'ListPlasmidsInventory',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockPlasmidListFilterQuery(
- *   ({ query, variables }) => {
- *     const { cursor, limit, filter } = variables;
- *     return HttpResponse.json({
- *       data: { listPlasmids }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockPlasmidListFilterQuery((req, res, ctx) => {
+ *   const { cursor, limit, filter } = req.variables;
+ *   return res(
+ *     ctx.data({ listPlasmids })
+ *   )
+ * })
  */
-export const mockPlasmidListFilterQuery = (resolver: GraphQLResponseResolver<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockPlasmidListFilterQuery = (resolver: Parameters<typeof graphql.query<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>>[1]) =>
   graphql.query<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(
     'PlasmidListFilter',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockPlasmidQuery(
- *   ({ query, variables }) => {
- *     const { id } = variables;
- *     return HttpResponse.json({
- *       data: { plasmid }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockPlasmidQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ plasmid })
+ *   )
+ * })
  */
-export const mockPlasmidQuery = (resolver: GraphQLResponseResolver<PlasmidQuery, PlasmidQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockPlasmidQuery = (resolver: Parameters<typeof graphql.query<PlasmidQuery, PlasmidQueryVariables>>[1]) =>
   graphql.query<PlasmidQuery, PlasmidQueryVariables>(
     'Plasmid',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockStrainQuery(
- *   ({ query, variables }) => {
- *     const { id } = variables;
- *     return HttpResponse.json({
- *       data: { strain }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockStrainQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ strain })
+ *   )
+ * })
  */
-export const mockStrainQuery = (resolver: GraphQLResponseResolver<StrainQuery, StrainQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockStrainQuery = (resolver: Parameters<typeof graphql.query<StrainQuery, StrainQueryVariables>>[1]) =>
   graphql.query<StrainQuery, StrainQueryVariables>(
     'Strain',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListRecentPlasmidsQuery(
- *   ({ query, variables }) => {
- *     const { limit } = variables;
- *     return HttpResponse.json({
- *       data: { listRecentPlasmids }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListRecentPlasmidsQuery((req, res, ctx) => {
+ *   const { limit } = req.variables;
+ *   return res(
+ *     ctx.data({ listRecentPlasmids })
+ *   )
+ * })
  */
-export const mockListRecentPlasmidsQuery = (resolver: GraphQLResponseResolver<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListRecentPlasmidsQuery = (resolver: Parameters<typeof graphql.query<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>>[1]) =>
   graphql.query<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>(
     'ListRecentPlasmids',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockListRecentStrainsQuery(
- *   ({ query, variables }) => {
- *     const { limit } = variables;
- *     return HttpResponse.json({
- *       data: { listRecentStrains }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockListRecentStrainsQuery((req, res, ctx) => {
+ *   const { limit } = req.variables;
+ *   return res(
+ *     ctx.data({ listRecentStrains })
+ *   )
+ * })
  */
-export const mockListRecentStrainsQuery = (resolver: GraphQLResponseResolver<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockListRecentStrainsQuery = (resolver: Parameters<typeof graphql.query<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>>[1]) =>
   graphql.query<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>(
     'ListRecentStrains',
-    resolver,
-    options
+    resolver
   )
 
 /**
- * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
- * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockUserByEmailQuery(
- *   ({ query, variables }) => {
- *     const { email } = variables;
- *     return HttpResponse.json({
- *       data: { userByEmail }
- *     })
- *   },
- *   requestOptions
- * )
+ * mockUserByEmailQuery((req, res, ctx) => {
+ *   const { email } = req.variables;
+ *   return res(
+ *     ctx.data({ userByEmail })
+ *   )
+ * })
  */
-export const mockUserByEmailQuery = (resolver: GraphQLResponseResolver<UserByEmailQuery, UserByEmailQueryVariables>, options?: RequestHandlerOptions) =>
+export const mockUserByEmailQuery = (resolver: Parameters<typeof graphql.query<UserByEmailQuery, UserByEmailQueryVariables>>[1]) =>
   graphql.query<UserByEmailQuery, UserByEmailQueryVariables>(
     'UserByEmail',
-    resolver,
-    options
+    resolver
   )
