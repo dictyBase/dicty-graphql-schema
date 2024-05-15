@@ -16,6 +16,7 @@ const config: CodegenConfig = {
     },
     "./types/mocks.ts" : {
       plugins: [
+        "typescript",
         "typescript-operations",
         "typescript-msw",
       ],
