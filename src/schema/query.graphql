@@ -19,6 +19,7 @@ type Query {
   # Stock queries
   plasmid(id: ID!): Plasmid
   strain(id: ID!): Strain
+  listStrainsWithGene(gene: String!): [Strain!]
   listStrains(
     cursor: Int
     limit: Int
