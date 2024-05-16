@@ -157,6 +157,7 @@ export const GeneOntologyAnnotation = gql`
     id
     type
     date
+    go_term
     evidence_code
     qualifier
     publication
