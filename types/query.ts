@@ -176,6 +176,31 @@ export const GeneOntologyAnnotation = gql`
   }
 }
     `;
+export const ListStrainsWithGene = gql`
+    query ListStrainsWithGene($gene: String!) {
+  listStrainsWithGene(gene: $gene) {
+    id
+    label
+    characteristics
+    in_stock
+    phenotypes {
+      phenotype
+      publication {
+        id
+        title
+        journal
+        pages
+        volume
+        pub_date
+        authors {
+          last_name
+          rank
+        }
+      }
+    }
+  }
+}
+    `;
 export const ListRecentGenes = gql`
     query ListRecentGenes($limit: Int! = 4) {
   listRecentGenes(limit: $limit) {

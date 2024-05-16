@@ -636,6 +636,7 @@ export type Query = {
   listRoles?: Maybe<Array<Role>>;
   listStrains?: Maybe<StrainListWithCursor>;
   listStrainsWithAnnotation?: Maybe<StrainListWithCursor>;
+  listStrainsWithGene?: Maybe<Array<Strain>>;
   listUsers?: Maybe<UserList>;
   order?: Maybe<Order>;
   organism?: Maybe<Organism>;
@@ -718,6 +719,11 @@ export type QueryListStrainsWithAnnotationArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   type: Scalars['String']['input'];
+};
+
+
+export type QueryListStrainsWithGeneArgs = {
+  gene: Scalars['String']['input'];
 };
 
 
@@ -1052,6 +1058,13 @@ export type GeneOntologyAnnotationQueryVariables = Exact<{
 
 export type GeneOntologyAnnotationQuery = { __typename?: 'Query', geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, go_term: string, evidence_code: string, qualifier: string, publication: string, assigned_by: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null };
 
+export type ListStrainsWithGeneQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
+}>;
+
+
+export type ListStrainsWithGeneQuery = { __typename?: 'Query', listStrainsWithGene?: Array<{ __typename?: 'Strain', id: string, label: string, characteristics?: Array<string> | null, in_stock: boolean, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, publication?: { __typename?: 'Publication', id: string, title: string, journal: string, pages?: string | null, volume?: string | null, pub_date?: any | null, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> } | null }> | null }> | null };
+
 export type ListRecentGenesQueryVariables = Exact<{
   limit?: Scalars['Int']['input'];
 }>;
@@ -1357,6 +1370,23 @@ export const mockListOrganismsQuery = (resolver: Parameters<typeof graphql.query
 export const mockGeneOntologyAnnotationQuery = (resolver: Parameters<typeof graphql.query<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>>[1]) =>
   graphql.query<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(
     'GeneOntologyAnnotation',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListStrainsWithGeneQuery((req, res, ctx) => {
+ *   const { gene } = req.variables;
+ *   return res(
+ *     ctx.data({ listStrainsWithGene })
+ *   )
+ * })
+ */
+export const mockListStrainsWithGeneQuery = (resolver: Parameters<typeof graphql.query<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>>[1]) =>
+  graphql.query<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>(
+    'ListStrainsWithGene',
     resolver
   )
 
