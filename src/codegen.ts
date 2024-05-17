@@ -10,7 +10,6 @@ const config: CodegenConfig = {
         "typescript",
         "typescript-operations",
         "typescript-react-apollo",
-        "typescript-msw",
       ],
       config: { withHooks: true },
     },
