@@ -2,8 +2,8 @@ version: 2
 updates:
   - package-ecosystem: npm
     directory: "/"
+    versioning-strategy: lockfile-only
     ignore: 
-    - dependency-name: "@graphql-codegen/typescript-react-apollo"
     schedule:
       interval: weekly
       day: saturday
