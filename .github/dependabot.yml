@@ -3,7 +3,6 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     versioning-strategy: lockfile-only
-    ignore: 
     schedule:
       interval: weekly
       day: saturday
