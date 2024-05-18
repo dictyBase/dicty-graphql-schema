@@ -247,6 +247,30 @@ export const ListRecentPublications = gql`
   }
 }
     `;
+export const ListPublicationsWithGene = gql`
+    query ListPublicationsWithGene($gene: String!) {
+  listPublicationsWithGene(gene: $gene) {
+    related_genes {
+      id
+      name
+    }
+    id
+    doi
+    title
+    journal
+    pub_date
+    volume
+    pages
+    pub_type
+    source
+    issue
+    authors {
+      last_name
+      rank
+    }
+  }
+}
+    `;
 export const StrainList = gql`
     query StrainList($cursor: Int!, $limit: Int!, $filter: StrainListFilter) {
   listStrains(cursor: $cursor, limit: $limit, filter: $filter) {

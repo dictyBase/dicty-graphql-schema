@@ -337,7 +337,7 @@ export type PublicationWithGeneFieldPolicy = {
 	title?: FieldPolicy<any> | FieldReadFunction<any>,
 	volume?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('content' | 'contentBySlug' | 'geneOntologyAnnotation' | 'listOrders' | 'listOrganisms' | 'listPermissions' | 'listPlasmids' | 'listPlasmidsWithAnnotation' | 'listRecentGenes' | 'listRecentPlasmids' | 'listRecentPublications' | 'listRecentStrains' | 'listRoles' | 'listStrains' | 'listStrainsWithAnnotation' | 'listStrainsWithGene' | 'listUsers' | 'order' | 'organism' | 'permission' | 'plasmid' | 'publication' | 'role' | 'strain' | 'user' | 'userByEmail' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('content' | 'contentBySlug' | 'geneOntologyAnnotation' | 'listOrders' | 'listOrganisms' | 'listPermissions' | 'listPlasmids' | 'listPlasmidsWithAnnotation' | 'listPublicationsWithGene' | 'listRecentGenes' | 'listRecentPlasmids' | 'listRecentPublications' | 'listRecentStrains' | 'listRoles' | 'listStrains' | 'listStrainsWithAnnotation' | 'listStrainsWithGene' | 'listUsers' | 'order' | 'organism' | 'permission' | 'plasmid' | 'publication' | 'role' | 'strain' | 'user' | 'userByEmail' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	content?: FieldPolicy<any> | FieldReadFunction<any>,
 	contentBySlug?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -347,6 +347,7 @@ export type QueryFieldPolicy = {
 	listPermissions?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPlasmids?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPlasmidsWithAnnotation?: FieldPolicy<any> | FieldReadFunction<any>,
+	listPublicationsWithGene?: FieldPolicy<any> | FieldReadFunction<any>,
 	listRecentGenes?: FieldPolicy<any> | FieldReadFunction<any>,
 	listRecentPlasmids?: FieldPolicy<any> | FieldReadFunction<any>,
 	listRecentPublications?: FieldPolicy<any> | FieldReadFunction<any>,
