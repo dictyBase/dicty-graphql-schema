@@ -631,6 +631,7 @@ export type Query = {
   listPermissions?: Maybe<Array<Permission>>;
   listPlasmids?: Maybe<PlasmidListWithCursor>;
   listPlasmidsWithAnnotation?: Maybe<PlasmidListWithCursor>;
+  listPublicationsWithGene?: Maybe<Array<PublicationWithGene>>;
   listRecentGenes?: Maybe<Array<Gene>>;
   listRecentPlasmids?: Maybe<Array<Plasmid>>;
   listRecentPublications?: Maybe<Array<Publication>>;
@@ -686,6 +687,11 @@ export type QueryListPlasmidsWithAnnotationArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   type: Scalars['String']['input'];
+};
+
+
+export type QueryListPublicationsWithGeneArgs = {
+  gene: Scalars['String']['input'];
 };
 
 
@@ -1087,6 +1093,13 @@ export type ListRecentPublicationsQueryVariables = Exact<{
 
 
 export type ListRecentPublicationsQuery = { __typename?: 'Query', listRecentPublications?: Array<{ __typename?: 'Publication', id: string, doi?: string | null, title: string, abstract: string, journal: string, pub_date?: any | null, pages?: string | null, issue?: string | null, volume?: string | null, authors: Array<{ __typename?: 'Author', initials?: string | null, last_name: string }> }> | null };
+
+export type ListPublicationsWithGeneQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
+}>;
+
+
+export type ListPublicationsWithGeneQuery = { __typename?: 'Query', listPublicationsWithGene?: Array<{ __typename?: 'PublicationWithGene', id: string, doi?: string | null, title: string, journal: string, pub_date?: any | null, volume?: string | null, pages?: string | null, pub_type: string, source: string, issue?: string | null, related_genes: Array<{ __typename?: 'Gene', id: string, name: string }>, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> }> | null };
 
 export type StrainListQueryVariables = Exact<{
   cursor: Scalars['Int']['input'];
@@ -1851,6 +1864,58 @@ export function useListRecentPublicationsLazyQuery(baseOptions?: Apollo.LazyQuer
 export type ListRecentPublicationsQueryHookResult = ReturnType<typeof useListRecentPublicationsQuery>;
 export type ListRecentPublicationsLazyQueryHookResult = ReturnType<typeof useListRecentPublicationsLazyQuery>;
 export type ListRecentPublicationsQueryResult = Apollo.QueryResult<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>;
+export const ListPublicationsWithGeneDocument = gql`
+    query ListPublicationsWithGene($gene: String!) {
+  listPublicationsWithGene(gene: $gene) {
+    related_genes {
+      id
+      name
+    }
+    id
+    doi
+    title
+    journal
+    pub_date
+    volume
+    pages
+    pub_type
+    source
+    issue
+    authors {
+      last_name
+      rank
+    }
+  }
+}
+    `;
+
+/**
+ * __useListPublicationsWithGeneQuery__
+ *
+ * To run a query within a React component, call `useListPublicationsWithGeneQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPublicationsWithGeneQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPublicationsWithGeneQuery({
+ *   variables: {
+ *      gene: // value for 'gene'
+ *   },
+ * });
+ */
+export function useListPublicationsWithGeneQuery(baseOptions: Apollo.QueryHookOptions<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>(ListPublicationsWithGeneDocument, options);
+      }
+export function useListPublicationsWithGeneLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>(ListPublicationsWithGeneDocument, options);
+        }
+export type ListPublicationsWithGeneQueryHookResult = ReturnType<typeof useListPublicationsWithGeneQuery>;
+export type ListPublicationsWithGeneLazyQueryHookResult = ReturnType<typeof useListPublicationsWithGeneLazyQuery>;
+export type ListPublicationsWithGeneQueryResult = Apollo.QueryResult<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>;
 export const StrainListDocument = gql`
     query StrainList($cursor: Int!, $limit: Int!, $filter: StrainListFilter) {
   listStrains(cursor: $cursor, limit: $limit, filter: $filter) {

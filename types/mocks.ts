@@ -629,6 +629,7 @@ export type Query = {
   listPermissions?: Maybe<Array<Permission>>;
   listPlasmids?: Maybe<PlasmidListWithCursor>;
   listPlasmidsWithAnnotation?: Maybe<PlasmidListWithCursor>;
+  listPublicationsWithGene?: Maybe<Array<PublicationWithGene>>;
   listRecentGenes?: Maybe<Array<Gene>>;
   listRecentPlasmids?: Maybe<Array<Plasmid>>;
   listRecentPublications?: Maybe<Array<Publication>>;
@@ -684,6 +685,11 @@ export type QueryListPlasmidsWithAnnotationArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   type: Scalars['String']['input'];
+};
+
+
+export type QueryListPublicationsWithGeneArgs = {
+  gene: Scalars['String']['input'];
 };
 
 
@@ -1086,6 +1092,13 @@ export type ListRecentPublicationsQueryVariables = Exact<{
 
 export type ListRecentPublicationsQuery = { __typename?: 'Query', listRecentPublications?: Array<{ __typename?: 'Publication', id: string, doi?: string | null, title: string, abstract: string, journal: string, pub_date?: any | null, pages?: string | null, issue?: string | null, volume?: string | null, authors: Array<{ __typename?: 'Author', initials?: string | null, last_name: string }> }> | null };
 
+export type ListPublicationsWithGeneQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
+}>;
+
+
+export type ListPublicationsWithGeneQuery = { __typename?: 'Query', listPublicationsWithGene?: Array<{ __typename?: 'PublicationWithGene', id: string, doi?: string | null, title: string, journal: string, pub_date?: any | null, volume?: string | null, pages?: string | null, pub_type: string, source: string, issue?: string | null, related_genes: Array<{ __typename?: 'Gene', id: string, name: string }>, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> }> | null };
+
 export type StrainListQueryVariables = Exact<{
   cursor: Scalars['Int']['input'];
   limit: Scalars['Int']['input'];
@@ -1438,6 +1451,23 @@ export const mockPublicationQuery = (resolver: Parameters<typeof graphql.query<P
 export const mockListRecentPublicationsQuery = (resolver: Parameters<typeof graphql.query<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>>[1]) =>
   graphql.query<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>(
     'ListRecentPublications',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListPublicationsWithGeneQuery((req, res, ctx) => {
+ *   const { gene } = req.variables;
+ *   return res(
+ *     ctx.data({ listPublicationsWithGene })
+ *   )
+ * })
+ */
+export const mockListPublicationsWithGeneQuery = (resolver: Parameters<typeof graphql.query<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>>[1]) =>
+  graphql.query<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>(
+    'ListPublicationsWithGene',
     resolver
   )
 
