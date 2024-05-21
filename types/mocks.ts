@@ -1063,6 +1063,13 @@ export type ListOrganismsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ListOrganismsQuery = { __typename?: 'Query', listOrganisms?: Array<{ __typename?: 'Organism', taxon_id: string, scientific_name: string, citations: Array<{ __typename?: 'Citation', title: string, authors: string, pubmed_id: string, journal: string }>, downloads: Array<{ __typename?: 'Download', title: string, items: Array<{ __typename?: 'DownloadItem', title: string, url: string }> }> }> | null };
 
+export type GeneSummaryQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
+}>;
+
+
+export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } | null };
+
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
 }>;
@@ -1076,13 +1083,6 @@ export type ListStrainsWithGeneQueryVariables = Exact<{
 
 
 export type ListStrainsWithGeneQuery = { __typename?: 'Query', listStrainsWithGene?: Array<{ __typename?: 'Strain', id: string, label: string, characteristics?: Array<string> | null, in_stock: boolean, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, publication?: { __typename?: 'Publication', id: string, title: string, journal: string, pages?: string | null, volume?: string | null, pub_date?: any | null, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> } | null }> | null }> | null };
-
-export type GeneGeneralInformationQueryVariables = Exact<{
-  gene: Scalars['String']['input'];
-}>;
-
-
-export type GeneGeneralInformationQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } | null };
 
 export type ListRecentGenesQueryVariables = Exact<{
   limit?: Scalars['Int']['input'];
@@ -1386,6 +1386,23 @@ export const mockListOrganismsQuery = (resolver: Parameters<typeof graphql.query
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockGeneSummaryQuery((req, res, ctx) => {
+ *   const { gene } = req.variables;
+ *   return res(
+ *     ctx.data({ geneGeneralInformation })
+ *   )
+ * })
+ */
+export const mockGeneSummaryQuery = (resolver: Parameters<typeof graphql.query<GeneSummaryQuery, GeneSummaryQueryVariables>>[1]) =>
+  graphql.query<GeneSummaryQuery, GeneSummaryQueryVariables>(
+    'GeneSummary',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockGeneOntologyAnnotationQuery((req, res, ctx) => {
  *   const { gene } = req.variables;
  *   return res(
@@ -1413,23 +1430,6 @@ export const mockGeneOntologyAnnotationQuery = (resolver: Parameters<typeof grap
 export const mockListStrainsWithGeneQuery = (resolver: Parameters<typeof graphql.query<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>>[1]) =>
   graphql.query<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>(
     'ListStrainsWithGene',
-    resolver
-  )
-
-/**
- * @param resolver a function that accepts a captured request and may return a mocked response.
- * @see https://mswjs.io/docs/basics/response-resolver
- * @example
- * mockGeneGeneralInformationQuery((req, res, ctx) => {
- *   const { gene } = req.variables;
- *   return res(
- *     ctx.data({ geneGeneralInformation })
- *   )
- * })
- */
-export const mockGeneGeneralInformationQuery = (resolver: Parameters<typeof graphql.query<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>>[1]) =>
-  graphql.query<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>(
-    'GeneGeneralInformation',
     resolver
   )
 
