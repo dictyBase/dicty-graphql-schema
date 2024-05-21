@@ -77,7 +77,7 @@ type Orthologs {
   source: [String!]!
 }
 
-type GeneralInfo {
+type GeneGeneralInfo {
   name_description: [String!]!
   alt_gene_name: [String!]
   gene_product: String!
