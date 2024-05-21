@@ -5,7 +5,7 @@ type Gene {
   strains: [Strain!]
   orthologs: [Orthologs!]
   product_info: [ProductInformation!]
-  general_info: GeneralInfo!
+  general_info: GeneGeneralInfo!
   associated_sequences: AssociatedSequences!
   links: Links!
   protein_information: ProteinInformation
