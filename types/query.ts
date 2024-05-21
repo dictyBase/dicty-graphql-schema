@@ -201,6 +201,17 @@ export const ListStrainsWithGene = gql`
   }
 }
     `;
+export const GeneGeneralInformation = gql`
+    query GeneGeneralInformation($gene: String!) {
+  geneGeneralInformation(gene: $gene) {
+    name_description
+    alt_gene_name
+    gene_product
+    alt_protein_names
+    description
+  }
+}
+    `;
 export const ListRecentGenes = gql`
     query ListRecentGenes($limit: Int! = 4) {
   listRecentGenes(limit: $limit) {
