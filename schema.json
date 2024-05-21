@@ -2316,7 +2316,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "GeneralInfo",
+                "name": "GeneGeneralInfo",
                 "ofType": null
               }
             },
@@ -2471,7 +2471,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "GeneralInfo",
+        "name": "GeneGeneralInfo",
         "description": null,
         "fields": [
           {
@@ -5729,6 +5729,35 @@
             "type": {
               "kind": "OBJECT",
               "name": "Content",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "geneGeneralInformation",
+            "description": null,
+            "args": [
+              {
+                "name": "gene",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "GeneGeneralInfo",
               "ofType": null
             },
             "isDeprecated": false,

@@ -234,7 +234,7 @@ export type GoAnnotation = {
 export type Gene = {
   __typename?: 'Gene';
   associated_sequences: AssociatedSequences;
-  general_info: GeneralInfo;
+  general_info: GeneGeneralInfo;
   goas?: Maybe<Array<GoAnnotation>>;
   id: Scalars['String']['output'];
   links: Links;
@@ -245,8 +245,8 @@ export type Gene = {
   strains?: Maybe<Array<Strain>>;
 };
 
-export type GeneralInfo = {
-  __typename?: 'GeneralInfo';
+export type GeneGeneralInfo = {
+  __typename?: 'GeneGeneralInfo';
   alt_gene_name?: Maybe<Array<Scalars['String']['output']>>;
   alt_protein_names?: Maybe<Array<Scalars['String']['output']>>;
   description: Scalars['String']['output'];
@@ -623,6 +623,7 @@ export type Query = {
   __typename?: 'Query';
   content?: Maybe<Content>;
   contentBySlug?: Maybe<Content>;
+  geneGeneralInformation?: Maybe<GeneGeneralInfo>;
   geneOntologyAnnotation?: Maybe<Array<GoAnnotation>>;
   listOrders?: Maybe<OrderListWithCursor>;
   listOrganisms?: Maybe<Array<Organism>>;
@@ -658,6 +659,11 @@ export type QueryContentArgs = {
 
 export type QueryContentBySlugArgs = {
   slug: Scalars['String']['input'];
+};
+
+
+export type QueryGeneGeneralInformationArgs = {
+  gene: Scalars['String']['input'];
 };
 
 
@@ -1071,6 +1077,13 @@ export type ListStrainsWithGeneQueryVariables = Exact<{
 
 export type ListStrainsWithGeneQuery = { __typename?: 'Query', listStrainsWithGene?: Array<{ __typename?: 'Strain', id: string, label: string, characteristics?: Array<string> | null, in_stock: boolean, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, publication?: { __typename?: 'Publication', id: string, title: string, journal: string, pages?: string | null, volume?: string | null, pub_date?: any | null, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> } | null }> | null }> | null };
 
+export type GeneGeneralInformationQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
+}>;
+
+
+export type GeneGeneralInformationQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } | null };
+
 export type ListRecentGenesQueryVariables = Exact<{
   limit?: Scalars['Int']['input'];
 }>;
@@ -1400,6 +1413,23 @@ export const mockGeneOntologyAnnotationQuery = (resolver: Parameters<typeof grap
 export const mockListStrainsWithGeneQuery = (resolver: Parameters<typeof graphql.query<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>>[1]) =>
   graphql.query<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>(
     'ListStrainsWithGene',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockGeneGeneralInformationQuery((req, res, ctx) => {
+ *   const { gene } = req.variables;
+ *   return res(
+ *     ctx.data({ geneGeneralInformation })
+ *   )
+ * })
+ */
+export const mockGeneGeneralInformationQuery = (resolver: Parameters<typeof graphql.query<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>>[1]) =>
+  graphql.query<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>(
+    'GeneGeneralInformation',
     resolver
   )
 
