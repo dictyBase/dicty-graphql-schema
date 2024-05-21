@@ -2,7 +2,7 @@ type Query {
   # Gene queries
   geneOntologyAnnotation(gene: String!): [GOAnnotation!]
   listRecentGenes(limit: Int!): [Gene!]
-  geneGeneralInformation(gene: String!) GeneGeneralInfo
+  geneGeneralInformation(gene: String!): GeneGeneralInfo
   # Content queries
   content(id: ID!): Content
   contentBySlug(slug: String!): Content
