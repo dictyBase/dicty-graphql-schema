@@ -46,6 +46,16 @@ query ListStrainsWithGene($gene: String!) {
   }
 }
 
+query GeneGeneralInformation($gene: String!) {
+  geneGeneralInformation(gene: $gene) {
+    name_description
+    alt_gene_name
+    gene_product
+    alt_protein_names
+    description
+  }  
+} 
+
 query ListRecentGenes($limit: Int! = 4) {
   listRecentGenes(limit: $limit) {
     id
