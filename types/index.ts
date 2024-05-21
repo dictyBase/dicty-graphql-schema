@@ -1065,6 +1065,13 @@ export type ListOrganismsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ListOrganismsQuery = { __typename?: 'Query', listOrganisms?: Array<{ __typename?: 'Organism', taxon_id: string, scientific_name: string, citations: Array<{ __typename?: 'Citation', title: string, authors: string, pubmed_id: string, journal: string }>, downloads: Array<{ __typename?: 'Download', title: string, items: Array<{ __typename?: 'DownloadItem', title: string, url: string }> }> }> | null };
 
+export type GeneSummaryQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
+}>;
+
+
+export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } | null };
+
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
 }>;
@@ -1078,13 +1085,6 @@ export type ListStrainsWithGeneQueryVariables = Exact<{
 
 
 export type ListStrainsWithGeneQuery = { __typename?: 'Query', listStrainsWithGene?: Array<{ __typename?: 'Strain', id: string, label: string, characteristics?: Array<string> | null, in_stock: boolean, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, publication?: { __typename?: 'Publication', id: string, title: string, journal: string, pages?: string | null, volume?: string | null, pub_date?: any | null, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> } | null }> | null }> | null };
-
-export type GeneGeneralInformationQueryVariables = Exact<{
-  gene: Scalars['String']['input'];
-}>;
-
-
-export type GeneGeneralInformationQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } | null };
 
 export type ListRecentGenesQueryVariables = Exact<{
   limit?: Scalars['Int']['input'];
@@ -1641,6 +1641,45 @@ export function useListOrganismsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type ListOrganismsQueryHookResult = ReturnType<typeof useListOrganismsQuery>;
 export type ListOrganismsLazyQueryHookResult = ReturnType<typeof useListOrganismsLazyQuery>;
 export type ListOrganismsQueryResult = Apollo.QueryResult<ListOrganismsQuery, ListOrganismsQueryVariables>;
+export const GeneSummaryDocument = gql`
+    query GeneSummary($gene: String!) {
+  geneGeneralInformation(gene: $gene) {
+    name_description
+    alt_gene_name
+    gene_product
+    alt_protein_names
+    description
+  }
+}
+    `;
+
+/**
+ * __useGeneSummaryQuery__
+ *
+ * To run a query within a React component, call `useGeneSummaryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGeneSummaryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGeneSummaryQuery({
+ *   variables: {
+ *      gene: // value for 'gene'
+ *   },
+ * });
+ */
+export function useGeneSummaryQuery(baseOptions: Apollo.QueryHookOptions<GeneSummaryQuery, GeneSummaryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GeneSummaryQuery, GeneSummaryQueryVariables>(GeneSummaryDocument, options);
+      }
+export function useGeneSummaryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GeneSummaryQuery, GeneSummaryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GeneSummaryQuery, GeneSummaryQueryVariables>(GeneSummaryDocument, options);
+        }
+export type GeneSummaryQueryHookResult = ReturnType<typeof useGeneSummaryQuery>;
+export type GeneSummaryLazyQueryHookResult = ReturnType<typeof useGeneSummaryLazyQuery>;
+export type GeneSummaryQueryResult = Apollo.QueryResult<GeneSummaryQuery, GeneSummaryQueryVariables>;
 export const GeneOntologyAnnotationDocument = gql`
     query GeneOntologyAnnotation($gene: String!) {
   geneOntologyAnnotation(gene: $gene) {
@@ -1747,45 +1786,6 @@ export function useListStrainsWithGeneLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type ListStrainsWithGeneQueryHookResult = ReturnType<typeof useListStrainsWithGeneQuery>;
 export type ListStrainsWithGeneLazyQueryHookResult = ReturnType<typeof useListStrainsWithGeneLazyQuery>;
 export type ListStrainsWithGeneQueryResult = Apollo.QueryResult<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>;
-export const GeneGeneralInformationDocument = gql`
-    query GeneGeneralInformation($gene: String!) {
-  geneGeneralInformation(gene: $gene) {
-    name_description
-    alt_gene_name
-    gene_product
-    alt_protein_names
-    description
-  }
-}
-    `;
-
-/**
- * __useGeneGeneralInformationQuery__
- *
- * To run a query within a React component, call `useGeneGeneralInformationQuery` and pass it any options that fit your needs.
- * When your component renders, `useGeneGeneralInformationQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGeneGeneralInformationQuery({
- *   variables: {
- *      gene: // value for 'gene'
- *   },
- * });
- */
-export function useGeneGeneralInformationQuery(baseOptions: Apollo.QueryHookOptions<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>(GeneGeneralInformationDocument, options);
-      }
-export function useGeneGeneralInformationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>(GeneGeneralInformationDocument, options);
-        }
-export type GeneGeneralInformationQueryHookResult = ReturnType<typeof useGeneGeneralInformationQuery>;
-export type GeneGeneralInformationLazyQueryHookResult = ReturnType<typeof useGeneGeneralInformationLazyQuery>;
-export type GeneGeneralInformationQueryResult = Apollo.QueryResult<GeneGeneralInformationQuery, GeneGeneralInformationQueryVariables>;
 export const ListRecentGenesDocument = gql`
     query ListRecentGenes($limit: Int! = 4) {
   listRecentGenes(limit: $limit) {
