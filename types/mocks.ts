@@ -247,8 +247,8 @@ export type Gene = {
 
 export type GeneGeneralInfo = {
   __typename?: 'GeneGeneralInfo';
-  alt_gene_name?: Maybe<Array<Scalars['String']['output']>>;
-  alt_protein_names?: Maybe<Array<Scalars['String']['output']>>;
+  alt_gene_name: Array<Scalars['String']['output']>;
+  alt_protein_names: Array<Scalars['String']['output']>;
   description: Scalars['String']['output'];
   gene_product: Scalars['String']['output'];
   id: Scalars['String']['output'];
@@ -1069,7 +1069,7 @@ export type GeneSummaryQueryVariables = Exact<{
 }>;
 
 
-export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } | null };
+export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string>, alt_gene_name: Array<string>, gene_product: string, alt_protein_names: Array<string>, description: string } | null };
 
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
