@@ -78,6 +78,7 @@ type Orthologs {
 }
 
 type GeneGeneralInfo {
+  id: String!
   name_description: [String!]!
   alt_gene_name: [String!]
   gene_product: String!
