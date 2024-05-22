@@ -162,6 +162,8 @@ export const GeneSummary = gql`
   }
   geneOntologyAnnotation(gene: $gene) {
     id
+    type
+    date
     go_term
     evidence_code
     with {
