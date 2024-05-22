@@ -154,12 +154,27 @@ export const ListOrganisms = gql`
 export const GeneSummary = gql`
     query GeneSummary($gene: String!) {
   geneGeneralInformation(gene: $gene) {
-    id
     name_description
     alt_gene_name
     gene_product
     alt_protein_names
     description
+  }
+  geneOntologyAnnotation(gene: $gene) {
+    id
+    go_term
+    evidence_code
+    with {
+      id
+      db
+      name
+    }
+    extensions {
+      id
+      db
+      relation
+      name
+    }
   }
 }
     `;
