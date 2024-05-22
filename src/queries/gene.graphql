@@ -8,6 +8,8 @@ query GeneSummary($gene: String!) {
   }  
   geneOntologyAnnotation(gene: $gene) {
     id
+    type
+    date
     go_term
     evidence_code
     with {
