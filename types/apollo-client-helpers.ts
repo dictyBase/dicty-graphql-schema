@@ -118,12 +118,13 @@ export type GeneFieldPolicy = {
 	protein_information?: FieldPolicy<any> | FieldReadFunction<any>,
 	strains?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type GeneGeneralInfoKeySpecifier = ('alt_gene_name' | 'alt_protein_names' | 'description' | 'gene_product' | 'name_description' | GeneGeneralInfoKeySpecifier)[];
+export type GeneGeneralInfoKeySpecifier = ('alt_gene_name' | 'alt_protein_names' | 'description' | 'gene_product' | 'id' | 'name_description' | GeneGeneralInfoKeySpecifier)[];
 export type GeneGeneralInfoFieldPolicy = {
 	alt_gene_name?: FieldPolicy<any> | FieldReadFunction<any>,
 	alt_protein_names?: FieldPolicy<any> | FieldReadFunction<any>,
 	description?: FieldPolicy<any> | FieldReadFunction<any>,
 	gene_product?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	name_description?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type GenomicCoordinatesKeySpecifier = ('chrom_coords' | 'exon' | 'local_coords' | GenomicCoordinatesKeySpecifier)[];

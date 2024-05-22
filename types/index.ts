@@ -253,6 +253,7 @@ export type GeneGeneralInfo = {
   alt_protein_names?: Maybe<Array<Scalars['String']['output']>>;
   description: Scalars['String']['output'];
   gene_product: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   name_description: Array<Scalars['String']['output']>;
 };
 
@@ -1070,7 +1071,7 @@ export type GeneSummaryQueryVariables = Exact<{
 }>;
 
 
-export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } | null };
+export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string>, alt_gene_name?: Array<string> | null, gene_product: string, alt_protein_names?: Array<string> | null, description: string } | null };
 
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
@@ -1644,6 +1645,7 @@ export type ListOrganismsQueryResult = Apollo.QueryResult<ListOrganismsQuery, Li
 export const GeneSummaryDocument = gql`
     query GeneSummary($gene: String!) {
   geneGeneralInformation(gene: $gene) {
+    id
     name_description
     alt_gene_name
     gene_product
