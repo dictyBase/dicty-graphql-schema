@@ -1069,7 +1069,7 @@ export type GeneSummaryQueryVariables = Exact<{
 }>;
 
 
-export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string>, alt_gene_name: Array<string>, gene_product: string, alt_protein_names: Array<string>, description: string } | null };
+export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', name_description: Array<string>, alt_gene_name: Array<string>, gene_product: string, alt_protein_names: Array<string>, description: string } | null, geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, go_term: string, evidence_code: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null };
 
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
@@ -1390,7 +1390,7 @@ export const mockListOrganismsQuery = (resolver: Parameters<typeof graphql.query
  * mockGeneSummaryQuery((req, res, ctx) => {
  *   const { gene } = req.variables;
  *   return res(
- *     ctx.data({ geneGeneralInformation })
+ *     ctx.data({ geneGeneralInformation, geneOntologyAnnotation })
  *   )
  * })
  */
