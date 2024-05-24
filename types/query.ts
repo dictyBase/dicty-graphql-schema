@@ -178,6 +178,20 @@ export const GeneSummary = gql`
       name
     }
   }
+  listGeneProductInformation(gene: $gene) {
+    protein_coding_gene {
+      name
+      link
+    }
+    protein_length
+    protein_molecular_weight
+    more_protein_data
+    genomic_coords {
+      exon
+      local_coords
+      chrom_coords
+    }
+  }
 }
     `;
 export const GeneOntologyAnnotation = gql`
