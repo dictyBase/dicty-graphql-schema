@@ -1,5 +1,6 @@
 query GeneSummary($gene: String!) {
   geneGeneralInformation(gene: $gene) {
+    id
     name_description
     alt_gene_name
     gene_product
