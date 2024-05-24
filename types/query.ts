@@ -154,6 +154,7 @@ export const ListOrganisms = gql`
 export const GeneSummary = gql`
     query GeneSummary($gene: String!) {
   geneGeneralInformation(gene: $gene) {
+    id
     name_description
     alt_gene_name
     gene_product
