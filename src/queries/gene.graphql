@@ -24,6 +24,17 @@ query GeneSummary($gene: String!) {
       name
     }
   }
+  listGeneProductInformation(gene: $gene) {
+    protein_coding_gene
+    protein_length
+    protein_molecular_weight
+    more_protein_data
+    genomic_coords {
+      exon
+      local_coords
+      chrom_coords
+    }
+  }
 }
 
 query GeneOntologyAnnotation($gene: String!) {
