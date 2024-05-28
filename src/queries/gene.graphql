@@ -39,6 +39,19 @@ query GeneSummary($gene: String!) {
       chrom_coords
     }
   }
+  listAssociatedSequences(gene: $gene) {
+    genbank_genomic_fragment {
+      name
+      link
+    }
+    genbank_mrna {
+      name
+      link
+    }    
+    ests {
+      name
+      link
+    } 
 }
 
 query GeneOntologyAnnotation($gene: String!) {
