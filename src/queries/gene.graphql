@@ -39,7 +39,7 @@ query GeneSummary($gene: String!) {
       chrom_coords
     }
   }
-  listAssociatedSequences(gene: $gene) {
+  associatedSequences(gene: $gene) {
     genbank_genomic_fragment {
       name
       link
