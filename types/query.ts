@@ -193,7 +193,7 @@ export const GeneSummary = gql`
       chrom_coords
     }
   }
-  listAssociatedSequences(gene: $gene) {
+  associatedSequences(gene: $gene) {
     genbank_genomic_fragment {
       name
       link
