@@ -624,11 +624,11 @@ export type PublicationWithGene = BasePublication & {
 
 export type Query = {
   __typename?: 'Query';
+  associatedSequences?: Maybe<AssociatedSequences>;
   content?: Maybe<Content>;
   contentBySlug?: Maybe<Content>;
   geneGeneralInformation?: Maybe<GeneGeneralInfo>;
   geneOntologyAnnotation?: Maybe<Array<GoAnnotation>>;
-  listAssociatedSequences?: Maybe<Array<AssociatedSequences>>;
   listGeneProductInformation?: Maybe<Array<ProductInformation>>;
   listOrders?: Maybe<OrderListWithCursor>;
   listOrganisms?: Maybe<Array<Organism>>;
@@ -657,6 +657,11 @@ export type Query = {
 };
 
 
+export type QueryAssociatedSequencesArgs = {
+  gene: Scalars['String']['input'];
+};
+
+
 export type QueryContentArgs = {
   id: Scalars['ID']['input'];
 };
@@ -673,11 +678,6 @@ export type QueryGeneGeneralInformationArgs = {
 
 
 export type QueryGeneOntologyAnnotationArgs = {
-  gene: Scalars['String']['input'];
-};
-
-
-export type QueryListAssociatedSequencesArgs = {
   gene: Scalars['String']['input'];
 };
 
@@ -1083,7 +1083,7 @@ export type GeneSummaryQueryVariables = Exact<{
 }>;
 
 
-export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string>, alt_gene_name: Array<string>, gene_product: string, alt_protein_names: Array<string>, description: string } | null, geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, go_term: string, evidence_code: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null, listGeneProductInformation?: Array<{ __typename?: 'ProductInformation', protein_length: string, protein_molecular_weight: string, more_protein_data: string, protein_coding_gene: { __typename?: 'NameWithLink', name: string, link: string }, genomic_coords: Array<{ __typename?: 'GenomicCoordinates', exon: string, local_coords: string, chrom_coords: string }> }> | null, listAssociatedSequences?: Array<{ __typename?: 'AssociatedSequences', genbank_genomic_fragment?: { __typename?: 'NameWithLink', name: string, link: string } | null, genbank_mrna?: { __typename?: 'NameWithLink', name: string, link: string } | null, ests: Array<{ __typename?: 'NameWithLink', name: string, link: string }> }> | null };
+export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string>, alt_gene_name: Array<string>, gene_product: string, alt_protein_names: Array<string>, description: string } | null, geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, go_term: string, evidence_code: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null, listGeneProductInformation?: Array<{ __typename?: 'ProductInformation', protein_length: string, protein_molecular_weight: string, more_protein_data: string, protein_coding_gene: { __typename?: 'NameWithLink', name: string, link: string }, genomic_coords: Array<{ __typename?: 'GenomicCoordinates', exon: string, local_coords: string, chrom_coords: string }> }> | null, associatedSequences?: { __typename?: 'AssociatedSequences', genbank_genomic_fragment?: { __typename?: 'NameWithLink', name: string, link: string } | null, genbank_mrna?: { __typename?: 'NameWithLink', name: string, link: string } | null, ests: Array<{ __typename?: 'NameWithLink', name: string, link: string }> } | null };
 
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
@@ -1696,7 +1696,7 @@ export const GeneSummaryDocument = gql`
       chrom_coords
     }
   }
-  listAssociatedSequences(gene: $gene) {
+  associatedSequences(gene: $gene) {
     genbank_genomic_fragment {
       name
       link
