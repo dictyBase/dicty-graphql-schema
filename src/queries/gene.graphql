@@ -51,7 +51,8 @@ query GeneSummary($gene: String!) {
     ests {
       name
       link
-    } 
+    }
+  }
 }
 
 query GeneOntologyAnnotation($gene: String!) {
