@@ -4,6 +4,7 @@ type Query {
   listRecentGenes(limit: Int!): [Gene!]
   geneGeneralInformation(gene: String!): GeneGeneralInfo
   listGeneProductInformation(gene: String!): [ProductInformation!] 
+  listAssociatedSequences(gene: String!): [AssociatedSequences!]
   # Content queries
   content(id: ID!): Content
   contentBySlug(slug: String!): Content
