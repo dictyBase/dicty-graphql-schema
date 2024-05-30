@@ -18,14 +18,6 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
-export type AssociatedSequences = {
-  __typename?: 'AssociatedSequences';
-  ests: Array<NameWithLink>;
-  genbank_genomic_fragment?: Maybe<NameWithLink>;
-  genbank_mrna?: Maybe<NameWithLink>;
-  more_link: Scalars['String']['output'];
-};
-
 export type Auth = {
   __typename?: 'Auth';
   identity: Identity;
@@ -233,33 +225,17 @@ export type GoAnnotation = {
 
 export type Gene = {
   __typename?: 'Gene';
-  associated_sequences: AssociatedSequences;
-  general_info: GeneGeneralInfo;
-  goas?: Maybe<Array<GoAnnotation>>;
   id: Scalars['String']['output'];
-  links: Links;
   name: Scalars['String']['output'];
-  orthologs?: Maybe<Array<Orthologs>>;
-  product_info?: Maybe<Array<ProductInformation>>;
-  protein_information?: Maybe<ProteinInformation>;
-  strains?: Maybe<Array<Strain>>;
 };
 
 export type GeneGeneralInfo = {
   __typename?: 'GeneGeneralInfo';
-  alt_gene_name: Array<Scalars['String']['output']>;
-  alt_protein_names: Array<Scalars['String']['output']>;
-  description: Scalars['String']['output'];
-  gene_product: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  gene_product?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
-  name_description: Array<Scalars['String']['output']>;
-};
-
-export type GenomicCoordinates = {
-  __typename?: 'GenomicCoordinates';
-  chrom_coords: Scalars['String']['output'];
-  exon: Scalars['String']['output'];
-  local_coords: Scalars['String']['output'];
+  name_description: Array<Maybe<Scalars['String']['output']>>;
+  synonyms: Array<Maybe<Scalars['String']['output']>>;
 };
 
 export type Identity = {
@@ -276,13 +252,6 @@ export type Identity = {
 export type ImageFile = {
   __typename?: 'ImageFile';
   url: Scalars['String']['output'];
-};
-
-export type Links = {
-  __typename?: 'Links';
-  colleagues: NameWithLink;
-  expression: Array<NameWithLink>;
-  ext_resources: Array<NameWithLink>;
 };
 
 export type LoginInput = {
@@ -450,12 +419,6 @@ export type MutationUploadFileArgs = {
   file: Scalars['Upload']['input'];
 };
 
-export type NameWithLink = {
-  __typename?: 'NameWithLink';
-  link: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
-
 export type NumberOfPublicationsWithGene = {
   __typename?: 'NumberOfPublicationsWithGene';
   num_pubs: Scalars['Int']['output'];
@@ -494,15 +457,6 @@ export type Organism = {
   downloads: Array<Download>;
   scientific_name: Scalars['String']['output'];
   taxon_id: Scalars['String']['output'];
-};
-
-export type Orthologs = {
-  __typename?: 'Orthologs';
-  gene_product: Scalars['String']['output'];
-  id: NameWithLink;
-  source: Array<Scalars['String']['output']>;
-  species: Scalars['String']['output'];
-  uniprotkb: NameWithLink;
 };
 
 export type Permission = {
@@ -554,35 +508,6 @@ export type PlasmidListWithCursor = {
   totalCount: Scalars['Int']['output'];
 };
 
-export type ProductInformation = {
-  __typename?: 'ProductInformation';
-  genomic_coords: Array<GenomicCoordinates>;
-  more_protein_data: Scalars['String']['output'];
-  protein_coding_gene: NameWithLink;
-  protein_length: Scalars['String']['output'];
-  protein_molecular_weight: Scalars['String']['output'];
-};
-
-export type ProteinGeneralInfo = {
-  __typename?: 'ProteinGeneralInfo';
-  aa_composition: NameWithLink;
-  description: Scalars['String']['output'];
-  dictybase_id: Scalars['String']['output'];
-  gene_product: Scalars['String']['output'];
-  molecular_weight: Scalars['String']['output'];
-  note: Scalars['String']['output'];
-  protein_existence: Scalars['String']['output'];
-  protein_length: Scalars['String']['output'];
-  subcellular_location: Scalars['String']['output'];
-};
-
-export type ProteinInformation = {
-  __typename?: 'ProteinInformation';
-  external_links: Array<NameWithLink>;
-  general_info: ProteinGeneralInfo;
-  protein_sequence: Scalars['String']['output'];
-};
-
 export type Publication = BasePublication & {
   __typename?: 'Publication';
   abstract: Scalars['String']['output'];
@@ -622,19 +547,16 @@ export type PublicationWithGene = BasePublication & {
 
 export type Query = {
   __typename?: 'Query';
-  associatedSequences?: Maybe<AssociatedSequences>;
   content?: Maybe<Content>;
   contentBySlug?: Maybe<Content>;
   geneGeneralInformation?: Maybe<GeneGeneralInfo>;
   geneOntologyAnnotation?: Maybe<Array<GoAnnotation>>;
-  listGeneProductInformation?: Maybe<Array<ProductInformation>>;
   listOrders?: Maybe<OrderListWithCursor>;
   listOrganisms?: Maybe<Array<Organism>>;
   listPermissions?: Maybe<Array<Permission>>;
   listPlasmids?: Maybe<PlasmidListWithCursor>;
   listPlasmidsWithAnnotation?: Maybe<PlasmidListWithCursor>;
   listPublicationsWithGene?: Maybe<Array<PublicationWithGene>>;
-  listRecentGenes?: Maybe<Array<Gene>>;
   listRecentPlasmids?: Maybe<Array<Plasmid>>;
   listRecentPublications?: Maybe<Array<Publication>>;
   listRecentStrains?: Maybe<Array<Strain>>;
@@ -655,11 +577,6 @@ export type Query = {
 };
 
 
-export type QueryAssociatedSequencesArgs = {
-  gene: Scalars['String']['input'];
-};
-
-
 export type QueryContentArgs = {
   id: Scalars['ID']['input'];
 };
@@ -676,11 +593,6 @@ export type QueryGeneGeneralInformationArgs = {
 
 
 export type QueryGeneOntologyAnnotationArgs = {
-  gene: Scalars['String']['input'];
-};
-
-
-export type QueryListGeneProductInformationArgs = {
   gene: Scalars['String']['input'];
 };
 
@@ -709,11 +621,6 @@ export type QueryListPlasmidsWithAnnotationArgs = {
 
 export type QueryListPublicationsWithGeneArgs = {
   gene: Scalars['String']['input'];
-};
-
-
-export type QueryListRecentGenesArgs = {
-  limit: Scalars['Int']['input'];
 };
 
 
@@ -1081,7 +988,7 @@ export type GeneSummaryQueryVariables = Exact<{
 }>;
 
 
-export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string>, alt_gene_name: Array<string>, gene_product: string, alt_protein_names: Array<string>, description: string } | null, geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, go_term: string, evidence_code: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null, listGeneProductInformation?: Array<{ __typename?: 'ProductInformation', protein_length: string, protein_molecular_weight: string, more_protein_data: string, protein_coding_gene: { __typename?: 'NameWithLink', name: string, link: string }, genomic_coords: Array<{ __typename?: 'GenomicCoordinates', exon: string, local_coords: string, chrom_coords: string }> }> | null, associatedSequences?: { __typename?: 'AssociatedSequences', genbank_genomic_fragment?: { __typename?: 'NameWithLink', name: string, link: string } | null, genbank_mrna?: { __typename?: 'NameWithLink', name: string, link: string } | null, ests: Array<{ __typename?: 'NameWithLink', name: string, link: string }> } | null };
+export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string | null>, gene_product?: string | null, synonyms: Array<string | null>, description?: string | null } | null, geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, go_term: string, evidence_code: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null };
 
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
@@ -1096,13 +1003,6 @@ export type ListStrainsWithGeneQueryVariables = Exact<{
 
 
 export type ListStrainsWithGeneQuery = { __typename?: 'Query', listStrainsWithGene?: Array<{ __typename?: 'Strain', id: string, label: string, characteristics?: Array<string> | null, in_stock: boolean, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, publication?: { __typename?: 'Publication', id: string, title: string, journal: string, pages?: string | null, volume?: string | null, pub_date?: any | null, authors: Array<{ __typename?: 'Author', last_name: string, rank?: string | null }> } | null }> | null }> | null };
-
-export type ListRecentGenesQueryVariables = Exact<{
-  limit?: Scalars['Int']['input'];
-}>;
-
-
-export type ListRecentGenesQuery = { __typename?: 'Query', listRecentGenes?: Array<{ __typename?: 'Gene', id: string, name: string }> | null };
 
 export type PublicationQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1402,7 +1302,7 @@ export const mockListOrganismsQuery = (resolver: Parameters<typeof graphql.query
  * mockGeneSummaryQuery((req, res, ctx) => {
  *   const { gene } = req.variables;
  *   return res(
- *     ctx.data({ geneGeneralInformation, geneOntologyAnnotation, listGeneProductInformation, associatedSequences })
+ *     ctx.data({ geneGeneralInformation, geneOntologyAnnotation })
  *   )
  * })
  */
@@ -1443,23 +1343,6 @@ export const mockGeneOntologyAnnotationQuery = (resolver: Parameters<typeof grap
 export const mockListStrainsWithGeneQuery = (resolver: Parameters<typeof graphql.query<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>>[1]) =>
   graphql.query<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>(
     'ListStrainsWithGene',
-    resolver
-  )
-
-/**
- * @param resolver a function that accepts a captured request and may return a mocked response.
- * @see https://mswjs.io/docs/basics/response-resolver
- * @example
- * mockListRecentGenesQuery((req, res, ctx) => {
- *   const { limit } = req.variables;
- *   return res(
- *     ctx.data({ listRecentGenes })
- *   )
- * })
- */
-export const mockListRecentGenesQuery = (resolver: Parameters<typeof graphql.query<ListRecentGenesQuery, ListRecentGenesQueryVariables>>[1]) =>
-  graphql.query<ListRecentGenesQuery, ListRecentGenesQueryVariables>(
-    'ListRecentGenes',
     resolver
   )
 
