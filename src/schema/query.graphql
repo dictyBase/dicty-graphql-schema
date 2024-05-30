@@ -1,10 +1,7 @@
 type Query {
   # Gene queries
   geneOntologyAnnotation(gene: String!): [GOAnnotation!]
-  listRecentGenes(limit: Int!): [Gene!]
   geneGeneralInformation(gene: String!): GeneGeneralInfo
-  listGeneProductInformation(gene: String!): [ProductInformation!] 
-  associatedSequences(gene: String!): AssociatedSequences
   # Content queries
   content(id: ID!): Content
   contentBySlug(slug: String!): Content
