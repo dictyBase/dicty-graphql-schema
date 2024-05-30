@@ -156,9 +156,8 @@ export const GeneSummary = gql`
   geneGeneralInformation(gene: $gene) {
     id
     name_description
-    alt_gene_name
     gene_product
-    alt_protein_names
+    synonyms
     description
   }
   geneOntologyAnnotation(gene: $gene) {
@@ -177,34 +176,6 @@ export const GeneSummary = gql`
       db
       relation
       name
-    }
-  }
-  listGeneProductInformation(gene: $gene) {
-    protein_coding_gene {
-      name
-      link
-    }
-    protein_length
-    protein_molecular_weight
-    more_protein_data
-    genomic_coords {
-      exon
-      local_coords
-      chrom_coords
-    }
-  }
-  associatedSequences(gene: $gene) {
-    genbank_genomic_fragment {
-      name
-      link
-    }
-    genbank_mrna {
-      name
-      link
-    }
-    ests {
-      name
-      link
     }
   }
 }
@@ -256,14 +227,6 @@ export const ListStrainsWithGene = gql`
         }
       }
     }
-  }
-}
-    `;
-export const ListRecentGenes = gql`
-    query ListRecentGenes($limit: Int! = 4) {
-  listRecentGenes(limit: $limit) {
-    id
-    name
   }
 }
     `;
