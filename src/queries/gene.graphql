@@ -24,6 +24,16 @@ query GeneSummary($gene: String!) {
       name
     }
   }
+  listPublicationsWithGene(gene: $gene) {
+    id
+    title
+    journal
+    pages
+    issue
+    authors {
+      last_name
+    }
+  }
 }
 
 query GeneOntologyAnnotation($gene: String!) {
