@@ -16,7 +16,7 @@ type Query {
   # List publication query that is by default is sorted by publication
   # date in descendent order
   listRecentPublications(limit: Int!): [Publication!]
-  listPublicationsWithGene(gene: String!): [PublicationWithGene!]
+  listPublicationsWithGene(gene: String!): [PublicationWithGene!]!
   # Stock queries
   plasmid(id: ID!): Plasmid
   strain(id: ID!): Strain
