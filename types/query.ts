@@ -178,6 +178,16 @@ export const GeneSummary = gql`
       name
     }
   }
+  listPublicationsWithGene(gene: $gene) {
+    id
+    title
+    journal
+    pages
+    issue
+    authors {
+      last_name
+    }
+  }
 }
     `;
 export const GeneOntologyAnnotation = gql`
