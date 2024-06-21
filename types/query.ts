@@ -81,6 +81,30 @@ export const UpdateUser = gql`
   }
 }
     `;
+export const ListContentByNamespace = gql`
+    query ListContentByNamespace($namespace: String!) {
+  listContentByNamespace(namespace: $namespace) {
+    id
+    content
+    name
+    slug
+    created_at
+    updated_at
+    created_by {
+      id
+      email
+      first_name
+      last_name
+    }
+    updated_by {
+      id
+      email
+      first_name
+      last_name
+    }
+  }
+}
+    `;
 export const ContentBySlug = gql`
     query ContentBySlug($slug: String!) {
   contentBySlug(slug: $slug) {
