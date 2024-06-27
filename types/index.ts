@@ -943,6 +943,13 @@ export type UpdateContentMutationVariables = Exact<{
 
 export type UpdateContentMutation = { __typename?: 'Mutation', updateContent?: { __typename?: 'Content', id: string, content: string, updated_by: { __typename?: 'User', id: string } } | null };
 
+export type DeleteContentMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteContentMutation = { __typename?: 'Mutation', deleteContent?: { __typename?: 'DeleteContent', success: boolean } | null };
+
 export type CreateOrderMutationVariables = Exact<{
   input: CreateOrderInput;
 }>;
@@ -1281,6 +1288,39 @@ export function useUpdateContentMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateContentMutationHookResult = ReturnType<typeof useUpdateContentMutation>;
 export type UpdateContentMutationResult = Apollo.MutationResult<UpdateContentMutation>;
 export type UpdateContentMutationOptions = Apollo.BaseMutationOptions<UpdateContentMutation, UpdateContentMutationVariables>;
+export const DeleteContentDocument = gql`
+    mutation DeleteContent($id: ID!) {
+  deleteContent(id: $id) {
+    success
+  }
+}
+    `;
+export type DeleteContentMutationFn = Apollo.MutationFunction<DeleteContentMutation, DeleteContentMutationVariables>;
+
+/**
+ * __useDeleteContentMutation__
+ *
+ * To run a mutation, you first call `useDeleteContentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteContentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteContentMutation, { data, loading, error }] = useDeleteContentMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteContentMutation(baseOptions?: Apollo.MutationHookOptions<DeleteContentMutation, DeleteContentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteContentMutation, DeleteContentMutationVariables>(DeleteContentDocument, options);
+      }
+export type DeleteContentMutationHookResult = ReturnType<typeof useDeleteContentMutation>;
+export type DeleteContentMutationResult = Apollo.MutationResult<DeleteContentMutation>;
+export type DeleteContentMutationOptions = Apollo.BaseMutationOptions<DeleteContentMutation, DeleteContentMutationVariables>;
 export const CreateOrderDocument = gql`
     mutation CreateOrder($input: CreateOrderInput!) {
   createOrder(input: $input) {

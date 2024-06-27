@@ -941,6 +941,13 @@ export type UpdateContentMutationVariables = Exact<{
 
 export type UpdateContentMutation = { __typename?: 'Mutation', updateContent?: { __typename?: 'Content', id: string, content: string, updated_by: { __typename?: 'User', id: string } } | null };
 
+export type DeleteContentMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteContentMutation = { __typename?: 'Mutation', deleteContent?: { __typename?: 'DeleteContent', success: boolean } | null };
+
 export type CreateOrderMutationVariables = Exact<{
   input: CreateOrderInput;
 }>;
@@ -1187,6 +1194,23 @@ export const mockCreateContentMutation = (resolver: Parameters<typeof graphql.mu
 export const mockUpdateContentMutation = (resolver: Parameters<typeof graphql.mutation<UpdateContentMutation, UpdateContentMutationVariables>>[1]) =>
   graphql.mutation<UpdateContentMutation, UpdateContentMutationVariables>(
     'UpdateContent',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockDeleteContentMutation((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ deleteContent })
+ *   )
+ * })
+ */
+export const mockDeleteContentMutation = (resolver: Parameters<typeof graphql.mutation<DeleteContentMutation, DeleteContentMutationVariables>>[1]) =>
+  graphql.mutation<DeleteContentMutation, DeleteContentMutationVariables>(
+    'DeleteContent',
     resolver
   )
 
