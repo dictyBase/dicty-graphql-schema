@@ -53,6 +53,13 @@ export const UpdateContent = gql`
   }
 }
     `;
+export const DeleteContent = gql`
+    mutation DeleteContent($id: ID!) {
+  deleteContent(id: $id) {
+    success
+  }
+}
+    `;
 export const CreateOrder = gql`
     mutation CreateOrder($input: CreateOrderInput!) {
   createOrder(input: $input) {
