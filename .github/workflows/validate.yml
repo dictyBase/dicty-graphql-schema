@@ -7,7 +7,7 @@ jobs:
       - name: check out code
         uses: actions/checkout@v4
       - name: setup bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
       - name: install deps
         run: bun install
       - name: run codegen
