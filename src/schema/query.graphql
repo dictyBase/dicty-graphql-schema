@@ -46,6 +46,8 @@ type Query {
   # List strain query that is by default is sorted by strain
   # date in descendent order
   listRecentStrains(limit: Int!): [Strain!]
+  listPhenotypeEnvironments(search: String!): [String!]
+  listPhenotypeAssays(search: String!): [String!]
   # User queries
   user(id: ID!): User
   userByEmail(email: String!): User
