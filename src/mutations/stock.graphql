@@ -1,0 +1,24 @@
+mutation AddStrainPhenotype($strainId: ID!, $input: AddStrainPhenotypeInput!) {
+ addStrainPhenotype(strainId: $strainId, input: $input) {
+  id
+  label
+  phenotypes {
+    phenotype
+    environment
+    assay
+    notes
+    publication {
+        id
+        pub_date
+        title
+        journal
+        volume
+        pages
+        authors {
+          last_name
+        }
+    }
+  }
+ }
+}
+
