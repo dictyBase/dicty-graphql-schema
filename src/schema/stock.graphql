@@ -191,3 +191,11 @@ input StrainListFilter {
   in_stock: Boolean
   strain_type: StrainType!
 }
+
+input AddStrainPhenotypeInput {
+  phenotype: String!
+  environment: String
+  assay: String
+  publication: String!
+  notes: String
+}
