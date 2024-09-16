@@ -64,6 +64,10 @@ export type DeleteStockKeySpecifier = ('success' | DeleteStockKeySpecifier)[];
 export type DeleteStockFieldPolicy = {
 	success?: FieldPolicy<any> | FieldReadFunction<any>
 };
+export type DeleteStrainPhenotypeKeySpecifier = ('success' | DeleteStrainPhenotypeKeySpecifier)[];
+export type DeleteStrainPhenotypeFieldPolicy = {
+	success?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type DeleteUserKeySpecifier = ('success' | DeleteUserKeySpecifier)[];
 export type DeleteUserFieldPolicy = {
 	success?: FieldPolicy<any> | FieldReadFunction<any>
@@ -128,7 +132,7 @@ export type LogoutKeySpecifier = ('success' | LogoutKeySpecifier)[];
 export type LogoutFieldPolicy = {
 	success?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('addStrainPhenotype' | 'createContent' | 'createOrder' | 'createPermission' | 'createPlasmid' | 'createRole' | 'createRolePermissionRelationship' | 'createStrain' | 'createUser' | 'createUserRoleRelationship' | 'deleteContent' | 'deletePermission' | 'deleteRole' | 'deleteStock' | 'deleteUser' | 'login' | 'logout' | 'updateContent' | 'updateOrder' | 'updatePermission' | 'updatePlasmid' | 'updateRole' | 'updateStrain' | 'updateUser' | 'uploadFile' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('addStrainPhenotype' | 'createContent' | 'createOrder' | 'createPermission' | 'createPlasmid' | 'createRole' | 'createRolePermissionRelationship' | 'createStrain' | 'createUser' | 'createUserRoleRelationship' | 'deleteContent' | 'deletePermission' | 'deleteRole' | 'deleteStock' | 'deleteStrainPhenotype' | 'deleteUser' | 'login' | 'logout' | 'updateContent' | 'updateOrder' | 'updatePermission' | 'updatePlasmid' | 'updateRole' | 'updateStrain' | 'updateUser' | 'uploadFile' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
 	addStrainPhenotype?: FieldPolicy<any> | FieldReadFunction<any>,
 	createContent?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -144,6 +148,7 @@ export type MutationFieldPolicy = {
 	deletePermission?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteRole?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteStock?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteStrainPhenotype?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteUser?: FieldPolicy<any> | FieldReadFunction<any>,
 	login?: FieldPolicy<any> | FieldReadFunction<any>,
 	logout?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -433,6 +438,10 @@ export type StrictTypedTypePolicies = {
 	DeleteStock?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | DeleteStockKeySpecifier | (() => undefined | DeleteStockKeySpecifier),
 		fields?: DeleteStockFieldPolicy,
+	},
+	DeleteStrainPhenotype?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | DeleteStrainPhenotypeKeySpecifier | (() => undefined | DeleteStrainPhenotypeKeySpecifier),
+		fields?: DeleteStrainPhenotypeFieldPolicy,
 	},
 	DeleteUser?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | DeleteUserKeySpecifier | (() => undefined | DeleteUserKeySpecifier),

@@ -186,6 +186,11 @@ export type DeleteStock = {
   success: Scalars['Boolean']['output'];
 };
 
+export type DeleteStrainPhenotype = {
+  __typename?: 'DeleteStrainPhenotype';
+  success: Scalars['Boolean']['output'];
+};
+
 export type DeleteUser = {
   __typename?: 'DeleteUser';
   success: Scalars['Boolean']['output'];
@@ -292,6 +297,7 @@ export type Mutation = {
   deletePermission?: Maybe<DeletePermission>;
   deleteRole?: Maybe<DeleteRole>;
   deleteStock?: Maybe<DeleteStock>;
+  deleteStrainPhenotype?: Maybe<DeleteStrainPhenotype>;
   deleteUser?: Maybe<DeleteUser>;
   login?: Maybe<Auth>;
   logout?: Maybe<Logout>;
@@ -376,6 +382,12 @@ export type MutationDeleteRoleArgs = {
 
 export type MutationDeleteStockArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteStrainPhenotypeArgs = {
+  phenotype: Scalars['String']['input'];
+  strainId: Scalars['ID']['input'];
 };
 
 
