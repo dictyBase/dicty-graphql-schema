@@ -236,3 +236,14 @@ query ListRecentStrains($limit: Int! = 4) {
   }
 }
 
+query ListPhenotypes($search: String!) {
+  listPhenotypes(search: $search)
+}
+
+query ListPhenotypeEnvironments($search: String!) {
+  listPhenotypeEnvironments(search: $search)
+}
+
+query ListPhenotypeAssays($search: String!) {
+  listPhenotypeAssays(search: $search)
+}
