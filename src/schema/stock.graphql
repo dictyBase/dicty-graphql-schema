@@ -199,3 +199,8 @@ input AddStrainPhenotypeInput {
   publication: String!
   notes: String
 }
+
+type DeleteStrainPhenotype {
+  success: Boolean!
+}
+
