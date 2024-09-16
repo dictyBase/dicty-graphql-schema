@@ -575,6 +575,21 @@ export const ListRecentStrains = gql`
   }
 }
     `;
+export const ListPhenotypes = gql`
+    query ListPhenotypes($search: String!) {
+  listPhenotypes(search: $search)
+}
+    `;
+export const ListPhenotypeEnvironments = gql`
+    query ListPhenotypeEnvironments($search: String!) {
+  listPhenotypeEnvironments(search: $search)
+}
+    `;
+export const ListPhenotypeAssays = gql`
+    query ListPhenotypeAssays($search: String!) {
+  listPhenotypeAssays(search: $search)
+}
+    `;
 export const UserByEmail = gql`
     query UserByEmail($email: String!) {
   userByEmail(email: $email) {

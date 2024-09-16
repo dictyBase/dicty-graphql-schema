@@ -555,6 +555,9 @@ export type Query = {
   listOrders?: Maybe<OrderListWithCursor>;
   listOrganisms?: Maybe<Array<Organism>>;
   listPermissions?: Maybe<Array<Permission>>;
+  listPhenotypeAssays: Array<Scalars['String']['output']>;
+  listPhenotypeEnvironments: Array<Scalars['String']['output']>;
+  listPhenotypes: Array<Scalars['String']['output']>;
   listPlasmids?: Maybe<PlasmidListWithCursor>;
   listPlasmidsWithAnnotation?: Maybe<PlasmidListWithCursor>;
   listPublicationsWithGene: Array<PublicationWithGene>;
@@ -607,6 +610,21 @@ export type QueryListOrdersArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   filter?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryListPhenotypeAssaysArgs = {
+  search: Scalars['String']['input'];
+};
+
+
+export type QueryListPhenotypeEnvironmentsArgs = {
+  search: Scalars['String']['input'];
+};
+
+
+export type QueryListPhenotypesArgs = {
+  search: Scalars['String']['input'];
 };
 
 
@@ -1122,6 +1140,27 @@ export type ListRecentStrainsQueryVariables = Exact<{
 
 export type ListRecentStrainsQuery = { __typename?: 'Query', listRecentStrains?: Array<{ __typename?: 'Strain', id: string, created_at: any, systematic_name: string }> | null };
 
+export type ListPhenotypesQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+}>;
+
+
+export type ListPhenotypesQuery = { __typename?: 'Query', listPhenotypes: Array<string> };
+
+export type ListPhenotypeEnvironmentsQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+}>;
+
+
+export type ListPhenotypeEnvironmentsQuery = { __typename?: 'Query', listPhenotypeEnvironments: Array<string> };
+
+export type ListPhenotypeAssaysQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+}>;
+
+
+export type ListPhenotypeAssaysQuery = { __typename?: 'Query', listPhenotypeAssays: Array<string> };
+
 export type UserByEmailQueryVariables = Exact<{
   email: Scalars['String']['input'];
 }>;
@@ -1617,6 +1656,57 @@ export const mockListRecentPlasmidsQuery = (resolver: Parameters<typeof graphql.
 export const mockListRecentStrainsQuery = (resolver: Parameters<typeof graphql.query<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>>[1]) =>
   graphql.query<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>(
     'ListRecentStrains',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListPhenotypesQuery((req, res, ctx) => {
+ *   const { search } = req.variables;
+ *   return res(
+ *     ctx.data({ listPhenotypes })
+ *   )
+ * })
+ */
+export const mockListPhenotypesQuery = (resolver: Parameters<typeof graphql.query<ListPhenotypesQuery, ListPhenotypesQueryVariables>>[1]) =>
+  graphql.query<ListPhenotypesQuery, ListPhenotypesQueryVariables>(
+    'ListPhenotypes',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListPhenotypeEnvironmentsQuery((req, res, ctx) => {
+ *   const { search } = req.variables;
+ *   return res(
+ *     ctx.data({ listPhenotypeEnvironments })
+ *   )
+ * })
+ */
+export const mockListPhenotypeEnvironmentsQuery = (resolver: Parameters<typeof graphql.query<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>>[1]) =>
+  graphql.query<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>(
+    'ListPhenotypeEnvironments',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListPhenotypeAssaysQuery((req, res, ctx) => {
+ *   const { search } = req.variables;
+ *   return res(
+ *     ctx.data({ listPhenotypeAssays })
+ *   )
+ * })
+ */
+export const mockListPhenotypeAssaysQuery = (resolver: Parameters<typeof graphql.query<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>>[1]) =>
+  graphql.query<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>(
+    'ListPhenotypeAssays',
     resolver
   )
 

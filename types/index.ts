@@ -557,6 +557,9 @@ export type Query = {
   listOrders?: Maybe<OrderListWithCursor>;
   listOrganisms?: Maybe<Array<Organism>>;
   listPermissions?: Maybe<Array<Permission>>;
+  listPhenotypeAssays: Array<Scalars['String']['output']>;
+  listPhenotypeEnvironments: Array<Scalars['String']['output']>;
+  listPhenotypes: Array<Scalars['String']['output']>;
   listPlasmids?: Maybe<PlasmidListWithCursor>;
   listPlasmidsWithAnnotation?: Maybe<PlasmidListWithCursor>;
   listPublicationsWithGene: Array<PublicationWithGene>;
@@ -609,6 +612,21 @@ export type QueryListOrdersArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   filter?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryListPhenotypeAssaysArgs = {
+  search: Scalars['String']['input'];
+};
+
+
+export type QueryListPhenotypeEnvironmentsArgs = {
+  search: Scalars['String']['input'];
+};
+
+
+export type QueryListPhenotypesArgs = {
+  search: Scalars['String']['input'];
 };
 
 
@@ -1123,6 +1141,27 @@ export type ListRecentStrainsQueryVariables = Exact<{
 
 
 export type ListRecentStrainsQuery = { __typename?: 'Query', listRecentStrains?: Array<{ __typename?: 'Strain', id: string, created_at: any, systematic_name: string }> | null };
+
+export type ListPhenotypesQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+}>;
+
+
+export type ListPhenotypesQuery = { __typename?: 'Query', listPhenotypes: Array<string> };
+
+export type ListPhenotypeEnvironmentsQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+}>;
+
+
+export type ListPhenotypeEnvironmentsQuery = { __typename?: 'Query', listPhenotypeEnvironments: Array<string> };
+
+export type ListPhenotypeAssaysQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+}>;
+
+
+export type ListPhenotypeAssaysQuery = { __typename?: 'Query', listPhenotypeAssays: Array<string> };
 
 export type UserByEmailQueryVariables = Exact<{
   email: Scalars['String']['input'];
@@ -2508,6 +2547,105 @@ export function useListRecentStrainsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type ListRecentStrainsQueryHookResult = ReturnType<typeof useListRecentStrainsQuery>;
 export type ListRecentStrainsLazyQueryHookResult = ReturnType<typeof useListRecentStrainsLazyQuery>;
 export type ListRecentStrainsQueryResult = Apollo.QueryResult<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>;
+export const ListPhenotypesDocument = gql`
+    query ListPhenotypes($search: String!) {
+  listPhenotypes(search: $search)
+}
+    `;
+
+/**
+ * __useListPhenotypesQuery__
+ *
+ * To run a query within a React component, call `useListPhenotypesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPhenotypesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPhenotypesQuery({
+ *   variables: {
+ *      search: // value for 'search'
+ *   },
+ * });
+ */
+export function useListPhenotypesQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypesQuery, ListPhenotypesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListPhenotypesQuery, ListPhenotypesQueryVariables>(ListPhenotypesDocument, options);
+      }
+export function useListPhenotypesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListPhenotypesQuery, ListPhenotypesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListPhenotypesQuery, ListPhenotypesQueryVariables>(ListPhenotypesDocument, options);
+        }
+export type ListPhenotypesQueryHookResult = ReturnType<typeof useListPhenotypesQuery>;
+export type ListPhenotypesLazyQueryHookResult = ReturnType<typeof useListPhenotypesLazyQuery>;
+export type ListPhenotypesQueryResult = Apollo.QueryResult<ListPhenotypesQuery, ListPhenotypesQueryVariables>;
+export const ListPhenotypeEnvironmentsDocument = gql`
+    query ListPhenotypeEnvironments($search: String!) {
+  listPhenotypeEnvironments(search: $search)
+}
+    `;
+
+/**
+ * __useListPhenotypeEnvironmentsQuery__
+ *
+ * To run a query within a React component, call `useListPhenotypeEnvironmentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPhenotypeEnvironmentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPhenotypeEnvironmentsQuery({
+ *   variables: {
+ *      search: // value for 'search'
+ *   },
+ * });
+ */
+export function useListPhenotypeEnvironmentsQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>(ListPhenotypeEnvironmentsDocument, options);
+      }
+export function useListPhenotypeEnvironmentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>(ListPhenotypeEnvironmentsDocument, options);
+        }
+export type ListPhenotypeEnvironmentsQueryHookResult = ReturnType<typeof useListPhenotypeEnvironmentsQuery>;
+export type ListPhenotypeEnvironmentsLazyQueryHookResult = ReturnType<typeof useListPhenotypeEnvironmentsLazyQuery>;
+export type ListPhenotypeEnvironmentsQueryResult = Apollo.QueryResult<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>;
+export const ListPhenotypeAssaysDocument = gql`
+    query ListPhenotypeAssays($search: String!) {
+  listPhenotypeAssays(search: $search)
+}
+    `;
+
+/**
+ * __useListPhenotypeAssaysQuery__
+ *
+ * To run a query within a React component, call `useListPhenotypeAssaysQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPhenotypeAssaysQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPhenotypeAssaysQuery({
+ *   variables: {
+ *      search: // value for 'search'
+ *   },
+ * });
+ */
+export function useListPhenotypeAssaysQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>(ListPhenotypeAssaysDocument, options);
+      }
+export function useListPhenotypeAssaysLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>(ListPhenotypeAssaysDocument, options);
+        }
+export type ListPhenotypeAssaysQueryHookResult = ReturnType<typeof useListPhenotypeAssaysQuery>;
+export type ListPhenotypeAssaysLazyQueryHookResult = ReturnType<typeof useListPhenotypeAssaysLazyQuery>;
+export type ListPhenotypeAssaysQueryResult = Apollo.QueryResult<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>;
 export const UserByEmailDocument = gql`
     query UserByEmail($email: String!) {
   userByEmail(email: $email) {
