@@ -48,7 +48,9 @@ type Query {
   listRecentStrains(limit: Int!): [Strain!]
   # List Phenotypes that match the provided search string
   listPhenotypes(search: String!): [String!]!
+  # List Phenotype Environments that match the provided search string
   listPhenotypeEnvironments(search: String!): [String!]!
+  # List Phenotype Assays that match the provided search string
   listPhenotypeAssays(search: String!): [String!]!
   # User queries
   user(id: ID!): User
