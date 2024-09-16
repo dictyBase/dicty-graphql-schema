@@ -20,6 +20,14 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
+export type AddStrainPhenotypeInput = {
+  assay?: InputMaybe<Scalars['String']['input']>;
+  environment?: InputMaybe<Scalars['String']['input']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
+  phenotype: Scalars['String']['input'];
+  publication: Scalars['String']['input'];
+};
+
 export type Auth = {
   __typename?: 'Auth';
   identity: Identity;
@@ -272,6 +280,7 @@ export type Logout = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addStrainPhenotype?: Maybe<Strain>;
   createContent?: Maybe<Content>;
   createOrder?: Maybe<Order>;
   createPermission?: Maybe<Permission>;
@@ -296,6 +305,12 @@ export type Mutation = {
   updateStrain?: Maybe<Strain>;
   updateUser?: Maybe<User>;
   uploadFile: ImageFile;
+};
+
+
+export type MutationAddStrainPhenotypeArgs = {
+  input?: InputMaybe<AddStrainPhenotypeInput>;
+  strainId: Scalars['ID']['input'];
 };
 
 
@@ -975,6 +990,14 @@ export type CreateOrderMutationVariables = Exact<{
 
 export type CreateOrderMutation = { __typename?: 'Mutation', createOrder?: { __typename?: 'Order', id: string } | null };
 
+export type AddStrainPhenotypeMutationVariables = Exact<{
+  strainId: Scalars['ID']['input'];
+  input: AddStrainPhenotypeInput;
+}>;
+
+
+export type AddStrainPhenotypeMutation = { __typename?: 'Mutation', addStrainPhenotype?: { __typename?: 'Strain', id: string, label: string, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, environment?: string | null, assay?: string | null, note?: string | null, publication?: { __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> } | null }> | null } | null };
+
 export type UploadFileMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
 }>;
@@ -1393,6 +1416,58 @@ export function useCreateOrderMutation(baseOptions?: Apollo.MutationHookOptions<
 export type CreateOrderMutationHookResult = ReturnType<typeof useCreateOrderMutation>;
 export type CreateOrderMutationResult = Apollo.MutationResult<CreateOrderMutation>;
 export type CreateOrderMutationOptions = Apollo.BaseMutationOptions<CreateOrderMutation, CreateOrderMutationVariables>;
+export const AddStrainPhenotypeDocument = gql`
+    mutation AddStrainPhenotype($strainId: ID!, $input: AddStrainPhenotypeInput!) {
+  addStrainPhenotype(strainId: $strainId, input: $input) {
+    id
+    label
+    phenotypes {
+      phenotype
+      environment
+      assay
+      note
+      publication {
+        id
+        pub_date
+        title
+        journal
+        volume
+        pages
+        authors {
+          last_name
+        }
+      }
+    }
+  }
+}
+    `;
+export type AddStrainPhenotypeMutationFn = Apollo.MutationFunction<AddStrainPhenotypeMutation, AddStrainPhenotypeMutationVariables>;
+
+/**
+ * __useAddStrainPhenotypeMutation__
+ *
+ * To run a mutation, you first call `useAddStrainPhenotypeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddStrainPhenotypeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addStrainPhenotypeMutation, { data, loading, error }] = useAddStrainPhenotypeMutation({
+ *   variables: {
+ *      strainId: // value for 'strainId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAddStrainPhenotypeMutation(baseOptions?: Apollo.MutationHookOptions<AddStrainPhenotypeMutation, AddStrainPhenotypeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddStrainPhenotypeMutation, AddStrainPhenotypeMutationVariables>(AddStrainPhenotypeDocument, options);
+      }
+export type AddStrainPhenotypeMutationHookResult = ReturnType<typeof useAddStrainPhenotypeMutation>;
+export type AddStrainPhenotypeMutationResult = Apollo.MutationResult<AddStrainPhenotypeMutation>;
+export type AddStrainPhenotypeMutationOptions = Apollo.BaseMutationOptions<AddStrainPhenotypeMutation, AddStrainPhenotypeMutationVariables>;
 export const UploadFileDocument = gql`
     mutation UploadFile($file: Upload!) {
   uploadFile(file: $file) {
