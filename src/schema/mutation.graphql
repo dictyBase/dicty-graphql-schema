@@ -14,6 +14,7 @@ type Mutation {
   createPlasmid(input: CreatePlasmidInput): Plasmid
   updateStrain(id: ID!, input: UpdateStrainInput): Strain
   addStrainPhenotype(strainId: ID!, input: AddStrainPhenotypeInput): Strain
+  deleteStrainPhenotype(strainId: ID!, phenotype: String!): DeleteStrainPhenotype
   updatePlasmid(id: ID!, input: UpdatePlasmidInput): Plasmid
   deleteStock(id: ID!): DeleteStock
   # User mutations
