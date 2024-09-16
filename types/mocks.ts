@@ -18,6 +18,14 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
+export type AddStrainPhenotypeInput = {
+  assay?: InputMaybe<Scalars['String']['input']>;
+  environment?: InputMaybe<Scalars['String']['input']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
+  phenotype: Scalars['String']['input'];
+  publication: Scalars['String']['input'];
+};
+
 export type Auth = {
   __typename?: 'Auth';
   identity: Identity;
@@ -270,6 +278,7 @@ export type Logout = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addStrainPhenotype?: Maybe<Strain>;
   createContent?: Maybe<Content>;
   createOrder?: Maybe<Order>;
   createPermission?: Maybe<Permission>;
@@ -294,6 +303,12 @@ export type Mutation = {
   updateStrain?: Maybe<Strain>;
   updateUser?: Maybe<User>;
   uploadFile: ImageFile;
+};
+
+
+export type MutationAddStrainPhenotypeArgs = {
+  input?: InputMaybe<AddStrainPhenotypeInput>;
+  strainId: Scalars['ID']['input'];
 };
 
 
@@ -973,6 +988,14 @@ export type CreateOrderMutationVariables = Exact<{
 
 export type CreateOrderMutation = { __typename?: 'Mutation', createOrder?: { __typename?: 'Order', id: string } | null };
 
+export type AddStrainPhenotypeMutationVariables = Exact<{
+  strainId: Scalars['ID']['input'];
+  input: AddStrainPhenotypeInput;
+}>;
+
+
+export type AddStrainPhenotypeMutation = { __typename?: 'Mutation', addStrainPhenotype?: { __typename?: 'Strain', id: string, label: string, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, environment?: string | null, assay?: string | null, note?: string | null, publication?: { __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> } | null }> | null } | null };
+
 export type UploadFileMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
 }>;
@@ -1267,6 +1290,23 @@ export const mockDeleteContentMutation = (resolver: Parameters<typeof graphql.mu
 export const mockCreateOrderMutation = (resolver: Parameters<typeof graphql.mutation<CreateOrderMutation, CreateOrderMutationVariables>>[1]) =>
   graphql.mutation<CreateOrderMutation, CreateOrderMutationVariables>(
     'CreateOrder',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockAddStrainPhenotypeMutation((req, res, ctx) => {
+ *   const { strainId, input } = req.variables;
+ *   return res(
+ *     ctx.data({ addStrainPhenotype })
+ *   )
+ * })
+ */
+export const mockAddStrainPhenotypeMutation = (resolver: Parameters<typeof graphql.mutation<AddStrainPhenotypeMutation, AddStrainPhenotypeMutationVariables>>[1]) =>
+  graphql.mutation<AddStrainPhenotypeMutation, AddStrainPhenotypeMutationVariables>(
+    'AddStrainPhenotype',
     resolver
   )
 

@@ -67,6 +67,31 @@ export const CreateOrder = gql`
   }
 }
     `;
+export const AddStrainPhenotype = gql`
+    mutation AddStrainPhenotype($strainId: ID!, $input: AddStrainPhenotypeInput!) {
+  addStrainPhenotype(strainId: $strainId, input: $input) {
+    id
+    label
+    phenotypes {
+      phenotype
+      environment
+      assay
+      note
+      publication {
+        id
+        pub_date
+        title
+        journal
+        volume
+        pages
+        authors {
+          last_name
+        }
+      }
+    }
+  }
+}
+    `;
 export const UploadFile = gql`
     mutation UploadFile($file: Upload!) {
   uploadFile(file: $file) {
