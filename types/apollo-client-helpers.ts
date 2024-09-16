@@ -271,7 +271,7 @@ export type PublicationWithGeneFieldPolicy = {
 	title?: FieldPolicy<any> | FieldReadFunction<any>,
 	volume?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('content' | 'contentBySlug' | 'geneGeneralInformation' | 'geneOntologyAnnotation' | 'listContentByNamespace' | 'listOrders' | 'listOrganisms' | 'listPermissions' | 'listPlasmids' | 'listPlasmidsWithAnnotation' | 'listPublicationsWithGene' | 'listRecentPlasmids' | 'listRecentPublications' | 'listRecentStrains' | 'listRoles' | 'listStrains' | 'listStrainsWithAnnotation' | 'listStrainsWithGene' | 'listUsers' | 'order' | 'organism' | 'permission' | 'plasmid' | 'publication' | 'role' | 'strain' | 'user' | 'userByEmail' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('content' | 'contentBySlug' | 'geneGeneralInformation' | 'geneOntologyAnnotation' | 'listContentByNamespace' | 'listOrders' | 'listOrganisms' | 'listPermissions' | 'listPhenotypeAssays' | 'listPhenotypeEnvironments' | 'listPhenotypes' | 'listPlasmids' | 'listPlasmidsWithAnnotation' | 'listPublicationsWithGene' | 'listRecentPlasmids' | 'listRecentPublications' | 'listRecentStrains' | 'listRoles' | 'listStrains' | 'listStrainsWithAnnotation' | 'listStrainsWithGene' | 'listUsers' | 'order' | 'organism' | 'permission' | 'plasmid' | 'publication' | 'role' | 'strain' | 'user' | 'userByEmail' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	content?: FieldPolicy<any> | FieldReadFunction<any>,
 	contentBySlug?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -281,6 +281,9 @@ export type QueryFieldPolicy = {
 	listOrders?: FieldPolicy<any> | FieldReadFunction<any>,
 	listOrganisms?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPermissions?: FieldPolicy<any> | FieldReadFunction<any>,
+	listPhenotypeAssays?: FieldPolicy<any> | FieldReadFunction<any>,
+	listPhenotypeEnvironments?: FieldPolicy<any> | FieldReadFunction<any>,
+	listPhenotypes?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPlasmids?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPlasmidsWithAnnotation?: FieldPolicy<any> | FieldReadFunction<any>,
 	listPublicationsWithGene?: FieldPolicy<any> | FieldReadFunction<any>,
