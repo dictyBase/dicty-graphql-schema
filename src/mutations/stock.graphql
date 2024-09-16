@@ -6,17 +6,17 @@ mutation AddStrainPhenotype($strainId: ID!, $input: AddStrainPhenotypeInput!) {
     phenotype
     environment
     assay
-    notes
+    note
     publication {
-        id
-        pub_date
-        title
-        journal
-        volume
-        pages
-        authors {
-          last_name
-        }
+      id
+      pub_date
+      title
+      journal
+      volume
+      pages
+      authors {
+        last_name
+      }
     }
   }
  }
