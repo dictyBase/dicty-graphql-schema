@@ -4,12 +4,6 @@ const config: CodegenConfig = {
   schema: "./src/schema/*.graphql",
   documents: ["./src/queries/*.graphql", "./src/mutations/*.graphql"],
   ignoreNoDocuments: true, // for better experience with the watcher
-  config: { 
-    scalars: {
-      StringSet: "Set<string>"
-      Upload: "File"
-    }
-  },
   generates: {
     "./types/index.ts": {
       plugins: [
