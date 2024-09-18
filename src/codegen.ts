@@ -4,6 +4,12 @@ const config: CodegenConfig = {
   schema: "./src/schema/*.graphql",
   documents: ["./src/queries/*.graphql", "./src/mutations/*.graphql"],
   ignoreNoDocuments: true, // for better experience with the watcher
+  config: { 
+    scalars: {
+      StringSet: "Set<string>"
+      Upload: "File"
+    }
+  },
   generates: {
     "./types/index.ts": {
       plugins: [
@@ -11,7 +17,13 @@ const config: CodegenConfig = {
         "typescript-operations",
         "typescript-react-apollo",
       ],
-      config: { withHooks: true },
+      config: { 
+        withHooks: true,
+        scalars: {
+          StringSet: "Set<string>"
+          Upload: "File"
+        }
+      },
     },
     "./types/mocks.ts" : {
       plugins: [
@@ -19,6 +31,12 @@ const config: CodegenConfig = {
         "typescript-operations",
         "typescript-msw",
       ],
+      config: { 
+        scalars: {
+          StringSet: "Set<string>"
+          Upload: "File"
+        }
+      },
     },
     "./types/fragment.ts": {
       plugins: ["fragment-matcher"],
