@@ -13,10 +13,10 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  StringSet: { input: any; output: any; }
+  StringSet: { input: Set<string>; output: Set<string>; }
   Timestamp: { input: any; output: any; }
   /** The `Upload` scalar type represents a multipart file upload. */
-  Upload: { input: any; output: any; }
+  Upload: { input: File; output: File; }
 };
 
 export type AddStrainPhenotypeInput = {
