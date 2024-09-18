@@ -14,8 +14,8 @@ const config: CodegenConfig = {
       config: { 
         withHooks: true,
         scalars: {
-          StringSet: "Set<string>"
-          Upload: "File"
+          StringSet: "Set<string>",
+          Upload: "File",
         }
       },
     },
@@ -27,8 +27,8 @@ const config: CodegenConfig = {
       ],
       config: { 
         scalars: {
-          StringSet: "Set<string>"
-          Upload: "File"
+          StringSet: "Set<string>",
+          Upload: "File",
         }
       },
     },
