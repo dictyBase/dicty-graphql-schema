@@ -132,7 +132,7 @@ export type LogoutKeySpecifier = ('success' | LogoutKeySpecifier)[];
 export type LogoutFieldPolicy = {
 	success?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('addStrainPhenotype' | 'createContent' | 'createOrder' | 'createPermission' | 'createPlasmid' | 'createRole' | 'createRolePermissionRelationship' | 'createStrain' | 'createUser' | 'createUserRoleRelationship' | 'deleteContent' | 'deletePermission' | 'deleteRole' | 'deleteStock' | 'deleteStrainPhenotype' | 'deleteUser' | 'login' | 'logout' | 'updateContent' | 'updateOrder' | 'updatePermission' | 'updatePlasmid' | 'updateRole' | 'updateStrain' | 'updateUser' | 'uploadFile' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('addStrainPhenotype' | 'createContent' | 'createOrder' | 'createPermission' | 'createPlasmid' | 'createRole' | 'createRolePermissionRelationship' | 'createStrain' | 'createUser' | 'createUserRoleRelationship' | 'deleteContent' | 'deletePermission' | 'deleteRole' | 'deleteStock' | 'deleteStrainPhenotype' | 'deleteUser' | 'login' | 'logout' | 'updateContent' | 'updateOrder' | 'updatePermission' | 'updatePlasmid' | 'updateRole' | 'updateStrain' | 'updateStrainPhenotype' | 'updateUser' | 'uploadFile' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
 	addStrainPhenotype?: FieldPolicy<any> | FieldReadFunction<any>,
 	createContent?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -158,6 +158,7 @@ export type MutationFieldPolicy = {
 	updatePlasmid?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateRole?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateStrain?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateStrainPhenotype?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateUser?: FieldPolicy<any> | FieldReadFunction<any>,
 	uploadFile?: FieldPolicy<any> | FieldReadFunction<any>
 };
