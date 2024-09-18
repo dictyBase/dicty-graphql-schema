@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  StringSet: { input: any; output: any; }
   Timestamp: { input: any; output: any; }
   /** The `Upload` scalar type represents a multipart file upload. */
   Upload: { input: any; output: any; }
@@ -191,6 +192,14 @@ export type DeleteStrainPhenotype = {
   success: Scalars['Boolean']['output'];
 };
 
+export type DeleteStrainPhenotypeInput = {
+  assay?: InputMaybe<Scalars['String']['input']>;
+  environment?: InputMaybe<Scalars['String']['input']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
+  phenotype: Scalars['String']['input'];
+  publication: Scalars['String']['input'];
+};
+
 export type DeleteUser = {
   __typename?: 'DeleteUser';
   success: Scalars['Boolean']['output'];
@@ -297,7 +306,7 @@ export type Mutation = {
   deletePermission?: Maybe<DeletePermission>;
   deleteRole?: Maybe<DeleteRole>;
   deleteStock?: Maybe<DeleteStock>;
-  deleteStrainPhenotype?: Maybe<DeleteStrainPhenotype>;
+  deleteStrainPhenotype: DeleteStrainPhenotype;
   deleteUser?: Maybe<DeleteUser>;
   login?: Maybe<Auth>;
   logout?: Maybe<Logout>;
@@ -307,13 +316,14 @@ export type Mutation = {
   updatePlasmid?: Maybe<Plasmid>;
   updateRole?: Maybe<Role>;
   updateStrain?: Maybe<Strain>;
+  updateStrainPhenotype?: Maybe<Strain>;
   updateUser?: Maybe<User>;
   uploadFile: ImageFile;
 };
 
 
 export type MutationAddStrainPhenotypeArgs = {
-  input?: InputMaybe<AddStrainPhenotypeInput>;
+  input: AddStrainPhenotypeInput;
   strainId: Scalars['ID']['input'];
 };
 
@@ -386,7 +396,7 @@ export type MutationDeleteStockArgs = {
 
 
 export type MutationDeleteStrainPhenotypeArgs = {
-  phenotype: Scalars['String']['input'];
+  input: DeleteStrainPhenotypeInput;
   strainId: Scalars['ID']['input'];
 };
 
@@ -433,6 +443,13 @@ export type MutationUpdateRoleArgs = {
 export type MutationUpdateStrainArgs = {
   id: Scalars['ID']['input'];
   input?: InputMaybe<UpdateStrainInput>;
+};
+
+
+export type MutationUpdateStrainPhenotypeArgs = {
+  payload: UpdateStrainPhenotypePayloadInput;
+  strainId: Scalars['ID']['input'];
+  target: UpdateStrainPhenotypeTargetInput;
 };
 
 
@@ -909,6 +926,22 @@ export type UpdateStrainInput = {
   updated_by: Scalars['String']['input'];
 };
 
+export type UpdateStrainPhenotypePayloadInput = {
+  assay?: InputMaybe<Scalars['String']['input']>;
+  environment?: InputMaybe<Scalars['String']['input']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
+  phenotype?: InputMaybe<Scalars['String']['input']>;
+  publication?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateStrainPhenotypeTargetInput = {
+  assay?: InputMaybe<Scalars['String']['input']>;
+  environment?: InputMaybe<Scalars['String']['input']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
+  phenotype: Scalars['String']['input'];
+  publication: Scalars['String']['input'];
+};
+
 export type UpdateUserInput = {
   city?: InputMaybe<Scalars['String']['input']>;
   country?: InputMaybe<Scalars['String']['input']>;
@@ -1007,6 +1040,15 @@ export type AddStrainPhenotypeMutationVariables = Exact<{
 
 
 export type AddStrainPhenotypeMutation = { __typename?: 'Mutation', addStrainPhenotype?: { __typename?: 'Strain', id: string, label: string, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, environment?: string | null, assay?: string | null, note?: string | null, publication?: { __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> } | null }> | null } | null };
+
+export type UpdateStrainPhenotypeMutationVariables = Exact<{
+  strainId: Scalars['ID']['input'];
+  target: UpdateStrainPhenotypeTargetInput;
+  payload: UpdateStrainPhenotypePayloadInput;
+}>;
+
+
+export type UpdateStrainPhenotypeMutation = { __typename?: 'Mutation', updateStrainPhenotype?: { __typename?: 'Strain', id: string, label: string, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, environment?: string | null, assay?: string | null, note?: string | null, publication?: { __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> } | null }> | null } | null };
 
 export type UploadFileMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
@@ -1319,6 +1361,23 @@ export const mockCreateOrderMutation = (resolver: Parameters<typeof graphql.muta
 export const mockAddStrainPhenotypeMutation = (resolver: Parameters<typeof graphql.mutation<AddStrainPhenotypeMutation, AddStrainPhenotypeMutationVariables>>[1]) =>
   graphql.mutation<AddStrainPhenotypeMutation, AddStrainPhenotypeMutationVariables>(
     'AddStrainPhenotype',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockUpdateStrainPhenotypeMutation((req, res, ctx) => {
+ *   const { strainId, target, payload } = req.variables;
+ *   return res(
+ *     ctx.data({ updateStrainPhenotype })
+ *   )
+ * })
+ */
+export const mockUpdateStrainPhenotypeMutation = (resolver: Parameters<typeof graphql.mutation<UpdateStrainPhenotypeMutation, UpdateStrainPhenotypeMutationVariables>>[1]) =>
+  graphql.mutation<UpdateStrainPhenotypeMutation, UpdateStrainPhenotypeMutationVariables>(
+    'UpdateStrainPhenotype',
     resolver
   )
 
