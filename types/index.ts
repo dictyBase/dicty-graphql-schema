@@ -18,7 +18,7 @@ export type Scalars = {
   StringSet: { input: Set<string>; output: Set<string>; }
   Timestamp: { input: any; output: any; }
   /** The `Upload` scalar type represents a multipart file upload. */
-  Upload: { input: any; output: any; }
+  Upload: { input: File; output: File; }
 };
 
 export type AddStrainPhenotypeInput = {
