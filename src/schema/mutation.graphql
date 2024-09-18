@@ -13,8 +13,9 @@ type Mutation {
   createStrain(input: CreateStrainInput): Strain
   createPlasmid(input: CreatePlasmidInput): Plasmid
   updateStrain(id: ID!, input: UpdateStrainInput): Strain
-  addStrainPhenotype(strainId: ID!, input: AddStrainPhenotypeInput): Strain
-  deleteStrainPhenotype(strainId: ID!, phenotype: String!): DeleteStrainPhenotype
+  addStrainPhenotype(strainId: ID!, input: AddStrainPhenotypeInput!): Strain
+  updateStrainPhenotype(strainId: ID!, target: UpdateStrainPhenotypeTargetInput!, payload: UpdateStrainPhenotypePayloadInput!): Strain
+  deleteStrainPhenotype(strainId: ID!, input: DeleteStrainPhenotypeInput!): DeleteStrainPhenotype!
   updatePlasmid(id: ID!, input: UpdatePlasmidInput): Plasmid
   deleteStock(id: ID!): DeleteStock
   # User mutations
