@@ -1039,7 +1039,7 @@ export type AddStrainPhenotypeMutationVariables = Exact<{
 }>;
 
 
-export type AddStrainPhenotypeMutation = { __typename?: 'Mutation', addStrainPhenotype?: { __typename?: 'Strain', id: string, label: string, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, environment?: string | null, assay?: string | null, note?: string | null, publication?: { __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> } | null }> | null } | null };
+export type AddStrainPhenotypeMutation = { __typename?: 'Mutation', addStrainPhenotype?: { __typename?: 'Strain', id: string, label: string, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, environment?: string | null, assay?: string | null, note?: string | null, publication?: { __typename?: 'Publication', id: string } | null }> | null } | null };
 
 export type UpdateStrainPhenotypeMutationVariables = Exact<{
   strainId: Scalars['ID']['input'];
@@ -1048,7 +1048,7 @@ export type UpdateStrainPhenotypeMutationVariables = Exact<{
 }>;
 
 
-export type UpdateStrainPhenotypeMutation = { __typename?: 'Mutation', updateStrainPhenotype?: { __typename?: 'Strain', id: string, label: string, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, environment?: string | null, assay?: string | null, note?: string | null, publication?: { __typename?: 'Publication', id: string, pub_date?: any | null, title: string, journal: string, volume?: string | null, pages?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> } | null }> | null } | null };
+export type UpdateStrainPhenotypeMutation = { __typename?: 'Mutation', updateStrainPhenotype?: { __typename?: 'Strain', id: string, label: string, phenotypes?: Array<{ __typename?: 'Phenotype', phenotype: string, environment?: string | null, assay?: string | null, note?: string | null, publication?: { __typename?: 'Publication', id: string } | null }> | null } | null };
 
 export type UploadFileMutationVariables = Exact<{
   file: Scalars['Upload']['input'];

@@ -79,14 +79,6 @@ export const AddStrainPhenotype = gql`
       note
       publication {
         id
-        pub_date
-        title
-        journal
-        volume
-        pages
-        authors {
-          last_name
-        }
       }
     }
   }
@@ -104,14 +96,6 @@ export const UpdateStrainPhenotype = gql`
       note
       publication {
         id
-        pub_date
-        title
-        journal
-        volume
-        pages
-        authors {
-          last_name
-        }
       }
     }
   }
