@@ -9,14 +9,6 @@ mutation AddStrainPhenotype($strainId: ID!, $input: AddStrainPhenotypeInput!) {
     note
     publication {
       id
-      pub_date
-      title
-      journal
-      volume
-      pages
-      authors {
-        last_name
-      }
     }
   }
  }
@@ -33,14 +25,6 @@ mutation UpdateStrainPhenotype($strainId: ID!, $target: UpdateStrainPhenotypeTar
     note
     publication {
       id
-      pub_date
-      title
-      journal
-      volume
-      pages
-      authors {
-        last_name
-      }
     }
   }
  }
