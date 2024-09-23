@@ -12,7 +12,6 @@
         "kind": "INPUT_OBJECT",
         "name": "AddStrainPhenotypeInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -92,7 +91,6 @@
         "kind": "OBJECT",
         "name": "Auth",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "identity",
@@ -152,7 +150,6 @@
         "kind": "OBJECT",
         "name": "Author",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "first_name",
@@ -216,7 +213,6 @@
         "kind": "INTERFACE",
         "name": "BasePublication",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "abstract",
@@ -443,7 +439,6 @@
         "kind": "SCALAR",
         "name": "Boolean",
         "description": "The `Boolean` scalar type represents `true` or `false`.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -454,7 +449,6 @@
         "kind": "OBJECT",
         "name": "Citation",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "authors",
@@ -530,7 +524,6 @@
         "kind": "OBJECT",
         "name": "Content",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "content",
@@ -686,7 +679,6 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateContentInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -762,7 +754,6 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateOrderInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -934,7 +925,6 @@
         "kind": "INPUT_OBJECT",
         "name": "CreatePermissionInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -994,7 +984,6 @@
         "kind": "INPUT_OBJECT",
         "name": "CreatePlasmidInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1222,7 +1211,6 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateRoleInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1266,7 +1254,6 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateStrainInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1598,7 +1585,6 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateUserInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1782,7 +1768,6 @@
         "kind": "OBJECT",
         "name": "DeleteContent",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "success",
@@ -1810,7 +1795,6 @@
         "kind": "OBJECT",
         "name": "DeletePermission",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "success",
@@ -1838,7 +1822,6 @@
         "kind": "OBJECT",
         "name": "DeleteRole",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "success",
@@ -1866,7 +1849,6 @@
         "kind": "OBJECT",
         "name": "DeleteStock",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "success",
@@ -1894,7 +1876,6 @@
         "kind": "OBJECT",
         "name": "DeleteStrainPhenotype",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "success",
@@ -1922,7 +1903,6 @@
         "kind": "INPUT_OBJECT",
         "name": "DeleteStrainPhenotypeInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -2002,7 +1982,6 @@
         "kind": "OBJECT",
         "name": "DeleteUser",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "success",
@@ -2030,7 +2009,6 @@
         "kind": "OBJECT",
         "name": "Download",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "items",
@@ -2082,7 +2060,6 @@
         "kind": "OBJECT",
         "name": "DownloadItem",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "title",
@@ -2126,7 +2103,6 @@
         "kind": "OBJECT",
         "name": "Extension",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "db",
@@ -2202,7 +2178,6 @@
         "kind": "INPUT_OBJECT",
         "name": "FileToUpload",
         "description": "The `UploadFile` type, represents the request for uploading a image file with a certain payload.",
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -2246,7 +2221,6 @@
         "kind": "OBJECT",
         "name": "GOAnnotation",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "assigned_by",
@@ -2426,7 +2400,6 @@
         "kind": "OBJECT",
         "name": "Gene",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -2470,7 +2443,6 @@
         "kind": "OBJECT",
         "name": "GeneGeneralInfo",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -2562,7 +2534,6 @@
         "kind": "SCALAR",
         "name": "ID",
         "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -2573,7 +2544,6 @@
         "kind": "OBJECT",
         "name": "Identity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "created_at",
@@ -2681,7 +2651,6 @@
         "kind": "OBJECT",
         "name": "ImageFile",
         "description": "The `ImageFile` type, represents the response of uploading an image file.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "url",
@@ -2709,7 +2678,6 @@
         "kind": "SCALAR",
         "name": "Int",
         "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -2720,7 +2688,6 @@
         "kind": "INPUT_OBJECT",
         "name": "LoginInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -2828,7 +2795,6 @@
         "kind": "OBJECT",
         "name": "Logout",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "success",
@@ -2856,7 +2822,6 @@
         "kind": "OBJECT",
         "name": "Mutation",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "addStrainPhenotype",
@@ -3774,7 +3739,6 @@
         "kind": "OBJECT",
         "name": "NumberOfPublicationsWithGene",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "num_pubs",
@@ -3826,7 +3790,6 @@
         "kind": "OBJECT",
         "name": "Order",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "comments",
@@ -4014,7 +3977,6 @@
         "kind": "OBJECT",
         "name": "OrderListWithCursor",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "limit",
@@ -4110,7 +4072,6 @@
         "kind": "OBJECT",
         "name": "Organism",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "citations",
@@ -4202,7 +4163,6 @@
         "kind": "OBJECT",
         "name": "Permission",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "created_at",
@@ -4306,7 +4266,6 @@
         "kind": "OBJECT",
         "name": "Phenotype",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "assay",
@@ -4382,7 +4341,6 @@
         "kind": "OBJECT",
         "name": "Plasmid",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "created_at",
@@ -4668,7 +4626,6 @@
         "kind": "OBJECT",
         "name": "PlasmidListWithCursor",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "limit",
@@ -4764,7 +4721,6 @@
         "kind": "OBJECT",
         "name": "Publication",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "abstract",
@@ -4986,7 +4942,6 @@
         "kind": "OBJECT",
         "name": "PublicationWithGene",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "abstract",
@@ -5232,7 +5187,6 @@
         "kind": "OBJECT",
         "name": "Query",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "content",
@@ -6388,7 +6342,6 @@
         "kind": "OBJECT",
         "name": "Role",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "created_at",
@@ -6500,7 +6453,6 @@
         "kind": "ENUM",
         "name": "StatusEnum",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6536,7 +6488,6 @@
         "kind": "INTERFACE",
         "name": "Stock",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "created_at",
@@ -6755,7 +6706,6 @@
         "kind": "OBJECT",
         "name": "Strain",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "characteristics",
@@ -7145,7 +7095,6 @@
         "kind": "INPUT_OBJECT",
         "name": "StrainListFilter",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7221,7 +7170,6 @@
         "kind": "OBJECT",
         "name": "StrainListWithCursor",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "limit",
@@ -7317,7 +7265,6 @@
         "kind": "ENUM",
         "name": "StrainType",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -7353,7 +7300,6 @@
         "kind": "SCALAR",
         "name": "String",
         "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -7364,7 +7310,6 @@
         "kind": "SCALAR",
         "name": "StringSet",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -7375,7 +7320,6 @@
         "kind": "SCALAR",
         "name": "Timestamp",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -7386,7 +7330,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateContentInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7446,7 +7389,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateOrderInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7550,7 +7492,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdatePermissionInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7610,7 +7551,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdatePlasmidInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7814,7 +7754,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateRoleInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7858,7 +7797,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateStrainInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -8158,7 +8096,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateStrainPhenotypePayloadInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -8230,7 +8167,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateStrainPhenotypeTargetInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -8310,7 +8246,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateUserInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -8466,7 +8401,6 @@
         "kind": "SCALAR",
         "name": "Upload",
         "description": "The `Upload` scalar type represents a multipart file upload.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -8477,7 +8411,6 @@
         "kind": "OBJECT",
         "name": "User",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "city",
@@ -8729,7 +8662,6 @@
         "kind": "OBJECT",
         "name": "UserList",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "pageNum",
@@ -8805,7 +8737,6 @@
         "kind": "OBJECT",
         "name": "With",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "db",
@@ -8865,7 +8796,6 @@
         "kind": "OBJECT",
         "name": "__Directive",
         "description": "A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n\nIn some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -8982,7 +8912,6 @@
         "kind": "ENUM",
         "name": "__DirectiveLocation",
         "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -9108,7 +9037,6 @@
         "kind": "OBJECT",
         "name": "__EnumValue",
         "description": "One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -9176,7 +9104,6 @@
         "kind": "OBJECT",
         "name": "__Field",
         "description": "Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -9297,7 +9224,6 @@
         "kind": "OBJECT",
         "name": "__InputValue",
         "description": "Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -9393,7 +9319,6 @@
         "kind": "OBJECT",
         "name": "__Schema",
         "description": "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -9505,7 +9430,6 @@
         "kind": "OBJECT",
         "name": "__Type",
         "description": "The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n\nDepending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "kind",
@@ -9709,18 +9633,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "isOneOf",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -9732,7 +9644,6 @@
         "kind": "ENUM",
         "name": "__TypeKind",
         "description": "An enum describing what kind of type a given `__Type` is.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -9842,15 +9753,6 @@
             "deprecationReason": null
           }
         ]
-      },
-      {
-        "name": "oneOf",
-        "description": "Indicates exactly one field must be supplied and this field must not be `null`.",
-        "isRepeatable": false,
-        "locations": [
-          "INPUT_OBJECT"
-        ],
-        "args": []
       },
       {
         "name": "skip",
