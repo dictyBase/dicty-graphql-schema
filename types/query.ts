@@ -74,11 +74,19 @@ export const AddStrainPhenotype = gql`
     label
     phenotypes {
       phenotype
-      environment
-      assay
       note
+      assay
+      environment
       publication {
         id
+        pub_date
+        title
+        journal
+        volume
+        pages
+        authors {
+          last_name
+        }
       }
     }
   }
@@ -96,6 +104,14 @@ export const UpdateStrainPhenotype = gql`
       note
       publication {
         id
+        pub_date
+        title
+        journal
+        volume
+        pages
+        authors {
+          last_name
+        }
       }
     }
   }
