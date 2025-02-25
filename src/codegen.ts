@@ -16,6 +16,7 @@ const config: CodegenConfig = {
         scalars: {
           StringSet: "Set<string>",
           Upload: "File",
+          Timestamp: "string",
         }
       },
     },
