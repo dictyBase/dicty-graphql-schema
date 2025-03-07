@@ -1,5 +1,5 @@
-mutation UploadFile($file: Upload!) {
-    uploadFile(file: $file) {
+mutation UploadFile($file: Upload!, $name: String) {
+    uploadFile(file: $file, name: $name) {
       url
    }
 }
