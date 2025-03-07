@@ -1,8 +1,8 @@
 "The `Upload` scalar type represents a multipart file upload."
 scalar Upload
 
-"The `ImageFile` type, represents the response of uploading an image file."
-type ImageFile {
+"The `UploadedFile` type, represents the response of uploading an image file."
+type UploadedFile {
     url: String!
 }
 
