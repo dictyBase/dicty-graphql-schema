@@ -1100,12 +1100,26 @@ export type ListOrganismsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ListOrganismsQuery = { __typename?: 'Query', listOrganisms?: Array<{ __typename?: 'Organism', taxon_id: string, scientific_name: string, citations: Array<{ __typename?: 'Citation', title: string, authors: string, pubmed_id: string, journal: string }>, downloads: Array<{ __typename?: 'Download', title: string, items: Array<{ __typename?: 'DownloadItem', title: string, url: string }> }> }> | null };
 
-export type GeneSummaryQueryVariables = Exact<{
+export type GeneGeneralInformationSummaryQueryVariables = Exact<{
   gene: Scalars['String']['input'];
 }>;
 
 
-export type GeneSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string | null>, gene_product?: string | null, synonyms: Array<string | null>, description?: string | null } | null, geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, go_term: string, evidence_code: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null, listPublicationsWithGene: Array<{ __typename?: 'PublicationWithGene', id: string, title: string, journal: string, pages?: string | null, issue?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> }> };
+export type GeneGeneralInformationSummaryQuery = { __typename?: 'Query', geneGeneralInformation?: { __typename?: 'GeneGeneralInfo', id: string, name_description: Array<string | null>, gene_product?: string | null, synonyms: Array<string | null>, description?: string | null } | null };
+
+export type GeneOntologyAnnotationSummaryQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
+}>;
+
+
+export type GeneOntologyAnnotationSummaryQuery = { __typename?: 'Query', geneOntologyAnnotation?: Array<{ __typename?: 'GOAnnotation', id: string, type: string, date: string, go_term: string, evidence_code: string, with?: Array<{ __typename?: 'With', id: string, db: string, name: string }> | null, extensions?: Array<{ __typename?: 'Extension', id: string, db: string, relation: string, name: string }> | null }> | null };
+
+export type ListPublicationsWithGeneSummaryQueryVariables = Exact<{
+  gene: Scalars['String']['input'];
+}>;
+
+
+export type ListPublicationsWithGeneSummaryQuery = { __typename?: 'Query', listPublicationsWithGene: Array<{ __typename?: 'PublicationWithGene', id: string, title: string, journal: string, pages?: string | null, issue?: string | null, authors: Array<{ __typename?: 'Author', last_name: string }> }> };
 
 export type GeneOntologyAnnotationQueryVariables = Exact<{
   gene: Scalars['String']['input'];
@@ -1581,19 +1595,63 @@ export const mockListOrganismsQuery = (resolver: GraphQLResponseResolver<ListOrg
  * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockGeneSummaryQuery(
+ * mockGeneGeneralInformationSummaryQuery(
  *   ({ query, variables }) => {
  *     const { gene } = variables;
  *     return HttpResponse.json({
- *       data: { geneGeneralInformation, geneOntologyAnnotation, listPublicationsWithGene }
+ *       data: { geneGeneralInformation }
  *     })
  *   },
  *   requestOptions
  * )
  */
-export const mockGeneSummaryQuery = (resolver: GraphQLResponseResolver<GeneSummaryQuery, GeneSummaryQueryVariables>, options?: RequestHandlerOptions) =>
-  graphql.query<GeneSummaryQuery, GeneSummaryQueryVariables>(
-    'GeneSummary',
+export const mockGeneGeneralInformationSummaryQuery = (resolver: GraphQLResponseResolver<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables>(
+    'GeneGeneralInformationSummary',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockGeneOntologyAnnotationSummaryQuery(
+ *   ({ query, variables }) => {
+ *     const { gene } = variables;
+ *     return HttpResponse.json({
+ *       data: { geneOntologyAnnotation }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockGeneOntologyAnnotationSummaryQuery = (resolver: GraphQLResponseResolver<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables>(
+    'GeneOntologyAnnotationSummary',
+    resolver,
+    options
+  )
+
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockListPublicationsWithGeneSummaryQuery(
+ *   ({ query, variables }) => {
+ *     const { gene } = variables;
+ *     return HttpResponse.json({
+ *       data: { listPublicationsWithGene }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export const mockListPublicationsWithGeneSummaryQuery = (resolver: GraphQLResponseResolver<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables>, options?: RequestHandlerOptions) =>
+  graphql.query<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables>(
+    'ListPublicationsWithGeneSummary',
     resolver,
     options
   )
