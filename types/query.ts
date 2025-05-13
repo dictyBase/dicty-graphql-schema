@@ -232,8 +232,8 @@ export const ListOrganisms = gql`
   }
 }
     `;
-export const GeneSummary = gql`
-    query GeneSummary($gene: String!) {
+export const GeneGeneralInformationSummary = gql`
+    query GeneGeneralInformationSummary($gene: String!) {
   geneGeneralInformation(gene: $gene) {
     id
     name_description
@@ -241,6 +241,10 @@ export const GeneSummary = gql`
     synonyms
     description
   }
+}
+    `;
+export const GeneOntologyAnnotationSummary = gql`
+    query GeneOntologyAnnotationSummary($gene: String!) {
   geneOntologyAnnotation(gene: $gene) {
     id
     type
@@ -259,6 +263,10 @@ export const GeneSummary = gql`
       name
     }
   }
+}
+    `;
+export const ListPublicationsWithGeneSummary = gql`
+    query ListPublicationsWithGeneSummary($gene: String!) {
   listPublicationsWithGene(gene: $gene) {
     id
     title
