@@ -124,6 +124,10 @@ export type IdentityFieldPolicy = {
 	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	user_id?: FieldPolicy<any> | FieldReadFunction<any>
 };
+export type ImageFileKeySpecifier = ('url' | ImageFileKeySpecifier)[];
+export type ImageFileFieldPolicy = {
+	url?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type LogoutKeySpecifier = ('success' | LogoutKeySpecifier)[];
 export type LogoutFieldPolicy = {
 	success?: FieldPolicy<any> | FieldReadFunction<any>
@@ -366,10 +370,6 @@ export type StrainListWithCursorFieldPolicy = {
 	strains?: FieldPolicy<any> | FieldReadFunction<any>,
 	totalCount?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type UploadedFileKeySpecifier = ('url' | UploadedFileKeySpecifier)[];
-export type UploadedFileFieldPolicy = {
-	url?: FieldPolicy<any> | FieldReadFunction<any>
-};
 export type UserKeySpecifier = ('city' | 'country' | 'created_at' | 'email' | 'first_address' | 'first_name' | 'group_name' | 'id' | 'is_active' | 'last_name' | 'organization' | 'phone' | 'roles' | 'second_address' | 'state' | 'updated_at' | 'zipcode' | UserKeySpecifier)[];
 export type UserFieldPolicy = {
 	city?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -476,6 +476,10 @@ export type StrictTypedTypePolicies = {
 		keyFields?: false | IdentityKeySpecifier | (() => undefined | IdentityKeySpecifier),
 		fields?: IdentityFieldPolicy,
 	},
+	ImageFile?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | ImageFileKeySpecifier | (() => undefined | ImageFileKeySpecifier),
+		fields?: ImageFileFieldPolicy,
+	},
 	Logout?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | LogoutKeySpecifier | (() => undefined | LogoutKeySpecifier),
 		fields?: LogoutFieldPolicy,
@@ -543,10 +547,6 @@ export type StrictTypedTypePolicies = {
 	StrainListWithCursor?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | StrainListWithCursorKeySpecifier | (() => undefined | StrainListWithCursorKeySpecifier),
 		fields?: StrainListWithCursorFieldPolicy,
-	},
-	UploadedFile?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | UploadedFileKeySpecifier | (() => undefined | UploadedFileKeySpecifier),
-		fields?: UploadedFileFieldPolicy,
 	},
 	User?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | UserKeySpecifier | (() => undefined | UserKeySpecifier),

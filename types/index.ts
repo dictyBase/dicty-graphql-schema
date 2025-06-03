@@ -272,6 +272,12 @@ export type Identity = {
   user_id: Scalars['ID']['output'];
 };
 
+/** The `ImageFile` type, represents the response of uploading an image file. */
+export type ImageFile = {
+  __typename?: 'ImageFile';
+  url: Scalars['String']['output'];
+};
+
 export type LoginInput = {
   client_id: Scalars['String']['input'];
   code: Scalars['String']['input'];
@@ -314,7 +320,7 @@ export type Mutation = {
   updateStrain?: Maybe<Strain>;
   updateStrainPhenotype?: Maybe<Strain>;
   updateUser?: Maybe<User>;
-  uploadFile: UploadedFile;
+  uploadFile: ImageFile;
 };
 
 
@@ -457,7 +463,6 @@ export type MutationUpdateUserArgs = {
 
 export type MutationUploadFileArgs = {
   file: Scalars['Upload']['input'];
-  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NumberOfPublicationsWithGene = {
@@ -954,12 +959,6 @@ export type UpdateUserInput = {
   zipcode?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** The `UploadedFile` type, represents the response of uploading an image file. */
-export type UploadedFile = {
-  __typename?: 'UploadedFile';
-  url: Scalars['String']['output'];
-};
-
 export type User = {
   __typename?: 'User';
   city?: Maybe<Scalars['String']['output']>;
@@ -1055,11 +1054,10 @@ export type UpdateStrainPhenotypeMutation = { __typename?: 'Mutation', updateStr
 
 export type UploadFileMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
-  name?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type UploadFileMutation = { __typename?: 'Mutation', uploadFile: { __typename?: 'UploadedFile', url: string } };
+export type UploadFileMutation = { __typename?: 'Mutation', uploadFile: { __typename?: 'ImageFile', url: string } };
 
 export type CreateUserMutationVariables = Exact<{
   input: CreateUserInput;
@@ -1592,8 +1590,8 @@ export type UpdateStrainPhenotypeMutationHookResult = ReturnType<typeof useUpdat
 export type UpdateStrainPhenotypeMutationResult = Apollo.MutationResult<UpdateStrainPhenotypeMutation>;
 export type UpdateStrainPhenotypeMutationOptions = Apollo.BaseMutationOptions<UpdateStrainPhenotypeMutation, UpdateStrainPhenotypeMutationVariables>;
 export const UploadFileDocument = gql`
-    mutation UploadFile($file: Upload!, $name: String) {
-  uploadFile(file: $file, name: $name) {
+    mutation UploadFile($file: Upload!) {
+  uploadFile(file: $file) {
     url
   }
 }
@@ -1614,7 +1612,6 @@ export type UploadFileMutationFn = Apollo.MutationFunction<UploadFileMutation, U
  * const [uploadFileMutation, { data, loading, error }] = useUploadFileMutation({
  *   variables: {
  *      file: // value for 'file'
- *      name: // value for 'name'
  *   },
  * });
  */

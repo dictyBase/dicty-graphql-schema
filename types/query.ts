@@ -118,8 +118,8 @@ export const UpdateStrainPhenotype = gql`
 }
     `;
 export const UploadFile = gql`
-    mutation UploadFile($file: Upload!, $name: String) {
-  uploadFile(file: $file, name: $name) {
+    mutation UploadFile($file: Upload!) {
+  uploadFile(file: $file) {
     url
   }
 }
