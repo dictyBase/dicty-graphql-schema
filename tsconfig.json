@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "commonjs",
+    "target": "ES2019",
     "strict": true,
     "outDir": "dist",
     "declaration": true,
-    "moduleResolution": "node",
+    "module": "commonjs",
+    "moduleResolution": "node"
+
   },
   "include": ["types/query.ts"]
 }
