@@ -3,9 +3,16 @@
   "version": "1.32.0",
   "description": "GraphQL schema and typings for the dictyBase API.",
   "exports": {
-    "import": "./types/index.ts",
-    "require": "./dist/query.js"
+    ".": "./types/index.ts",
+    "mocks": "./types/mocks.ts",
+    "query": {
+      "default": "./types/query.ts",
+      "node": "./dist/query.js"
+    }
   },
+  "types": [
+    "./dist/query.d.ts"
+  ],
   "main": "./types/index.ts",
   "type": "module",
   "files": [
