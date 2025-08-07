@@ -4,7 +4,7 @@
   "description": "GraphQL schema and typings for the dictyBase API.",
   "exports": {
     "import": "./types/index.ts",
-    "require": "./dist/index.js"
+    "require": "./dist/query.js"
   },
   "main": "./types/index.ts",
   "type": "module",
