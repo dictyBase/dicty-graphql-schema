@@ -13,7 +13,8 @@
     "node": ">= 20.11.1"
   },
   "scripts": {
-    "generate": "graphql-codegen -c src/codegen.ts",
+    "generate": "graphql-codegen -c src/codegen.ts && bun transpile",
+    "transpile": "tsc",
     "create-release": "semantic-release"
   },
   "repository": {
