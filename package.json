@@ -50,6 +50,7 @@
     "graphql": "^16.8.1"
   },
   "devDependencies": {
+    "@apollo/client": "^3.13.9",
     "@graphql-codegen/cli": "5.0.2",
     "@graphql-codegen/fragment-matcher": "^5.0.2",
     "@graphql-codegen/introspection": "^4.0.3",
