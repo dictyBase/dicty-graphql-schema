@@ -5,21 +5,23 @@
   "exports": {
     ".": "./types/index.ts",
     "./package.json": "./package.json",
-    "./mocks": {
-      "default": "./types/mocks.ts",
+    "./dist/mocks": {
+      "types": "./dist/mocks.d.ts",
       "import": "./types/mocks.ts",
-      "types": "./dist/mocks.d.ts"
+      "default": "./types/mocks.ts"
     },
-    "./query": {
-      "default": "./types/query.ts",
-      "require": "./dist/query.js"
+    "./dist/query": {
+      "require": "./dist/query.js",
+      "import": "./dist/query.js",
+      "types": "./dist/query.d.ts",
+      "default": "./types/query.ts"
     }
   },
   "main": "./types/index.ts",
-  "type": "module",
   "files": [
     "types",
-    "package.json"
+    "package.json",
+    "dist"
   ],
   "private": true,
   "engines": {
