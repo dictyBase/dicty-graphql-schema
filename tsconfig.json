@@ -8,5 +8,5 @@
     "moduleResolution": "node"
 
   },
-  "include": ["types/*"]
+  "include": ["types/query.ts", "types/mocks.ts"]
 }
