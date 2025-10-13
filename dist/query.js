@@ -511,7 +511,7 @@ exports.ListPlasmidsInventory = (0, graphql_tag_1.default) `
 }
     `;
 exports.PlasmidListFilter = (0, graphql_tag_1.default) `
-    query PlasmidListFilter($cursor: Int!, $limit: Int!, $filter: String!) {
+    query PlasmidListFilter($cursor: Int!, $limit: Int!, $filter: PlasmidListFilter) {
   listPlasmids(cursor: $cursor, limit: $limit, filter: $filter) {
     nextCursor
     totalCount

@@ -27,7 +27,7 @@ type Query {
     limit: Int
     filter: StrainListFilter
   ): StrainListWithCursor
-  listPlasmids(cursor: Int, limit: Int, filter: String): PlasmidListWithCursor
+  listPlasmids(cursor: Int, limit: Int, filter: PlasmidListFilter): PlasmidListWithCursor
   listStrainsWithAnnotation(
     cursor: Int
     limit: Int
