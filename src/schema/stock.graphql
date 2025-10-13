@@ -184,12 +184,26 @@ enum StrainType {
   BACTERIAL
 }
 
+enum PlasmidType {
+  ALL 
+  REGULAR 
+  GOLDEN_BRAID
+}
+
 input StrainListFilter {
   label: String
   summary: String
   id: ID
   in_stock: Boolean
   strain_type: StrainType!
+}
+
+input PlasmidListFilter {
+  label: String
+  summary: String
+  id: ID
+  in_stock: Boolean
+  plasmid_type: PlasmidType!
 }
 
 input AddStrainPhenotypeInput {
