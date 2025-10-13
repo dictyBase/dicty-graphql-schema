@@ -489,6 +489,13 @@ export type Plasmid = Stock & {
     updated_at: Scalars['Timestamp']['output'];
     updated_by: User;
 };
+export type PlasmidListFilter = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    in_stock?: InputMaybe<Scalars['Boolean']['input']>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    plasmid_type: PlasmidType;
+    summary?: InputMaybe<Scalars['String']['input']>;
+};
 export type PlasmidListWithCursor = {
     __typename?: 'PlasmidListWithCursor';
     limit?: Maybe<Scalars['Int']['output']>;
@@ -497,6 +504,11 @@ export type PlasmidListWithCursor = {
     previousCursor: Scalars['Int']['output'];
     totalCount: Scalars['Int']['output'];
 };
+export declare enum PlasmidType {
+    All = "ALL",
+    GoldenBraid = "GOLDEN_BRAID",
+    Regular = "REGULAR"
+}
 export type Publication = BasePublication & {
     __typename?: 'Publication';
     abstract: Scalars['String']['output'];
@@ -597,7 +609,7 @@ export type QueryListPhenotypesArgs = {
 };
 export type QueryListPlasmidsArgs = {
     cursor?: InputMaybe<Scalars['Int']['input']>;
-    filter?: InputMaybe<Scalars['String']['input']>;
+    filter?: InputMaybe<PlasmidListFilter>;
     limit?: InputMaybe<Scalars['Int']['input']>;
 };
 export type QueryListPlasmidsWithAnnotationArgs = {
@@ -1484,7 +1496,7 @@ export type ListPlasmidsInventoryQuery = {
 export type PlasmidListFilterQueryVariables = Exact<{
     cursor: Scalars['Int']['input'];
     limit: Scalars['Int']['input'];
-    filter: Scalars['String']['input'];
+    filter?: InputMaybe<PlasmidListFilter>;
 }>;
 export type PlasmidListFilterQuery = {
     __typename?: 'Query';
