@@ -36,3 +36,9 @@ type GeneGeneralInfo {
   synonyms: [String]!
   description: String
 }
+
+type UpdateGeneGeneralInfoInput {
+  name_description: [String]!
+  gene_product: String
+  description: String
+}
