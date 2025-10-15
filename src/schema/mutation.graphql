@@ -18,6 +18,8 @@ type Mutation {
   deleteStrainPhenotype(strainId: ID!, input: DeleteStrainPhenotypeInput!): DeleteStrainPhenotype!
   updatePlasmid(id: ID!, input: UpdatePlasmidInput): Plasmid
   deleteStock(id: ID!): DeleteStock
+  # Gene mutations
+  updateGeneGeneralInfo(id: ID!, input: UpdateGeneGeneralInfoInput): Gene
   # User mutations
   createUser(input: CreateUserInput): User
   createUserRoleRelationship(userId: ID!, roleId: ID!): User
