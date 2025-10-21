@@ -3,6 +3,7 @@ export declare const Logout: import("graphql").DocumentNode;
 export declare const CreateContent: import("graphql").DocumentNode;
 export declare const UpdateContent: import("graphql").DocumentNode;
 export declare const DeleteContent: import("graphql").DocumentNode;
+export declare const UpdateGeneGeneralInfo: import("graphql").DocumentNode;
 export declare const CreateOrder: import("graphql").DocumentNode;
 export declare const AddStrainPhenotype: import("graphql").DocumentNode;
 export declare const UpdateStrainPhenotype: import("graphql").DocumentNode;

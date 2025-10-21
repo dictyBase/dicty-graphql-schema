@@ -1,2 +1,3 @@
 scalar Timestamp
 scalar StringSet
+scalar EmailAddress
