@@ -107,13 +107,15 @@ export type GeneFieldPolicy = {
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	name?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type GeneGeneralInfoKeySpecifier = ('description' | 'gene_product' | 'id' | 'name_description' | 'synonyms' | GeneGeneralInfoKeySpecifier)[];
+export type GeneGeneralInfoKeySpecifier = ('description' | 'gene_product' | 'id' | 'name_description' | 'synonyms' | 'updated_at' | 'updated_by' | GeneGeneralInfoKeySpecifier)[];
 export type GeneGeneralInfoFieldPolicy = {
 	description?: FieldPolicy<any> | FieldReadFunction<any>,
 	gene_product?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	name_description?: FieldPolicy<any> | FieldReadFunction<any>,
-	synonyms?: FieldPolicy<any> | FieldReadFunction<any>
+	synonyms?: FieldPolicy<any> | FieldReadFunction<any>,
+	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	updated_by?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type IdentityKeySpecifier = ('created_at' | 'id' | 'identifier' | 'provider' | 'updated_at' | 'user_id' | IdentityKeySpecifier)[];
 export type IdentityFieldPolicy = {
@@ -132,10 +134,11 @@ export type LogoutKeySpecifier = ('success' | LogoutKeySpecifier)[];
 export type LogoutFieldPolicy = {
 	success?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('addStrainPhenotype' | 'createContent' | 'createOrder' | 'createPermission' | 'createPlasmid' | 'createRole' | 'createRolePermissionRelationship' | 'createStrain' | 'createUser' | 'createUserRoleRelationship' | 'deleteContent' | 'deletePermission' | 'deleteRole' | 'deleteStock' | 'deleteStrainPhenotype' | 'deleteUser' | 'login' | 'logout' | 'updateContent' | 'updateOrder' | 'updatePermission' | 'updatePlasmid' | 'updateRole' | 'updateStrain' | 'updateStrainPhenotype' | 'updateUser' | 'uploadFile' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('addStrainPhenotype' | 'createContent' | 'createGeneGeneralInfo' | 'createOrder' | 'createPermission' | 'createPlasmid' | 'createRole' | 'createRolePermissionRelationship' | 'createStrain' | 'createUser' | 'createUserRoleRelationship' | 'deleteContent' | 'deletePermission' | 'deleteRole' | 'deleteStock' | 'deleteStrainPhenotype' | 'deleteUser' | 'login' | 'logout' | 'updateContent' | 'updateGeneGeneralInfo' | 'updateOrder' | 'updatePermission' | 'updatePlasmid' | 'updateRole' | 'updateStrain' | 'updateStrainPhenotype' | 'updateUser' | 'uploadFile' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
 	addStrainPhenotype?: FieldPolicy<any> | FieldReadFunction<any>,
 	createContent?: FieldPolicy<any> | FieldReadFunction<any>,
+	createGeneGeneralInfo?: FieldPolicy<any> | FieldReadFunction<any>,
 	createOrder?: FieldPolicy<any> | FieldReadFunction<any>,
 	createPermission?: FieldPolicy<any> | FieldReadFunction<any>,
 	createPlasmid?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -153,6 +156,7 @@ export type MutationFieldPolicy = {
 	login?: FieldPolicy<any> | FieldReadFunction<any>,
 	logout?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateContent?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateGeneGeneralInfo?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateOrder?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatePermission?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatePlasmid?: FieldPolicy<any> | FieldReadFunction<any>,

@@ -35,10 +35,23 @@ type GeneGeneralInfo {
   gene_product: String
   synonyms: [String]!
   description: String
+  # New
+  created_at: Timestamp
+  created_by: User
+  updated_at: Timestamp
+  updated_by: User
 }
 
-type UpdateGeneGeneralInfoInput {
-  name_description: [String]!
+input UpdateGeneGeneralInfoInput {
+  name_description: [String]
   gene_product: String
   description: String
+  user: EmailAddress!
+}
+
+input CreateGeneGeneralInfoInput {
+  name_description: [String]
+  gene_product: String
+  description: String
+  user: EmailAddress!
 }

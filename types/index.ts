@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  EmailAddress: { input: any; output: any; }
   StringSet: { input: Set<string>; output: Set<string>; }
   Timestamp: { input: string; output: string; }
   /** The `Upload` scalar type represents a multipart file upload. */
@@ -87,6 +88,13 @@ export type CreateContentInput = {
   created_by: Scalars['String']['input'];
   name: Scalars['String']['input'];
   namespace: Scalars['String']['input'];
+};
+
+export type CreateGeneGeneralInfoInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  gene_product?: InputMaybe<Scalars['String']['input']>;
+  name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  user?: InputMaybe<Scalars['EmailAddress']['input']>;
 };
 
 export type CreateOrderInput = {
@@ -260,6 +268,8 @@ export type GeneGeneralInfo = {
   id: Scalars['String']['output'];
   name_description: Array<Maybe<Scalars['String']['output']>>;
   synonyms: Array<Maybe<Scalars['String']['output']>>;
+  updated_at?: Maybe<Scalars['Timestamp']['output']>;
+  updated_by?: Maybe<User>;
 };
 
 export type Identity = {
@@ -296,6 +306,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addStrainPhenotype?: Maybe<Strain>;
   createContent?: Maybe<Content>;
+  createGeneGeneralInfo?: Maybe<GeneGeneralInfo>;
   createOrder?: Maybe<Order>;
   createPermission?: Maybe<Permission>;
   createPlasmid?: Maybe<Plasmid>;
@@ -313,6 +324,7 @@ export type Mutation = {
   login?: Maybe<Auth>;
   logout?: Maybe<Logout>;
   updateContent?: Maybe<Content>;
+  updateGeneGeneralInfo?: Maybe<GeneGeneralInfo>;
   updateOrder?: Maybe<Order>;
   updatePermission?: Maybe<Permission>;
   updatePlasmid?: Maybe<Plasmid>;
@@ -332,6 +344,12 @@ export type MutationAddStrainPhenotypeArgs = {
 
 export type MutationCreateContentArgs = {
   input?: InputMaybe<CreateContentInput>;
+};
+
+
+export type MutationCreateGeneGeneralInfoArgs = {
+  id: Scalars['ID']['input'];
+  input: CreateGeneGeneralInfoInput;
 };
 
 
@@ -415,6 +433,12 @@ export type MutationLoginArgs = {
 
 export type MutationUpdateContentArgs = {
   input?: InputMaybe<UpdateContentInput>;
+};
+
+
+export type MutationUpdateGeneGeneralInfoArgs = {
+  id: Scalars['ID']['input'];
+  input: UpdateGeneGeneralInfoInput;
 };
 
 
@@ -883,6 +907,12 @@ export type UpdateContentInput = {
   updated_by: Scalars['String']['input'];
 };
 
+export type UpdateGeneGeneralInfoInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  gene_product?: InputMaybe<Scalars['String']['input']>;
+  name_description: Array<InputMaybe<Scalars['String']['input']>>;
+};
+
 export type UpdateOrderInput = {
   comments?: InputMaybe<Scalars['String']['input']>;
   courier?: InputMaybe<Scalars['String']['input']>;
@@ -1041,6 +1071,14 @@ export type DeleteContentMutationVariables = Exact<{
 
 
 export type DeleteContentMutation = { __typename?: 'Mutation', deleteContent?: { __typename?: 'DeleteContent', success: boolean } | null };
+
+export type UpdateGeneGeneralInfoMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  input: UpdateGeneGeneralInfoInput;
+}>;
+
+
+export type UpdateGeneGeneralInfoMutation = { __typename?: 'Mutation', updateGeneGeneralInfo?: { __typename?: 'GeneGeneralInfo', id: string, updated_by?: { __typename?: 'User', id: string } | null } | null };
 
 export type CreateOrderMutationVariables = Exact<{
   input: CreateOrderInput;
@@ -1465,6 +1503,43 @@ export function useDeleteContentMutation(baseOptions?: Apollo.MutationHookOption
 export type DeleteContentMutationHookResult = ReturnType<typeof useDeleteContentMutation>;
 export type DeleteContentMutationResult = Apollo.MutationResult<DeleteContentMutation>;
 export type DeleteContentMutationOptions = Apollo.BaseMutationOptions<DeleteContentMutation, DeleteContentMutationVariables>;
+export const UpdateGeneGeneralInfoDocument = gql`
+    mutation UpdateGeneGeneralInfo($id: ID!, $input: UpdateGeneGeneralInfoInput!) {
+  updateGeneGeneralInfo(id: $id, input: $input) {
+    id
+    updated_by {
+      id
+    }
+  }
+}
+    `;
+export type UpdateGeneGeneralInfoMutationFn = Apollo.MutationFunction<UpdateGeneGeneralInfoMutation, UpdateGeneGeneralInfoMutationVariables>;
+
+/**
+ * __useUpdateGeneGeneralInfoMutation__
+ *
+ * To run a mutation, you first call `useUpdateGeneGeneralInfoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateGeneGeneralInfoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateGeneGeneralInfoMutation, { data, loading, error }] = useUpdateGeneGeneralInfoMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateGeneGeneralInfoMutation(baseOptions?: Apollo.MutationHookOptions<UpdateGeneGeneralInfoMutation, UpdateGeneGeneralInfoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateGeneGeneralInfoMutation, UpdateGeneGeneralInfoMutationVariables>(UpdateGeneGeneralInfoDocument, options);
+      }
+export type UpdateGeneGeneralInfoMutationHookResult = ReturnType<typeof useUpdateGeneGeneralInfoMutation>;
+export type UpdateGeneGeneralInfoMutationResult = Apollo.MutationResult<UpdateGeneGeneralInfoMutation>;
+export type UpdateGeneGeneralInfoMutationOptions = Apollo.BaseMutationOptions<UpdateGeneGeneralInfoMutation, UpdateGeneGeneralInfoMutationVariables>;
 export const CreateOrderDocument = gql`
     mutation CreateOrder($input: CreateOrderInput!) {
   createOrder(input: $input) {

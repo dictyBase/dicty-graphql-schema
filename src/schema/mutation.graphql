@@ -19,7 +19,8 @@ type Mutation {
   updatePlasmid(id: ID!, input: UpdatePlasmidInput): Plasmid
   deleteStock(id: ID!): DeleteStock
   # Gene mutations
-  updateGeneGeneralInfo(id: ID!, input: UpdateGeneGeneralInfoInput): Gene
+  createGeneGeneralInfo(id: ID!, input: CreateGeneGeneralInfoInput!): GeneGeneralInfo
+  updateGeneGeneralInfo(id: ID!, input: UpdateGeneGeneralInfoInput!): GeneGeneralInfo
   # User mutations
   createUser(input: CreateUserInput): User
   createUserRoleRelationship(userId: ID!, roleId: ID!): User
