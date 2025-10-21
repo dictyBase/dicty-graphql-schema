@@ -30,6 +30,7 @@ const config: CodegenConfig = {
         scalars: {
           StringSet: "Set<string>",
           Upload: "File",
+          EmailAddress: "string",
         }
       },
     },
