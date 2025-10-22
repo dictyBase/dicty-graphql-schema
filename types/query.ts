@@ -60,6 +60,16 @@ export const DeleteContent = gql`
   }
 }
     `;
+export const CreateGeneGeneralInfo = gql`
+    mutation CreateGeneGeneralInfo($id: ID!, $input: CreateGeneGeneralInfoInput!) {
+  createGeneGeneralInfo(id: $id, input: $input) {
+    id
+    created_by {
+      id
+    }
+  }
+}
+    `;
 export const UpdateGeneGeneralInfo = gql`
     mutation UpdateGeneGeneralInfo($id: ID!, $input: UpdateGeneGeneralInfoInput!) {
   updateGeneGeneralInfo(id: $id, input: $input) {

@@ -1,4 +1,4 @@
-mutation CreateGeneGeneralInfo($id: ID!, $input: CreateGeneGeneralInfo!) {
+mutation CreateGeneGeneralInfo($id: ID!, $input: CreateGeneGeneralInfoInput!) {
   createGeneGeneralInfo(id: $id, input: $input) {
     id
     created_by {

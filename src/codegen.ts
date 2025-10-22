@@ -11,27 +11,22 @@ const config: CodegenConfig = {
         "typescript-operations",
         "typescript-react-apollo",
       ],
-      config: { 
+      config: {
         withHooks: true,
         scalars: {
           StringSet: "Set<string>",
           Upload: "File",
           Timestamp: "string",
-        }
+        },
       },
     },
-    "./types/mocks.ts" : {
-      plugins: [
-        "typescript",
-        "typescript-operations",
-        "typescript-msw",
-      ],
-      config: { 
+    "./types/mocks.ts": {
+      plugins: ["typescript", "typescript-operations", "typescript-msw"],
+      config: {
         scalars: {
           StringSet: "Set<string>",
           Upload: "File",
-          EmailAddress: "string",
-        }
+        },
       },
     },
     "./types/fragment.ts": {

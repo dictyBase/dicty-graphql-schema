@@ -42,10 +42,6 @@ export type Scalars = {
         input: number;
         output: number;
     };
-    EmailAddress: {
-        input: string;
-        output: string;
-    };
     StringSet: {
         input: Set<string>;
         output: Set<string>;
@@ -125,7 +121,7 @@ export type CreateGeneGeneralInfoInput = {
     description?: InputMaybe<Scalars['String']['input']>;
     gene_product?: InputMaybe<Scalars['String']['input']>;
     name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-    user?: InputMaybe<Scalars['EmailAddress']['input']>;
+    user: Scalars['String']['input'];
 };
 export type CreateOrderInput = {
     comments?: InputMaybe<Scalars['String']['input']>;
@@ -274,6 +270,8 @@ export type Gene = {
 };
 export type GeneGeneralInfo = {
     __typename?: 'GeneGeneralInfo';
+    created_at?: Maybe<Scalars['Timestamp']['output']>;
+    created_by?: Maybe<User>;
     description?: Maybe<Scalars['String']['output']>;
     gene_product?: Maybe<Scalars['String']['output']>;
     id: Scalars['String']['output'];
@@ -782,7 +780,8 @@ export type UpdateContentInput = {
 export type UpdateGeneGeneralInfoInput = {
     description?: InputMaybe<Scalars['String']['input']>;
     gene_product?: InputMaybe<Scalars['String']['input']>;
-    name_description: Array<InputMaybe<Scalars['String']['input']>>;
+    name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    user: Scalars['String']['input'];
 };
 export type UpdateOrderInput = {
     comments?: InputMaybe<Scalars['String']['input']>;
@@ -978,6 +977,21 @@ export type DeleteContentMutation = {
     deleteContent?: {
         __typename?: 'DeleteContent';
         success: boolean;
+    } | null;
+};
+export type CreateGeneGeneralInfoMutationVariables = Exact<{
+    id: Scalars['ID']['input'];
+    input: CreateGeneGeneralInfoInput;
+}>;
+export type CreateGeneGeneralInfoMutation = {
+    __typename?: 'Mutation';
+    createGeneGeneralInfo?: {
+        __typename?: 'GeneGeneralInfo';
+        id: string;
+        created_by?: {
+            __typename?: 'User';
+            id: string;
+        } | null;
     } | null;
 };
 export type UpdateGeneGeneralInfoMutationVariables = Exact<{
@@ -1800,6 +1814,22 @@ export declare const mockUpdateContentMutation: (resolver: GraphQLResponseResolv
  * )
  */
 export declare const mockDeleteContentMutation: (resolver: GraphQLResponseResolver<DeleteContentMutation, DeleteContentMutationVariables>, options?: RequestHandlerOptions) => import("msw").GraphQLHandler;
+/**
+ * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
+ * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockCreateGeneGeneralInfoMutation(
+ *   ({ query, variables }) => {
+ *     const { id, input } = variables;
+ *     return HttpResponse.json({
+ *       data: { createGeneGeneralInfo }
+ *     })
+ *   },
+ *   requestOptions
+ * )
+ */
+export declare const mockCreateGeneGeneralInfoMutation: (resolver: GraphQLResponseResolver<CreateGeneGeneralInfoMutation, CreateGeneGeneralInfoMutationVariables>, options?: RequestHandlerOptions) => import("msw").GraphQLHandler;
 /**
  * @param resolver A function that accepts [resolver arguments](https://mswjs.io/docs/api/graphql#resolver-argument) and must always return the instruction on what to do with the intercepted request. ([see more](https://mswjs.io/docs/concepts/response-resolver#resolver-instructions))
  * @param options Options object to customize the behavior of the mock. ([see more](https://mswjs.io/docs/api/graphql#handler-options))
