@@ -15,7 +15,6 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  EmailAddress: { input: any; output: any; }
   StringSet: { input: Set<string>; output: Set<string>; }
   Timestamp: { input: string; output: string; }
   /** The `Upload` scalar type represents a multipart file upload. */
@@ -94,7 +93,7 @@ export type CreateGeneGeneralInfoInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   gene_product?: InputMaybe<Scalars['String']['input']>;
   name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  user?: InputMaybe<Scalars['EmailAddress']['input']>;
+  user: Scalars['String']['input'];
 };
 
 export type CreateOrderInput = {
@@ -263,6 +262,8 @@ export type Gene = {
 
 export type GeneGeneralInfo = {
   __typename?: 'GeneGeneralInfo';
+  created_at?: Maybe<Scalars['Timestamp']['output']>;
+  created_by?: Maybe<User>;
   description?: Maybe<Scalars['String']['output']>;
   gene_product?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
@@ -910,7 +911,8 @@ export type UpdateContentInput = {
 export type UpdateGeneGeneralInfoInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   gene_product?: InputMaybe<Scalars['String']['input']>;
-  name_description: Array<InputMaybe<Scalars['String']['input']>>;
+  name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  user: Scalars['String']['input'];
 };
 
 export type UpdateOrderInput = {
@@ -1071,6 +1073,14 @@ export type DeleteContentMutationVariables = Exact<{
 
 
 export type DeleteContentMutation = { __typename?: 'Mutation', deleteContent?: { __typename?: 'DeleteContent', success: boolean } | null };
+
+export type CreateGeneGeneralInfoMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  input: CreateGeneGeneralInfoInput;
+}>;
+
+
+export type CreateGeneGeneralInfoMutation = { __typename?: 'Mutation', createGeneGeneralInfo?: { __typename?: 'GeneGeneralInfo', id: string, created_by?: { __typename?: 'User', id: string } | null } | null };
 
 export type UpdateGeneGeneralInfoMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1503,6 +1513,43 @@ export function useDeleteContentMutation(baseOptions?: Apollo.MutationHookOption
 export type DeleteContentMutationHookResult = ReturnType<typeof useDeleteContentMutation>;
 export type DeleteContentMutationResult = Apollo.MutationResult<DeleteContentMutation>;
 export type DeleteContentMutationOptions = Apollo.BaseMutationOptions<DeleteContentMutation, DeleteContentMutationVariables>;
+export const CreateGeneGeneralInfoDocument = gql`
+    mutation CreateGeneGeneralInfo($id: ID!, $input: CreateGeneGeneralInfoInput!) {
+  createGeneGeneralInfo(id: $id, input: $input) {
+    id
+    created_by {
+      id
+    }
+  }
+}
+    `;
+export type CreateGeneGeneralInfoMutationFn = Apollo.MutationFunction<CreateGeneGeneralInfoMutation, CreateGeneGeneralInfoMutationVariables>;
+
+/**
+ * __useCreateGeneGeneralInfoMutation__
+ *
+ * To run a mutation, you first call `useCreateGeneGeneralInfoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateGeneGeneralInfoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createGeneGeneralInfoMutation, { data, loading, error }] = useCreateGeneGeneralInfoMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateGeneGeneralInfoMutation(baseOptions?: Apollo.MutationHookOptions<CreateGeneGeneralInfoMutation, CreateGeneGeneralInfoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateGeneGeneralInfoMutation, CreateGeneGeneralInfoMutationVariables>(CreateGeneGeneralInfoDocument, options);
+      }
+export type CreateGeneGeneralInfoMutationHookResult = ReturnType<typeof useCreateGeneGeneralInfoMutation>;
+export type CreateGeneGeneralInfoMutationResult = Apollo.MutationResult<CreateGeneGeneralInfoMutation>;
+export type CreateGeneGeneralInfoMutationOptions = Apollo.BaseMutationOptions<CreateGeneGeneralInfoMutation, CreateGeneGeneralInfoMutationVariables>;
 export const UpdateGeneGeneralInfoDocument = gql`
     mutation UpdateGeneGeneralInfo($id: ID!, $input: UpdateGeneGeneralInfoInput!) {
   updateGeneGeneralInfo(id: $id, input: $input) {
@@ -1819,7 +1866,7 @@ export const ListContentByNamespaceDocument = gql`
  *   },
  * });
  */
-export function useListContentByNamespaceQuery(baseOptions: Apollo.QueryHookOptions<ListContentByNamespaceQuery, ListContentByNamespaceQueryVariables>) {
+export function useListContentByNamespaceQuery(baseOptions: Apollo.QueryHookOptions<ListContentByNamespaceQuery, ListContentByNamespaceQueryVariables> & ({ variables: ListContentByNamespaceQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListContentByNamespaceQuery, ListContentByNamespaceQueryVariables>(ListContentByNamespaceDocument, options);
       }
@@ -1827,8 +1874,13 @@ export function useListContentByNamespaceLazyQuery(baseOptions?: Apollo.LazyQuer
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListContentByNamespaceQuery, ListContentByNamespaceQueryVariables>(ListContentByNamespaceDocument, options);
         }
+export function useListContentByNamespaceSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListContentByNamespaceQuery, ListContentByNamespaceQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListContentByNamespaceQuery, ListContentByNamespaceQueryVariables>(ListContentByNamespaceDocument, options);
+        }
 export type ListContentByNamespaceQueryHookResult = ReturnType<typeof useListContentByNamespaceQuery>;
 export type ListContentByNamespaceLazyQueryHookResult = ReturnType<typeof useListContentByNamespaceLazyQuery>;
+export type ListContentByNamespaceSuspenseQueryHookResult = ReturnType<typeof useListContentByNamespaceSuspenseQuery>;
 export type ListContentByNamespaceQueryResult = Apollo.QueryResult<ListContentByNamespaceQuery, ListContentByNamespaceQueryVariables>;
 export const ContentBySlugDocument = gql`
     query ContentBySlug($slug: String!) {
@@ -1871,7 +1923,7 @@ export const ContentBySlugDocument = gql`
  *   },
  * });
  */
-export function useContentBySlugQuery(baseOptions: Apollo.QueryHookOptions<ContentBySlugQuery, ContentBySlugQueryVariables>) {
+export function useContentBySlugQuery(baseOptions: Apollo.QueryHookOptions<ContentBySlugQuery, ContentBySlugQueryVariables> & ({ variables: ContentBySlugQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ContentBySlugQuery, ContentBySlugQueryVariables>(ContentBySlugDocument, options);
       }
@@ -1879,8 +1931,13 @@ export function useContentBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ContentBySlugQuery, ContentBySlugQueryVariables>(ContentBySlugDocument, options);
         }
+export function useContentBySlugSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ContentBySlugQuery, ContentBySlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ContentBySlugQuery, ContentBySlugQueryVariables>(ContentBySlugDocument, options);
+        }
 export type ContentBySlugQueryHookResult = ReturnType<typeof useContentBySlugQuery>;
 export type ContentBySlugLazyQueryHookResult = ReturnType<typeof useContentBySlugLazyQuery>;
+export type ContentBySlugSuspenseQueryHookResult = ReturnType<typeof useContentBySlugSuspenseQuery>;
 export type ContentBySlugQueryResult = Apollo.QueryResult<ContentBySlugQuery, ContentBySlugQueryVariables>;
 export const ContentDocument = gql`
     query Content($id: ID!) {
@@ -1924,7 +1981,7 @@ export const ContentDocument = gql`
  *   },
  * });
  */
-export function useContentQuery(baseOptions: Apollo.QueryHookOptions<ContentQuery, ContentQueryVariables>) {
+export function useContentQuery(baseOptions: Apollo.QueryHookOptions<ContentQuery, ContentQueryVariables> & ({ variables: ContentQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ContentQuery, ContentQueryVariables>(ContentDocument, options);
       }
@@ -1932,8 +1989,13 @@ export function useContentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Co
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ContentQuery, ContentQueryVariables>(ContentDocument, options);
         }
+export function useContentSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ContentQuery, ContentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ContentQuery, ContentQueryVariables>(ContentDocument, options);
+        }
 export type ContentQueryHookResult = ReturnType<typeof useContentQuery>;
 export type ContentLazyQueryHookResult = ReturnType<typeof useContentLazyQuery>;
+export type ContentSuspenseQueryHookResult = ReturnType<typeof useContentSuspenseQuery>;
 export type ContentQueryResult = Apollo.QueryResult<ContentQuery, ContentQueryVariables>;
 export const ListOrganismsDocument = gql`
     query ListOrganisms {
@@ -1980,8 +2042,13 @@ export function useListOrganismsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
         }
+export function useListOrganismsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListOrganismsQuery, ListOrganismsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListOrganismsQuery, ListOrganismsQueryVariables>(ListOrganismsDocument, options);
+        }
 export type ListOrganismsQueryHookResult = ReturnType<typeof useListOrganismsQuery>;
 export type ListOrganismsLazyQueryHookResult = ReturnType<typeof useListOrganismsLazyQuery>;
+export type ListOrganismsSuspenseQueryHookResult = ReturnType<typeof useListOrganismsSuspenseQuery>;
 export type ListOrganismsQueryResult = Apollo.QueryResult<ListOrganismsQuery, ListOrganismsQueryVariables>;
 export const GeneGeneralInformationSummaryDocument = gql`
     query GeneGeneralInformationSummary($gene: String!) {
@@ -2011,7 +2078,7 @@ export const GeneGeneralInformationSummaryDocument = gql`
  *   },
  * });
  */
-export function useGeneGeneralInformationSummaryQuery(baseOptions: Apollo.QueryHookOptions<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables>) {
+export function useGeneGeneralInformationSummaryQuery(baseOptions: Apollo.QueryHookOptions<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables> & ({ variables: GeneGeneralInformationSummaryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables>(GeneGeneralInformationSummaryDocument, options);
       }
@@ -2019,8 +2086,13 @@ export function useGeneGeneralInformationSummaryLazyQuery(baseOptions?: Apollo.L
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables>(GeneGeneralInformationSummaryDocument, options);
         }
+export function useGeneGeneralInformationSummarySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables>(GeneGeneralInformationSummaryDocument, options);
+        }
 export type GeneGeneralInformationSummaryQueryHookResult = ReturnType<typeof useGeneGeneralInformationSummaryQuery>;
 export type GeneGeneralInformationSummaryLazyQueryHookResult = ReturnType<typeof useGeneGeneralInformationSummaryLazyQuery>;
+export type GeneGeneralInformationSummarySuspenseQueryHookResult = ReturnType<typeof useGeneGeneralInformationSummarySuspenseQuery>;
 export type GeneGeneralInformationSummaryQueryResult = Apollo.QueryResult<GeneGeneralInformationSummaryQuery, GeneGeneralInformationSummaryQueryVariables>;
 export const GeneOntologyAnnotationSummaryDocument = gql`
     query GeneOntologyAnnotationSummary($gene: String!) {
@@ -2061,7 +2133,7 @@ export const GeneOntologyAnnotationSummaryDocument = gql`
  *   },
  * });
  */
-export function useGeneOntologyAnnotationSummaryQuery(baseOptions: Apollo.QueryHookOptions<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables>) {
+export function useGeneOntologyAnnotationSummaryQuery(baseOptions: Apollo.QueryHookOptions<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables> & ({ variables: GeneOntologyAnnotationSummaryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables>(GeneOntologyAnnotationSummaryDocument, options);
       }
@@ -2069,8 +2141,13 @@ export function useGeneOntologyAnnotationSummaryLazyQuery(baseOptions?: Apollo.L
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables>(GeneOntologyAnnotationSummaryDocument, options);
         }
+export function useGeneOntologyAnnotationSummarySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables>(GeneOntologyAnnotationSummaryDocument, options);
+        }
 export type GeneOntologyAnnotationSummaryQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationSummaryQuery>;
 export type GeneOntologyAnnotationSummaryLazyQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationSummaryLazyQuery>;
+export type GeneOntologyAnnotationSummarySuspenseQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationSummarySuspenseQuery>;
 export type GeneOntologyAnnotationSummaryQueryResult = Apollo.QueryResult<GeneOntologyAnnotationSummaryQuery, GeneOntologyAnnotationSummaryQueryVariables>;
 export const ListPublicationsWithGeneSummaryDocument = gql`
     query ListPublicationsWithGeneSummary($gene: String!) {
@@ -2103,7 +2180,7 @@ export const ListPublicationsWithGeneSummaryDocument = gql`
  *   },
  * });
  */
-export function useListPublicationsWithGeneSummaryQuery(baseOptions: Apollo.QueryHookOptions<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables>) {
+export function useListPublicationsWithGeneSummaryQuery(baseOptions: Apollo.QueryHookOptions<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables> & ({ variables: ListPublicationsWithGeneSummaryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables>(ListPublicationsWithGeneSummaryDocument, options);
       }
@@ -2111,8 +2188,13 @@ export function useListPublicationsWithGeneSummaryLazyQuery(baseOptions?: Apollo
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables>(ListPublicationsWithGeneSummaryDocument, options);
         }
+export function useListPublicationsWithGeneSummarySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables>(ListPublicationsWithGeneSummaryDocument, options);
+        }
 export type ListPublicationsWithGeneSummaryQueryHookResult = ReturnType<typeof useListPublicationsWithGeneSummaryQuery>;
 export type ListPublicationsWithGeneSummaryLazyQueryHookResult = ReturnType<typeof useListPublicationsWithGeneSummaryLazyQuery>;
+export type ListPublicationsWithGeneSummarySuspenseQueryHookResult = ReturnType<typeof useListPublicationsWithGeneSummarySuspenseQuery>;
 export type ListPublicationsWithGeneSummaryQueryResult = Apollo.QueryResult<ListPublicationsWithGeneSummaryQuery, ListPublicationsWithGeneSummaryQueryVariables>;
 export const GeneOntologyAnnotationDocument = gql`
     query GeneOntologyAnnotation($gene: String!) {
@@ -2156,7 +2238,7 @@ export const GeneOntologyAnnotationDocument = gql`
  *   },
  * });
  */
-export function useGeneOntologyAnnotationQuery(baseOptions: Apollo.QueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>) {
+export function useGeneOntologyAnnotationQuery(baseOptions: Apollo.QueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables> & ({ variables: GeneOntologyAnnotationQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
       }
@@ -2164,8 +2246,13 @@ export function useGeneOntologyAnnotationLazyQuery(baseOptions?: Apollo.LazyQuer
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
         }
+export function useGeneOntologyAnnotationSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>(GeneOntologyAnnotationDocument, options);
+        }
 export type GeneOntologyAnnotationQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationQuery>;
 export type GeneOntologyAnnotationLazyQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationLazyQuery>;
+export type GeneOntologyAnnotationSuspenseQueryHookResult = ReturnType<typeof useGeneOntologyAnnotationSuspenseQuery>;
 export type GeneOntologyAnnotationQueryResult = Apollo.QueryResult<GeneOntologyAnnotationQuery, GeneOntologyAnnotationQueryVariables>;
 export const ListStrainsWithGeneDocument = gql`
     query ListStrainsWithGene($gene: String!) {
@@ -2209,7 +2296,7 @@ export const ListStrainsWithGeneDocument = gql`
  *   },
  * });
  */
-export function useListStrainsWithGeneQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>) {
+export function useListStrainsWithGeneQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables> & ({ variables: ListStrainsWithGeneQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>(ListStrainsWithGeneDocument, options);
       }
@@ -2217,8 +2304,13 @@ export function useListStrainsWithGeneLazyQuery(baseOptions?: Apollo.LazyQueryHo
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>(ListStrainsWithGeneDocument, options);
         }
+export function useListStrainsWithGeneSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>(ListStrainsWithGeneDocument, options);
+        }
 export type ListStrainsWithGeneQueryHookResult = ReturnType<typeof useListStrainsWithGeneQuery>;
 export type ListStrainsWithGeneLazyQueryHookResult = ReturnType<typeof useListStrainsWithGeneLazyQuery>;
+export type ListStrainsWithGeneSuspenseQueryHookResult = ReturnType<typeof useListStrainsWithGeneSuspenseQuery>;
 export type ListStrainsWithGeneQueryResult = Apollo.QueryResult<ListStrainsWithGeneQuery, ListStrainsWithGeneQueryVariables>;
 export const PublicationDocument = gql`
     query Publication($id: ID!) {
@@ -2256,7 +2348,7 @@ export const PublicationDocument = gql`
  *   },
  * });
  */
-export function usePublicationQuery(baseOptions: Apollo.QueryHookOptions<PublicationQuery, PublicationQueryVariables>) {
+export function usePublicationQuery(baseOptions: Apollo.QueryHookOptions<PublicationQuery, PublicationQueryVariables> & ({ variables: PublicationQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<PublicationQuery, PublicationQueryVariables>(PublicationDocument, options);
       }
@@ -2264,8 +2356,13 @@ export function usePublicationLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<PublicationQuery, PublicationQueryVariables>(PublicationDocument, options);
         }
+export function usePublicationSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<PublicationQuery, PublicationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PublicationQuery, PublicationQueryVariables>(PublicationDocument, options);
+        }
 export type PublicationQueryHookResult = ReturnType<typeof usePublicationQuery>;
 export type PublicationLazyQueryHookResult = ReturnType<typeof usePublicationLazyQuery>;
+export type PublicationSuspenseQueryHookResult = ReturnType<typeof usePublicationSuspenseQuery>;
 export type PublicationQueryResult = Apollo.QueryResult<PublicationQuery, PublicationQueryVariables>;
 export const ListRecentPublicationsDocument = gql`
     query ListRecentPublications($limit: Int! = 4) {
@@ -2311,8 +2408,13 @@ export function useListRecentPublicationsLazyQuery(baseOptions?: Apollo.LazyQuer
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>(ListRecentPublicationsDocument, options);
         }
+export function useListRecentPublicationsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>(ListRecentPublicationsDocument, options);
+        }
 export type ListRecentPublicationsQueryHookResult = ReturnType<typeof useListRecentPublicationsQuery>;
 export type ListRecentPublicationsLazyQueryHookResult = ReturnType<typeof useListRecentPublicationsLazyQuery>;
+export type ListRecentPublicationsSuspenseQueryHookResult = ReturnType<typeof useListRecentPublicationsSuspenseQuery>;
 export type ListRecentPublicationsQueryResult = Apollo.QueryResult<ListRecentPublicationsQuery, ListRecentPublicationsQueryVariables>;
 export const ListPublicationsWithGeneDocument = gql`
     query ListPublicationsWithGene($gene: String!) {
@@ -2355,7 +2457,7 @@ export const ListPublicationsWithGeneDocument = gql`
  *   },
  * });
  */
-export function useListPublicationsWithGeneQuery(baseOptions: Apollo.QueryHookOptions<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>) {
+export function useListPublicationsWithGeneQuery(baseOptions: Apollo.QueryHookOptions<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables> & ({ variables: ListPublicationsWithGeneQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>(ListPublicationsWithGeneDocument, options);
       }
@@ -2363,8 +2465,13 @@ export function useListPublicationsWithGeneLazyQuery(baseOptions?: Apollo.LazyQu
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>(ListPublicationsWithGeneDocument, options);
         }
+export function useListPublicationsWithGeneSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>(ListPublicationsWithGeneDocument, options);
+        }
 export type ListPublicationsWithGeneQueryHookResult = ReturnType<typeof useListPublicationsWithGeneQuery>;
 export type ListPublicationsWithGeneLazyQueryHookResult = ReturnType<typeof useListPublicationsWithGeneLazyQuery>;
+export type ListPublicationsWithGeneSuspenseQueryHookResult = ReturnType<typeof useListPublicationsWithGeneSuspenseQuery>;
 export type ListPublicationsWithGeneQueryResult = Apollo.QueryResult<ListPublicationsWithGeneQuery, ListPublicationsWithGeneQueryVariables>;
 export const StrainListDocument = gql`
     query StrainList($cursor: Int!, $limit: Int!, $filter: StrainListFilter) {
@@ -2399,7 +2506,7 @@ export const StrainListDocument = gql`
  *   },
  * });
  */
-export function useStrainListQuery(baseOptions: Apollo.QueryHookOptions<StrainListQuery, StrainListQueryVariables>) {
+export function useStrainListQuery(baseOptions: Apollo.QueryHookOptions<StrainListQuery, StrainListQueryVariables> & ({ variables: StrainListQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<StrainListQuery, StrainListQueryVariables>(StrainListDocument, options);
       }
@@ -2407,8 +2514,13 @@ export function useStrainListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<StrainListQuery, StrainListQueryVariables>(StrainListDocument, options);
         }
+export function useStrainListSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<StrainListQuery, StrainListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<StrainListQuery, StrainListQueryVariables>(StrainListDocument, options);
+        }
 export type StrainListQueryHookResult = ReturnType<typeof useStrainListQuery>;
 export type StrainListLazyQueryHookResult = ReturnType<typeof useStrainListLazyQuery>;
+export type StrainListSuspenseQueryHookResult = ReturnType<typeof useStrainListSuspenseQuery>;
 export type StrainListQueryResult = Apollo.QueryResult<StrainListQuery, StrainListQueryVariables>;
 export const ListStrainsWithPhenotypeDocument = gql`
     query ListStrainsWithPhenotype($cursor: Int!, $limit: Int!, $type: String!, $annotation: String!) {
@@ -2461,7 +2573,7 @@ export const ListStrainsWithPhenotypeDocument = gql`
  *   },
  * });
  */
-export function useListStrainsWithPhenotypeQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>) {
+export function useListStrainsWithPhenotypeQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables> & ({ variables: ListStrainsWithPhenotypeQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(ListStrainsWithPhenotypeDocument, options);
       }
@@ -2469,8 +2581,13 @@ export function useListStrainsWithPhenotypeLazyQuery(baseOptions?: Apollo.LazyQu
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(ListStrainsWithPhenotypeDocument, options);
         }
+export function useListStrainsWithPhenotypeSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>(ListStrainsWithPhenotypeDocument, options);
+        }
 export type ListStrainsWithPhenotypeQueryHookResult = ReturnType<typeof useListStrainsWithPhenotypeQuery>;
 export type ListStrainsWithPhenotypeLazyQueryHookResult = ReturnType<typeof useListStrainsWithPhenotypeLazyQuery>;
+export type ListStrainsWithPhenotypeSuspenseQueryHookResult = ReturnType<typeof useListStrainsWithPhenotypeSuspenseQuery>;
 export type ListStrainsWithPhenotypeQueryResult = Apollo.QueryResult<ListStrainsWithPhenotypeQuery, ListStrainsWithPhenotypeQueryVariables>;
 export const ListBacterialStrainsDocument = gql`
     query ListBacterialStrains {
@@ -2530,8 +2647,13 @@ export function useListBacterialStrainsLazyQuery(baseOptions?: Apollo.LazyQueryH
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>(ListBacterialStrainsDocument, options);
         }
+export function useListBacterialStrainsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>(ListBacterialStrainsDocument, options);
+        }
 export type ListBacterialStrainsQueryHookResult = ReturnType<typeof useListBacterialStrainsQuery>;
 export type ListBacterialStrainsLazyQueryHookResult = ReturnType<typeof useListBacterialStrainsLazyQuery>;
+export type ListBacterialStrainsSuspenseQueryHookResult = ReturnType<typeof useListBacterialStrainsSuspenseQuery>;
 export type ListBacterialStrainsQueryResult = Apollo.QueryResult<ListBacterialStrainsQuery, ListBacterialStrainsQueryVariables>;
 export const ListStrainsInventoryDocument = gql`
     query ListStrainsInventory($cursor: Int!, $limit: Int!) {
@@ -2570,7 +2692,7 @@ export const ListStrainsInventoryDocument = gql`
  *   },
  * });
  */
-export function useListStrainsInventoryQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>) {
+export function useListStrainsInventoryQuery(baseOptions: Apollo.QueryHookOptions<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables> & ({ variables: ListStrainsInventoryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(ListStrainsInventoryDocument, options);
       }
@@ -2578,8 +2700,13 @@ export function useListStrainsInventoryLazyQuery(baseOptions?: Apollo.LazyQueryH
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(ListStrainsInventoryDocument, options);
         }
+export function useListStrainsInventorySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>(ListStrainsInventoryDocument, options);
+        }
 export type ListStrainsInventoryQueryHookResult = ReturnType<typeof useListStrainsInventoryQuery>;
 export type ListStrainsInventoryLazyQueryHookResult = ReturnType<typeof useListStrainsInventoryLazyQuery>;
+export type ListStrainsInventorySuspenseQueryHookResult = ReturnType<typeof useListStrainsInventorySuspenseQuery>;
 export type ListStrainsInventoryQueryResult = Apollo.QueryResult<ListStrainsInventoryQuery, ListStrainsInventoryQueryVariables>;
 export const ListPlasmidsInventoryDocument = gql`
     query ListPlasmidsInventory($cursor: Int!, $limit: Int!) {
@@ -2618,7 +2745,7 @@ export const ListPlasmidsInventoryDocument = gql`
  *   },
  * });
  */
-export function useListPlasmidsInventoryQuery(baseOptions: Apollo.QueryHookOptions<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>) {
+export function useListPlasmidsInventoryQuery(baseOptions: Apollo.QueryHookOptions<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables> & ({ variables: ListPlasmidsInventoryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(ListPlasmidsInventoryDocument, options);
       }
@@ -2626,8 +2753,13 @@ export function useListPlasmidsInventoryLazyQuery(baseOptions?: Apollo.LazyQuery
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(ListPlasmidsInventoryDocument, options);
         }
+export function useListPlasmidsInventorySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>(ListPlasmidsInventoryDocument, options);
+        }
 export type ListPlasmidsInventoryQueryHookResult = ReturnType<typeof useListPlasmidsInventoryQuery>;
 export type ListPlasmidsInventoryLazyQueryHookResult = ReturnType<typeof useListPlasmidsInventoryLazyQuery>;
+export type ListPlasmidsInventorySuspenseQueryHookResult = ReturnType<typeof useListPlasmidsInventorySuspenseQuery>;
 export type ListPlasmidsInventoryQueryResult = Apollo.QueryResult<ListPlasmidsInventoryQuery, ListPlasmidsInventoryQueryVariables>;
 export const PlasmidListFilterDocument = gql`
     query PlasmidListFilter($cursor: Int!, $limit: Int!, $filter: PlasmidListFilter) {
@@ -2662,7 +2794,7 @@ export const PlasmidListFilterDocument = gql`
  *   },
  * });
  */
-export function usePlasmidListFilterQuery(baseOptions: Apollo.QueryHookOptions<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>) {
+export function usePlasmidListFilterQuery(baseOptions: Apollo.QueryHookOptions<PlasmidListFilterQuery, PlasmidListFilterQueryVariables> & ({ variables: PlasmidListFilterQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(PlasmidListFilterDocument, options);
       }
@@ -2670,8 +2802,13 @@ export function usePlasmidListFilterLazyQuery(baseOptions?: Apollo.LazyQueryHook
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(PlasmidListFilterDocument, options);
         }
+export function usePlasmidListFilterSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>(PlasmidListFilterDocument, options);
+        }
 export type PlasmidListFilterQueryHookResult = ReturnType<typeof usePlasmidListFilterQuery>;
 export type PlasmidListFilterLazyQueryHookResult = ReturnType<typeof usePlasmidListFilterLazyQuery>;
+export type PlasmidListFilterSuspenseQueryHookResult = ReturnType<typeof usePlasmidListFilterSuspenseQuery>;
 export type PlasmidListFilterQueryResult = Apollo.QueryResult<PlasmidListFilterQuery, PlasmidListFilterQueryVariables>;
 export const PlasmidDocument = gql`
     query Plasmid($id: ID!) {
@@ -2724,7 +2861,7 @@ export const PlasmidDocument = gql`
  *   },
  * });
  */
-export function usePlasmidQuery(baseOptions: Apollo.QueryHookOptions<PlasmidQuery, PlasmidQueryVariables>) {
+export function usePlasmidQuery(baseOptions: Apollo.QueryHookOptions<PlasmidQuery, PlasmidQueryVariables> & ({ variables: PlasmidQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<PlasmidQuery, PlasmidQueryVariables>(PlasmidDocument, options);
       }
@@ -2732,8 +2869,13 @@ export function usePlasmidLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pl
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<PlasmidQuery, PlasmidQueryVariables>(PlasmidDocument, options);
         }
+export function usePlasmidSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<PlasmidQuery, PlasmidQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PlasmidQuery, PlasmidQueryVariables>(PlasmidDocument, options);
+        }
 export type PlasmidQueryHookResult = ReturnType<typeof usePlasmidQuery>;
 export type PlasmidLazyQueryHookResult = ReturnType<typeof usePlasmidLazyQuery>;
+export type PlasmidSuspenseQueryHookResult = ReturnType<typeof usePlasmidSuspenseQuery>;
 export type PlasmidQueryResult = Apollo.QueryResult<PlasmidQuery, PlasmidQueryVariables>;
 export const StrainDocument = gql`
     query Strain($id: ID!) {
@@ -2811,7 +2953,7 @@ export const StrainDocument = gql`
  *   },
  * });
  */
-export function useStrainQuery(baseOptions: Apollo.QueryHookOptions<StrainQuery, StrainQueryVariables>) {
+export function useStrainQuery(baseOptions: Apollo.QueryHookOptions<StrainQuery, StrainQueryVariables> & ({ variables: StrainQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<StrainQuery, StrainQueryVariables>(StrainDocument, options);
       }
@@ -2819,8 +2961,13 @@ export function useStrainLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Str
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<StrainQuery, StrainQueryVariables>(StrainDocument, options);
         }
+export function useStrainSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<StrainQuery, StrainQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<StrainQuery, StrainQueryVariables>(StrainDocument, options);
+        }
 export type StrainQueryHookResult = ReturnType<typeof useStrainQuery>;
 export type StrainLazyQueryHookResult = ReturnType<typeof useStrainLazyQuery>;
+export type StrainSuspenseQueryHookResult = ReturnType<typeof useStrainSuspenseQuery>;
 export type StrainQueryResult = Apollo.QueryResult<StrainQuery, StrainQueryVariables>;
 export const ListRecentPlasmidsDocument = gql`
     query ListRecentPlasmids($limit: Int! = 4) {
@@ -2856,8 +3003,13 @@ export function useListRecentPlasmidsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>(ListRecentPlasmidsDocument, options);
         }
+export function useListRecentPlasmidsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>(ListRecentPlasmidsDocument, options);
+        }
 export type ListRecentPlasmidsQueryHookResult = ReturnType<typeof useListRecentPlasmidsQuery>;
 export type ListRecentPlasmidsLazyQueryHookResult = ReturnType<typeof useListRecentPlasmidsLazyQuery>;
+export type ListRecentPlasmidsSuspenseQueryHookResult = ReturnType<typeof useListRecentPlasmidsSuspenseQuery>;
 export type ListRecentPlasmidsQueryResult = Apollo.QueryResult<ListRecentPlasmidsQuery, ListRecentPlasmidsQueryVariables>;
 export const ListRecentStrainsDocument = gql`
     query ListRecentStrains($limit: Int! = 4) {
@@ -2893,8 +3045,13 @@ export function useListRecentStrainsLazyQuery(baseOptions?: Apollo.LazyQueryHook
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>(ListRecentStrainsDocument, options);
         }
+export function useListRecentStrainsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>(ListRecentStrainsDocument, options);
+        }
 export type ListRecentStrainsQueryHookResult = ReturnType<typeof useListRecentStrainsQuery>;
 export type ListRecentStrainsLazyQueryHookResult = ReturnType<typeof useListRecentStrainsLazyQuery>;
+export type ListRecentStrainsSuspenseQueryHookResult = ReturnType<typeof useListRecentStrainsSuspenseQuery>;
 export type ListRecentStrainsQueryResult = Apollo.QueryResult<ListRecentStrainsQuery, ListRecentStrainsQueryVariables>;
 export const ListPhenotypesDocument = gql`
     query ListPhenotypes($search: String!) {
@@ -2918,7 +3075,7 @@ export const ListPhenotypesDocument = gql`
  *   },
  * });
  */
-export function useListPhenotypesQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypesQuery, ListPhenotypesQueryVariables>) {
+export function useListPhenotypesQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypesQuery, ListPhenotypesQueryVariables> & ({ variables: ListPhenotypesQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListPhenotypesQuery, ListPhenotypesQueryVariables>(ListPhenotypesDocument, options);
       }
@@ -2926,8 +3083,13 @@ export function useListPhenotypesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListPhenotypesQuery, ListPhenotypesQueryVariables>(ListPhenotypesDocument, options);
         }
+export function useListPhenotypesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListPhenotypesQuery, ListPhenotypesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListPhenotypesQuery, ListPhenotypesQueryVariables>(ListPhenotypesDocument, options);
+        }
 export type ListPhenotypesQueryHookResult = ReturnType<typeof useListPhenotypesQuery>;
 export type ListPhenotypesLazyQueryHookResult = ReturnType<typeof useListPhenotypesLazyQuery>;
+export type ListPhenotypesSuspenseQueryHookResult = ReturnType<typeof useListPhenotypesSuspenseQuery>;
 export type ListPhenotypesQueryResult = Apollo.QueryResult<ListPhenotypesQuery, ListPhenotypesQueryVariables>;
 export const ListPhenotypeEnvironmentsDocument = gql`
     query ListPhenotypeEnvironments($search: String!) {
@@ -2951,7 +3113,7 @@ export const ListPhenotypeEnvironmentsDocument = gql`
  *   },
  * });
  */
-export function useListPhenotypeEnvironmentsQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>) {
+export function useListPhenotypeEnvironmentsQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables> & ({ variables: ListPhenotypeEnvironmentsQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>(ListPhenotypeEnvironmentsDocument, options);
       }
@@ -2959,8 +3121,13 @@ export function useListPhenotypeEnvironmentsLazyQuery(baseOptions?: Apollo.LazyQ
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>(ListPhenotypeEnvironmentsDocument, options);
         }
+export function useListPhenotypeEnvironmentsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>(ListPhenotypeEnvironmentsDocument, options);
+        }
 export type ListPhenotypeEnvironmentsQueryHookResult = ReturnType<typeof useListPhenotypeEnvironmentsQuery>;
 export type ListPhenotypeEnvironmentsLazyQueryHookResult = ReturnType<typeof useListPhenotypeEnvironmentsLazyQuery>;
+export type ListPhenotypeEnvironmentsSuspenseQueryHookResult = ReturnType<typeof useListPhenotypeEnvironmentsSuspenseQuery>;
 export type ListPhenotypeEnvironmentsQueryResult = Apollo.QueryResult<ListPhenotypeEnvironmentsQuery, ListPhenotypeEnvironmentsQueryVariables>;
 export const ListPhenotypeAssaysDocument = gql`
     query ListPhenotypeAssays($search: String!) {
@@ -2984,7 +3151,7 @@ export const ListPhenotypeAssaysDocument = gql`
  *   },
  * });
  */
-export function useListPhenotypeAssaysQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>) {
+export function useListPhenotypeAssaysQuery(baseOptions: Apollo.QueryHookOptions<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables> & ({ variables: ListPhenotypeAssaysQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>(ListPhenotypeAssaysDocument, options);
       }
@@ -2992,8 +3159,13 @@ export function useListPhenotypeAssaysLazyQuery(baseOptions?: Apollo.LazyQueryHo
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>(ListPhenotypeAssaysDocument, options);
         }
+export function useListPhenotypeAssaysSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>(ListPhenotypeAssaysDocument, options);
+        }
 export type ListPhenotypeAssaysQueryHookResult = ReturnType<typeof useListPhenotypeAssaysQuery>;
 export type ListPhenotypeAssaysLazyQueryHookResult = ReturnType<typeof useListPhenotypeAssaysLazyQuery>;
+export type ListPhenotypeAssaysSuspenseQueryHookResult = ReturnType<typeof useListPhenotypeAssaysSuspenseQuery>;
 export type ListPhenotypeAssaysQueryResult = Apollo.QueryResult<ListPhenotypeAssaysQuery, ListPhenotypeAssaysQueryVariables>;
 export const UserByEmailDocument = gql`
     query UserByEmail($email: String!) {
@@ -3019,7 +3191,7 @@ export const UserByEmailDocument = gql`
  *   },
  * });
  */
-export function useUserByEmailQuery(baseOptions: Apollo.QueryHookOptions<UserByEmailQuery, UserByEmailQueryVariables>) {
+export function useUserByEmailQuery(baseOptions: Apollo.QueryHookOptions<UserByEmailQuery, UserByEmailQueryVariables> & ({ variables: UserByEmailQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<UserByEmailQuery, UserByEmailQueryVariables>(UserByEmailDocument, options);
       }
@@ -3027,6 +3199,11 @@ export function useUserByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<UserByEmailQuery, UserByEmailQueryVariables>(UserByEmailDocument, options);
         }
+export function useUserByEmailSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<UserByEmailQuery, UserByEmailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<UserByEmailQuery, UserByEmailQueryVariables>(UserByEmailDocument, options);
+        }
 export type UserByEmailQueryHookResult = ReturnType<typeof useUserByEmailQuery>;
 export type UserByEmailLazyQueryHookResult = ReturnType<typeof useUserByEmailLazyQuery>;
+export type UserByEmailSuspenseQueryHookResult = ReturnType<typeof useUserByEmailSuspenseQuery>;
 export type UserByEmailQueryResult = Apollo.QueryResult<UserByEmailQuery, UserByEmailQueryVariables>;

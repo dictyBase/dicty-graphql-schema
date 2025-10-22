@@ -107,8 +107,10 @@ export type GeneFieldPolicy = {
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	name?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type GeneGeneralInfoKeySpecifier = ('description' | 'gene_product' | 'id' | 'name_description' | 'synonyms' | 'updated_at' | 'updated_by' | GeneGeneralInfoKeySpecifier)[];
+export type GeneGeneralInfoKeySpecifier = ('created_at' | 'created_by' | 'description' | 'gene_product' | 'id' | 'name_description' | 'synonyms' | 'updated_at' | 'updated_by' | GeneGeneralInfoKeySpecifier)[];
 export type GeneGeneralInfoFieldPolicy = {
+	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	created_by?: FieldPolicy<any> | FieldReadFunction<any>,
 	description?: FieldPolicy<any> | FieldReadFunction<any>,
 	gene_product?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
