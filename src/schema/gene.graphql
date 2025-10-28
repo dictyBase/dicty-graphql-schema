@@ -31,7 +31,7 @@ type Extension {
 
 type GeneGeneralInfo {
   id: String!
-  name_description: [String]!
+  name_description: String
   gene_product: String
   synonyms: [String]!
   description: String
@@ -43,14 +43,14 @@ type GeneGeneralInfo {
 }
 
 input UpdateGeneGeneralInfoInput {
-  name_description: [String]
+  name_description: String
   gene_product: String
   description: String
   user: String!
 }
 
 input CreateGeneGeneralInfoInput {
-  name_description: [String]
+  name_description: String
   gene_product: String
   description: String
   user: String!

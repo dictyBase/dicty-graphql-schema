@@ -120,7 +120,7 @@ export type CreateContentInput = {
 export type CreateGeneGeneralInfoInput = {
     description?: InputMaybe<Scalars['String']['input']>;
     gene_product?: InputMaybe<Scalars['String']['input']>;
-    name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_description?: InputMaybe<Scalars['String']['input']>;
     user: Scalars['String']['input'];
 };
 export type CreateOrderInput = {
@@ -275,7 +275,7 @@ export type GeneGeneralInfo = {
     description?: Maybe<Scalars['String']['output']>;
     gene_product?: Maybe<Scalars['String']['output']>;
     id: Scalars['String']['output'];
-    name_description: Array<Maybe<Scalars['String']['output']>>;
+    name_description?: Maybe<Scalars['String']['output']>;
     synonyms: Array<Maybe<Scalars['String']['output']>>;
     updated_at?: Maybe<Scalars['Timestamp']['output']>;
     updated_by?: Maybe<User>;
@@ -780,7 +780,7 @@ export type UpdateContentInput = {
 export type UpdateGeneGeneralInfoInput = {
     description?: InputMaybe<Scalars['String']['input']>;
     gene_product?: InputMaybe<Scalars['String']['input']>;
-    name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_description?: InputMaybe<Scalars['String']['input']>;
     user: Scalars['String']['input'];
 };
 export type UpdateOrderInput = {
@@ -1238,7 +1238,7 @@ export type GeneGeneralInformationSummaryQuery = {
     geneGeneralInformation?: {
         __typename?: 'GeneGeneralInfo';
         id: string;
-        name_description: Array<string | null>;
+        name_description?: string | null;
         gene_product?: string | null;
         synonyms: Array<string | null>;
         description?: string | null;
