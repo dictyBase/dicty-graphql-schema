@@ -45,6 +45,7 @@ type GeneGeneralInfo {
 input UpdateGeneGeneralInfoInput {
   name_description: [String]
   gene_product: String
+  synonyms: [String]
   description: String
   user: String!
 }
@@ -52,6 +53,7 @@ input UpdateGeneGeneralInfoInput {
 input CreateGeneGeneralInfoInput {
   name_description: [String]
   gene_product: String
+  synonyms: [String]
   description: String
   user: String!
 }
