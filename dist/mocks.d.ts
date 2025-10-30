@@ -121,6 +121,7 @@ export type CreateGeneGeneralInfoInput = {
     description?: InputMaybe<Scalars['String']['input']>;
     gene_product?: InputMaybe<Scalars['String']['input']>;
     name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     user: Scalars['String']['input'];
 };
 export type CreateOrderInput = {
@@ -781,6 +782,7 @@ export type UpdateGeneGeneralInfoInput = {
     description?: InputMaybe<Scalars['String']['input']>;
     gene_product?: InputMaybe<Scalars['String']['input']>;
     name_description?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     user: Scalars['String']['input'];
 };
 export type UpdateOrderInput = {
