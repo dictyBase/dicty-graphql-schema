@@ -199,7 +199,7 @@ input StrainListFilter {
 }
 
 input PlasmidListFilter {
-  label: String
+  name: String
   summary: String
   id: ID
   in_stock: Boolean
