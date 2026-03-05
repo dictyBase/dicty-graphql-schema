@@ -4874,7 +4874,7 @@
             "deprecationReason": null
           },
           {
-            "name": "label",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "SCALAR",
