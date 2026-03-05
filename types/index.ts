@@ -574,7 +574,7 @@ export type Plasmid = Stock & {
 export type PlasmidListFilter = {
   id?: InputMaybe<Scalars['ID']['input']>;
   in_stock?: InputMaybe<Scalars['Boolean']['input']>;
-  label?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   plasmid_type: PlasmidType;
   summary?: InputMaybe<Scalars['String']['input']>;
 };
