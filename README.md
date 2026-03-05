@@ -8,7 +8,7 @@ folder contains the graphql schema definitions. The `mutations` and
 `queries` folders has the graphql documents. 
 
 ## Install
-`yarn add dictybase/dicty-graphql-schema`   
+`yarn add dictybase/dicty-graphql-schema`
 
 To install a particular version (check tags/release first)  
 
